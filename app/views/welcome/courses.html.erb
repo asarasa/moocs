@@ -1,0 +1,20 @@
+<div class="row">
+	<div class="col-md-6">
+		<h2>New courses</h2>
+
+		<% @courses.each do |course| %>
+			<h3><%= course.name %></h3>
+			<p><%= course.desc %></p>	
+			<%= link_to "Ver curso", course_path(course.id), :class => "btn btn-primary" %>
+		<% end %>
+	</div>
+	
+	<div class="col-md-6">
+		<h2>Popular courses</h2>
+
+		<% @courses.each do |course| %>
+			<h3><%= course.name %></h3>
+			<p><%= course.desc %></p>	
+		<% end %>
+	</div>	
+</div>

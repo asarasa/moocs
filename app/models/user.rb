@@ -10,8 +10,10 @@ class User
   field :admin, type: Boolean, default: false
   field :register_date, type: DateTime
   field :last_login, type: DateTime
+  has_and_belongs_to_many :courses
 
-  validates_uniqueness_of :email
+
+  validates_uniqueness_of :email, :username
 
   has_secure_password
 

@@ -1,0 +1,32 @@
+<div class="row row-offcanvas row-offcanvas-right">
+	<div class="col-xs-12 col-sm-9">
+		<div class="page-header">
+		  <h1><%= @course.name %> <small>Easy</small></h1>
+		</div>
+		<h3>About the course</h3>
+        <p><%= @course.desc %></p>		
+
+		<%= link_to 'Join', join_course_path(@course.id), :class => 'btn btn-primary' %>
+		<%= link_to 'Edit', edit_course_path(@course) %> |
+		<%= link_to 'Back', courses_path %>
+	</div>
+
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="info">
+    	<div class="panel panel-success" style="margin-top:50px">
+            <div class="panel-heading">
+		 	   <h3 class="panel-title">Info</h3>
+			</div>    	
+			<div class="panel-body">	
+	    		<h4>STARTS</h4>
+				<p>Dec 09, 2013</p>
+				<h4>ENDS</h4>
+				<p>January 27, 2014</p>
+				<h4>ESTIMATED EFFORT</h4>
+				<p>10 hours/week</p>
+				<h4>PREREQUISITES</h4>
+				<p>System Administration Skills Knowledge of Relational Database</p>
+			</div>
+    	</div>
+    </div><!--/span-->	
+</div>
+
