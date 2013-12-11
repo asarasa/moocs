@@ -15,11 +15,8 @@ class WelcomeController < ApplicationController
 		else
 			@courses = all_courses
 		end
+		logger.debug @courses.empty?
 		#logger.debug "all_courses - current_user.courses : #{@courses}"
-	end
-
-	def user_courses
-		@courses = current_user.courses
 	end
 
 end

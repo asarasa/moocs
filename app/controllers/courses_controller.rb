@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :join_course, :edit, :update, :destroy]
-  before_action :authorize, only: [:edit, :new, :create, :update, :destroy]
+  before_action :authorize, only: [:join_course, :edit, :new, :create, :update, :destroy]
+
 
   # GET /courses
   # GET /courses.json
@@ -11,6 +12,11 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+    @teachers = User.find(@course.teachers)
+  end
+
+  def user_courses
+    @courses = current_user.courses
   end
 
   def join_course
@@ -82,6 +88,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :desc, :start_date, :end_date)
+      params.require(:course).permit(:name, :desc, :start_date, :end_date, :estimated_effort, :prerequisites)
     end
 end

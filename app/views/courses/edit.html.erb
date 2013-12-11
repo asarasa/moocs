@@ -1,6 +1,8 @@
-<h1>Editing course</h1>
+<div class="form-signin">
+	<h2 class="form-signin-heading">Editing  course</h2>
 
-<%= render 'form' %>
+	<%= render 'form' %>
 
-<%= link_to 'Show', @course %> |
-<%= link_to 'Back', courses_path %>
+</div>
+
+<%= link_to 'Back', course_path(@course), :class => 'btn btn-default' %>
