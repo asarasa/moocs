@@ -1,4 +1,8 @@
 Moocs::Application.routes.draw do
+  resources :courses do
+    resources :lessons
+  end
+
   get 'signup', to: 'users#new', as: 'signup'
   get 'show_profile', to: 'users#show', as: 'show_profile'
   get 'edit_profile', to: 'users#edit', as: 'edit_profile'
@@ -9,6 +13,12 @@ Moocs::Application.routes.draw do
   resources :sessions
 
   root 'welcome#index'
+  get 'lastest_users', to: 'welcome#users', as: 'lastest_users'
+  get 'lastest_courses', to: 'welcome#courses', as: 'lastest_courses'
+  get 'user_courses', to: 'courses#user_courses', as: 'user_courses'
+  get 'join_course/:id', to: 'courses#join_course', as:'join_course'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -39,7 +49,7 @@ Moocs::Application.routes.draw do
 
   # Example resource route with sub-resources:
   #   resources :products do
-  #     resources :comments, :sales
+  #     , :sales
   #     resource :seller
   #   end
 

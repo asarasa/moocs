@@ -10,11 +10,18 @@
  *
  *= require_self
  *= require_tree .
+ *= require bootstrap
  */
 
 body {
   padding-top: 50px;
 }
+
+.alert {
+  text-align: center;
+}
+
+/* Navbar */
 
 .moocs-nav {
   text-shadow: 0 -1px 0 rgba(0,0,0,.15);
@@ -47,3 +54,25 @@ body {
   background-color: #463265;
   border-color: #463265;
 }
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Pad the edges of the mobile views a bit */
+.marketing {
+
+}
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-md-6 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-md-6 p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+

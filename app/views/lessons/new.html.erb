@@ -1,0 +1,9 @@
+<h3>Course: <%= @course.name %></h3>
+<div class="form-signin">
+	<h2 class="form-signin-heading">New lesson</h2>
+
+<%= render 'form' %>
+
+</div>
+
+<%= link_to 'Back', course_lessons_path(@course), :class => 'btn btn-default' %>
