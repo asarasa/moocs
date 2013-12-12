@@ -14,7 +14,6 @@ Moocs::Application.routes.draw do
   get 'lastest_users', to: 'welcome#users', as: 'lastest_users'
   get 'lastest_courses', to: 'welcome#courses', as: 'lastest_courses'
   get 'user_courses', to: 'courses#user_courses', as: 'user_courses'
-
   get 'join_course/:id', to: 'courses#join_course', as:'join_course'
 
 
