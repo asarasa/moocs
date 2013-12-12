@@ -7,7 +7,9 @@
         <p><%= @course.desc %></p>		
 
         <% if !is_member?(current_user, @course) %>
-		<%= link_to 'Join', join_course_path(@course.id), :class => 'btn btn-success' %>
+			<%= link_to 'Join', join_course_path(@course.id), :class => 'btn btn-success' %>
+		<% else %>
+			<%= link_to 'Lessons', course_lessons_path(@course.id), :class => 'btn btn-warning' %>
 		<% end %>
 		<% if is_teacher?(current_user, @course) %>
 			<%= link_to 'Edit', edit_course_path(@course), :class => 'btn btn-info' %>

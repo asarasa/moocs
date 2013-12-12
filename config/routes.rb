@@ -1,5 +1,7 @@
 Moocs::Application.routes.draw do
-  resources :courses
+  resources :courses do
+    resources :lessons
+  end
 
   get 'signup', to: 'users#new', as: 'signup'
   get 'show_profile', to: 'users#show', as: 'show_profile'
@@ -47,7 +49,7 @@ Moocs::Application.routes.draw do
 
   # Example resource route with sub-resources:
   #   resources :products do
-  #     resources :comments, :sales
+  #     , :sales
   #     resource :seller
   #   end
 

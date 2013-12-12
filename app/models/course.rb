@@ -9,4 +9,5 @@ class Course
   field :end_date, type: DateTime
   field :teachers, type: Array
   has_and_belongs_to_many :users
+  embeds_many :lessons
 end
