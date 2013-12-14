@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="col-md-6">
+		<div class="page-header">
+			<h2>As student<h2>
+		</div>
+
+		<% if @courses_as_student.empty? %>
+			<center>
+			<h3>You are not member of any course</h3>
+			
+				<%= link_to "See the available courses", lastest_courses_path(), :class => "btn btn-info" %>
+			</center>
+		<% else %>
+			<% @courses_as_student.each do |course| %>
+				<h3><%= course.name %></h3>
+				<p><%= course.desc %></p>	
+				<%= link_to "Show course", course_path(course.id), :class => "btn btn-primary" %>
+			<% end %>
+		<% end %>
+	</div>
+	
+	<div class="col-md-6">
+		<div class="page-header">
+			<h2>As teacher<h2>
+		</div>
+		<% if @courses_as_teacher.empty? %>
+			<center>
+			<h3>You are not a teacher of any course</h3>
+			
+				<%= link_to "Create a course", new_course_path(), :class => "btn btn-success" %>
+			</center>
+		<% else %>
+			<% @courses_as_teacher.each do |course| %>
+				<h3><%= course.name %></h3>
+				<p><%= course.desc %></p>	
+				<%= link_to "Ver curso", course_path(course.id), :class => "btn btn-primary" %>
+			<% end %>
+		<% end %>
+	</div>	
+</div>

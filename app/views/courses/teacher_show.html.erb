@@ -6,11 +6,8 @@
 		<h3>About the course</h3>
         <p><%= @course.desc %></p>		
 
-        <% if !is_member?(current_user, @course) %>
-			<%= link_to 'Join', join_course_path(@course.id), :class => 'btn btn-success' %>
-		<% else %>
-			<%= link_to 'Lessons', course_lessons_path(@course.id), :class => 'btn btn-warning' %>
-		<% end %>
+		<%= link_to 'Lessons', course_lessons_path(@course.id), :class => 'btn btn-warning' %>
+		<%= link_to 'Edit', edit_course_path(@course), :class => 'btn btn-info' %>
 		<%= link_to 'Back to home', root_url, :class => 'btn btn-default' %>
 	</div>
 

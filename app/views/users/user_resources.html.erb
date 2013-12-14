@@ -1,0 +1,38 @@
+<% if @resources.empty? %>
+	<h3 style="text-align:center">No has creado ningún recurso.</h3>
+<% else %>
+	<div class="page-header">
+		<h2>Listing my resources</h2>
+	</div>
+
+	<table class="table table-stripped">
+	  <thead>
+	    <tr>
+	      <th>Name</th>
+	      <th>Content</th>
+	      <th>Type</th>
+	      <th>Url</th>
+	      <th></th>
+	      <th></th>
+	      <th></th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <% @resources.each do |resource| %>
+	      <tr>
+	        <td><%= resource.name %></td>
+	        <td><%= resource.content %></td>
+	        <td><%= resource.type %></td>
+	        <td><%= resource.url %></td>
+	        <td><%= link_to 'Show', resource %></td>
+	        <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
+	        <td><%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+<% end %>
+<center>
+	<%= link_to 'New resource', new_resource_path, :class => 'btn btn-success' %>
+</center>

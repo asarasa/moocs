@@ -5,5 +5,5 @@ module CoursesHelper
 
 	def is_member?(user, course)
 		course.users.include?(user)
-	end
+	end	
 end

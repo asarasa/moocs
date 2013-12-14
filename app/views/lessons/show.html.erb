@@ -1,14 +1,51 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @lesson.name %>
-</p>
+<div class="page-header">
+  <h2><%= @lesson.name %> <small><%= @lesson.description %></small></h2>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @lesson.description %>
-</p>
+<div class="row">
+	<div class="col-md-3">
+		<table class="table table-stripped">
+		  <thead>
+		    <tr>
+				<th></th>
+		    	<th>Name</th>
+		    	<th></th>
+		    </tr>
+		  </thead>
 
-<%= link_to 'Edit', edit_course_lesson_path(@course, @lesson) %> |
-<%= link_to 'Back', course_lessons_path(@course) %>
+		  <tbody>
+		    <% @resources.each do |resource| %>
+		      <tr>
+		      	<td>
+		      	<% if resource.type == "video" %>
+		      		<img src="/assets/1387049801_social_4.png" alt="video">
+		      	<% end %>
+		      	</td>
+		        <td><%= resource.name %></td>
+		        <td><%=link_to( image_tag("1387049779_forward.png"), view_resource_path(@course, @lesson, resource)) %></td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>		
+	</div>
+
+	<div class="col-md-9">
+		<% if @resource.nil? %>
+			<h3 style="text-align:center">Please, select a recourse in the left menu.</h3>
+		<% else %>
+			<div class="page-header" style="margin-top:0px">
+			  <h2><%= @resource.name %> <small> in <%= @lesson.name %> lesson</small></h2>
+			</div>
+			<% if @resource.type == "video" %>
+  				<iframe width="720" height="480" src="//www.youtube.com/embed/<%= @resource.url %>" frameborder="0" allowfullscreen></iframe>			
+  			<% else %>
+				<p><%= @resource.content %></p>
+  			<% end %>
+		<% end %>
+	</div>
+</div>
+
+
+<%= link_to 'Back', course_lessons_path(@course), :class => 'btn btn-default' %>

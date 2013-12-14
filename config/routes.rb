@@ -1,4 +1,6 @@
 Moocs::Application.routes.draw do
+  resources :resources
+
   resources :courses do
     resources :lessons
   end
@@ -15,8 +17,13 @@ Moocs::Application.routes.draw do
   root 'welcome#index'
   get 'lastest_users', to: 'welcome#users', as: 'lastest_users'
   get 'lastest_courses', to: 'welcome#courses', as: 'lastest_courses'
-  get 'user_courses', to: 'courses#user_courses', as: 'user_courses'
   get 'join_course/:id', to: 'courses#join_course', as:'join_course'
+
+  get 'user_courses', to: 'users#user_courses', as: 'user_courses'
+  get 'user_resources', to: 'users#user_resources', as:'user_resources'
+
+  get 'courses/:course_id/lessons/:id/view_resource/:resource_id', to:'lessons#view_resource', as: 'view_resource'
+  get 'courses/:course_id/lessons/:id/use_resource/:resource_id', to:'lessons#use_resource', as: 'use_resource'
 
 
 

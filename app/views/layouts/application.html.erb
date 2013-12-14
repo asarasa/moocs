@@ -27,7 +27,8 @@
           	<ul class="nav navbar-nav navbar-right">
 			<% if current_user %>
 				<li><%= link_to current_user.email, show_profile_path %></li>
-            	<li><%= link_to "My courses", user_courses_path %></li>
+        <li><%= link_to "My courses", user_courses_path %></li>
+        <li><%= link_to "My resources", user_resources_path %></li>
 				<li><%= link_to "Log Out", logout_path %></li>
 			<% else %>
 				<li><%= link_to "Sign Up", signup_path %></li>

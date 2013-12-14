@@ -12,4 +12,12 @@ private
 	def authorize
 		redirect_to login_url, alert: "Not authorized" if current_user.nil?
 	end
+
+	def authorize_teacher
+		redirect_to root_url, alert: "You are not the teacher" if !is_teacher?
+	end
+
+	def is_teacher?
+		@course.teachers.include?(current_user.id)
+	end
 end

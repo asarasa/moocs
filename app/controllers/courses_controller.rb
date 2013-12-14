@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :join_course, :edit, :update, :destroy]
   before_action :authorize, only: [:join_course, :edit, :new, :create, :update, :destroy]
+  before_action :authorize_teacher, only: [:edit, :update, :destroy]
 
 
   # GET /courses
@@ -13,10 +14,9 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @teachers = User.find(@course.teachers)
-  end
-
-  def user_courses
-    @courses = current_user.courses
+    if is_teacher?
+      render 'teacher_show'
+    end
   end
 
   def join_course
