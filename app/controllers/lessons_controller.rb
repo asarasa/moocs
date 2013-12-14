@@ -1,16 +1,24 @@
 class LessonsController < ApplicationController
-  before_action :set_course, only: [:index, :new, :create, :show, :edit, :update, :destroy]  
-  before_action :set_lesson, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: [:view_resource, :use_resource, :index, :new, :create, :show, :edit, :update, :destroy]  
+  before_action :set_lesson, only: [:view_resource, :use_resource, :show, :edit, :update, :destroy]
+  before_action :authorize_teacher, only: [:use_resource, :new, :create, :edit, :update, :destroyed]
 
   # GET /lessons
   # GET /lessons.json
   def index
     @lessons = @course.lessons
+    if is_teacher?
+      render 'teacher_index'
+    end
   end
 
   # GET /lessons/1
   # GET /lessons/1.json
   def show
+    @resources = Resource.find(@lesson.resources)
+    if is_teacher? && !params[:student]
+      render 'teacher_show'
+    end
   end
 
   # GET /lessons/new
@@ -22,10 +30,29 @@ class LessonsController < ApplicationController
   def edit
   end
 
+  def use_resource
+    if (@lesson.resources.include?(params[:resource_id]))
+      redirect_to course_lesson_path(@course, @lesson), notice: 'The resource is already in the lesson.'
+    else
+      @lesson.resources.push(params[:resource_id])
+      @lesson.save
+      redirect_to course_lesson_path(@course, @lesson), notice: 'The resource was successfully added.'
+    end
+  end
+
+  def view_resource
+    @resource = Resource.find(params[:resource_id])
+    @resources = Resource.find(@lesson.resources)
+
+    render "show"
+  end
+
   # POST /lessons
   # POST /lessons.json
   def create
-    @course.lessons.push(Lesson.new(lesson_params))
+    lesson = Lesson.new(lesson_params)
+    lesson.resources = Array.new
+    @course.lessons.push(lesson)
 
     respond_to do |format|
       if @course.save

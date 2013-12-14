@@ -15,6 +15,22 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def user_courses
+		@courses_as_student = Array.new
+		@courses_as_teacher = Array.new
+		current_user.courses.each do |course|
+			if course.teachers.include?(current_user.id)
+				@courses_as_teacher.push(course)
+			else
+				@courses_as_student.push(course)
+			end
+		end
+	end
+
+	def user_resources
+		@resources = current_user.resources
+	end
+
 	def show
 		@user = current_user
 	end

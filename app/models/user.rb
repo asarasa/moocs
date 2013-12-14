@@ -11,6 +11,7 @@ class User
   field :register_date, type: DateTime
   field :last_login, type: DateTime
   has_and_belongs_to_many :courses
+  has_many :resources
 
 
   validates_uniqueness_of :email, :username

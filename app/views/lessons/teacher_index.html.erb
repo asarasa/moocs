@@ -11,6 +11,8 @@
       <th>Start date</th>
       <th>End date</th>
       <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -22,11 +24,9 @@
         <td><%= lesson.description %></td>
         <td><%= lesson.start_date.to_formatted_s(:short) %></td>
         <td><%= lesson.end_date.to_formatted_s(:short) %></td>
-        <% if (lesson.start_date < DateTime.now) && (lesson.end_date > DateTime.now) %>
-          <td><%= link_to 'Show', course_lesson_path(@course, lesson) %></td>
-        <% else %>
-        <td></td>
-        <% end %>
+        <td><%= link_to 'Show', course_lesson_path(@course, lesson) %></td>
+        <td><%= link_to 'Edit', edit_course_lesson_path(@course, lesson) %></td>
+        <td><%= link_to 'Destroy', [@course, lesson], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -35,3 +35,4 @@
 <br>
 
 <%= link_to 'Back', course_path(@course), :class => 'btn btn-default' %>
+<%= link_to 'New Lesson', new_course_lesson_path(@course), :class => 'btn btn-success' %>
