@@ -19,4 +19,11 @@ class WelcomeController < ApplicationController
 		#logger.debug "all_courses - current_user.courses : #{@courses}"
 	end
 
+	def search
+		@searchterm = params[:q]
+		@courses = Course.any_of({ :name => /.*#{@searchterm}.*/ })
+
+		render 'search_results'
+	end
+
 end

@@ -24,7 +24,7 @@ class CoursesController < ApplicationController
       redirect_to @course, notice: 'You are already enrolled in this course.'
     else
       @course.users.push(current_user)
-      redirect_to @course, notice: 'You have successfully registered.'
+      redirect_to course_lessons_path(@course), notice: 'You have successfully registered.'
     end
   end
 
@@ -88,6 +88,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :desc, :start_date, :end_date, :estimated_effort, :prerequisites)
+      params.require(:course).permit(:name, :desc, :abstract, :start_date, :end_date, :estimated_effort, :prerequisites)
     end
 end

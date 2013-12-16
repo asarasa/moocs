@@ -1,21 +1,27 @@
 <div class="row row-offcanvas row-offcanvas-right">
 	<div class="col-xs-12 col-sm-9">
 		<div class="page-header">
-		  <h1><%= @course.name %> <small>Easy</small></h1>
+		  <h1><%= @course.name %></h1>
 		</div>
-		<h3>About the course</h3>
-        <p><%= @course.desc %></p>		
+        <p><%=raw @course.desc %></p>		
 
-        <% if !is_member?(current_user, @course) %>
-			<%= link_to 'Join', join_course_path(@course.id), :class => 'btn btn-success' %>
-		<% else %>
-			<%= link_to 'Lessons', course_lessons_path(@course.id), :class => 'btn btn-warning' %>
-		<% end %>
-		<%= link_to 'Back to home', root_url, :class => 'btn btn-default' %>
+        <div class="buttons">
+
+			<%= link_to 'Back to home', root_url, :class => 'btn btn-default left' %>
+		</div>
 	</div>
 
     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="info">
-    	<div class="panel panel-success" style="margin-top:50px">
+    	<div class="panel panel-default"  style="margin-top:50px">
+    		<div class="panel-body center">
+		        <% if !is_member? %>
+					<%= link_to 'Join', join_course_path(@course.id), :class => 'btn btn-success' %>
+				<% else %>
+					<%= link_to 'Lessons', course_lessons_path(@course.id), :class => 'btn btn-warning' %>
+				<% end %>
+    		</div>
+    	</div>    	
+    	<div class="panel panel-success">
             <div class="panel-heading">
 		 	   <h3 class="panel-title">Info</h3>
 			</div>    	
@@ -27,7 +33,7 @@
 				<h4>ESTIMATED EFFORT</h4>
 				<p><%= @course.estimated_effort %></p>
 				<h4>PREREQUISITES</h4>
-				<p><%= @course.prerequisites %></p>
+				<p><%=raw @course.prerequisites %></p>
 			</div>
     	</div>
     	<div class="panel panel-info" style="margin-top:50px">

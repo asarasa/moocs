@@ -9,7 +9,6 @@
 	  <thead>
 	    <tr>
 	      <th>Name</th>
-	      <th>Content</th>
 	      <th>Type</th>
 	      <th>Url</th>
 	      <th></th>
@@ -22,8 +21,17 @@
 	    <% @resources.each do |resource| %>
 	      <tr>
 	        <td><%= resource.name %></td>
-	        <td><%= resource.content %></td>
-	        <td><%= resource.type %></td>
+	        <td>
+		      	<% if resource.type == "video" %>
+		      		<img src="/assets/1387049800_social_4.png" alt="video">
+		      	<% elsif resource.type == "audio" %>
+		      		<img src="/assets/1387133987_media-optical-audio.png" alt="video">
+		      	<% elsif resource.type == "pdf" %>
+		      		<img src="/assets/1387134021_application-pdf.png" alt="video">
+		      	<% elsif resource.type == "text" %>
+		      		<img src="/assets/1387134064_readme.png" alt="video">
+		      	<% end %>
+	        </td>
 	        <td><%= resource.url %></td>
 	        <td><%= link_to 'Show', resource %></td>
 	        <td><%= link_to 'Edit', edit_resource_path(resource) %></td>

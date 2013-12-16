@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <div class="page-header">
-  <h2><%= @lesson.name %> <small><%= @lesson.description %></small> <%= link_to 'Student view', course_lesson_path(@course, @lesson, :student => "true"), :class => 'btn btn-info' %></h2>
+  <h2><%= @lesson.name %> <small><%= link_to 'Student view', course_lesson_path(@course, @lesson, :student => "true"), :class => 'btn btn-info' %></small> </h2>
+  <p><%=raw @lesson.description %></p>
 </div>
 
 <div class="row">
@@ -16,11 +17,17 @@
 		  </thead>
 
 		  <tbody>
-		    <% current_user.resources.each do |resource| %>
+		    <% @avaliable_resources.each do |resource| %>
 		      <tr>
 		      	<td>
 		      	<% if resource.type == "video" %>
-		      		<img src="/assets/1387049801_social_4.png" alt="video">
+		      		<img src="/assets/1387049800_social_4.png" alt="video" height="24px" width="24px">
+		      	<% elsif resource.type == "audio" %>
+		      		<img src="/assets/1387133987_media-optical-audio.png" alt="video" height="24px" width="24px">
+		      	<% elsif resource.type == "pdf" %>
+		      		<img src="/assets/1387134021_application-pdf.png" alt="video" height="24px" width="24px">
+		      	<% elsif resource.type == "text" %>
+		      		<img src="/assets/1387134064_readme.png" alt="video" height="24px" width="24px">
 		      	<% end %>
 		      	</td>
 		        <td><%= resource.name %></td>
@@ -39,7 +46,6 @@
 		  <thead>
 		    <tr>
 		      <th>Name</th>
-		      <th>Content</th>
 		      <th>Type</th>
 		      <th>Url</th>
 		      <th></th>
@@ -52,12 +58,11 @@
 		    <% @resources.each do |resource| %>
 		      <tr>
 		        <td><%= resource.name %></td>
-		        <td><%= resource.content %></td>
 		        <td><%= resource.type %></td>
 		        <td><%= resource.url %></td>
 		        <td><%= link_to 'Show', resource %></td>
 		        <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
-		        <td><%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		        <td><%= link_to 'Delete', del_resource_path(@course, @lesson, resource) %></td>
 		      </tr>
 		    <% end %>
 		  </tbody>

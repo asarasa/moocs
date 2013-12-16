@@ -1,6 +1,7 @@
 class Course
   include Mongoid::Document
   field :name, type: String
+  field :abstract, type: String
   field :desc, type: String
   field :estimated_effort, type: String
   field :prerequisites, type: String

@@ -1,0 +1,9 @@
+<div class="page-header" style="margin-top:0px">
+	<h2><%= @resource.name %></h2>
+</div>
+
+<iframe width="100%" height="500" src="//www.youtube.com/embed/<%= @resource.url %>" frameborder="0" allowfullscreen></iframe>
+
+<div class="resource-content">
+	<%=raw @resource.content %>
+</div>

@@ -24,7 +24,9 @@ Moocs::Application.routes.draw do
 
   get 'courses/:course_id/lessons/:id/view_resource/:resource_id', to:'lessons#view_resource', as: 'view_resource'
   get 'courses/:course_id/lessons/:id/use_resource/:resource_id', to:'lessons#use_resource', as: 'use_resource'
+  get 'courses/:course_id/lessons/:id/del_resource/:resource_id', to:'lessons#delete_resource', as: 'del_resource'
 
+  get 'search', to:'welcome#search', as: 'search'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

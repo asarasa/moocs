@@ -1,4 +1,39 @@
-<h1 style="text-align:center">Welcome to Moocs!</h1>
-<center>
-	<%= link_to "Create a course", new_course_path, :class=>"btn btn-success" %>
-</center>
+<div class="jumbotron">
+	<h1 class="center"><span style="color:#323639">Welcome to </span>Moocs!</h1>
+
+	<div class="form">
+		<%= form_tag("/search", method: "get") do %>
+			<div class="form-group jumbo">
+				<%= text_field_tag(:q, nil, :class => 'form-control', :placeholder => "Search for a course") %>
+			</div>
+			<div class="center">
+				<%= submit_tag("Search", :class => 'btn btn-success') %>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+<!-- Three columns of text below the carousel -->
+<div class="row">
+	<div class="col-lg-4">
+		<div class="center">
+			<img src="/assets/create.png" alt="Create course" height="140" width="140">
+			<h2>Create</h2>
+		</div>
+		<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+	</div><!-- /.col-lg-4 -->
+	<div class="col-lg-4">
+		<div class="center">
+			<img src="/assets/discover.png" alt="Discover courses" height="140" width="140">
+			<h2>Discover</h2>
+		</div>
+		<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+	</div><!-- /.col-lg-4 -->
+	<div class="col-lg-4">
+		<div class="center">
+			<img src="/assets/learn.png" alt="Learn" height="140" width="140">
+			<h2>Learn</h2>
+		</div>
+		<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+	</div><!-- /.col-lg-4 -->
+</div><!-- /.row -->

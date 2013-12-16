@@ -1,0 +1,156 @@
+/*
+ * Jimmy's Iced Coffe Temaplte
+ * url: http://www.colourlovers.com/business/trends/branding/7887/Jimmys_Iced_Coffee
+ */
+
+body {
+  padding-top: 50px;
+  color:#73726D;
+}
+
+a {
+	color:#55C3DC;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	color: #848380;
+}
+
+.alert {
+  	text-align: center;
+	color:#8C6429;
+	background-color: #E7F3EF;
+	border-color:#E7F3EF;  
+}
+
+.center { 
+  text-align: center; 
+}
+
+.left {
+  float:left;
+  margin-right: 10px
+}
+
+.right {
+  float:right;
+  margin-left: 10px
+}
+
+/* Navbar */
+
+.moocs-nav {
+  text-shadow: 0 -1px 0 rgba(0,0,0,.15);
+  background-color: #55C3DC;
+  border-color: #7CC6D7;
+  box-shadow: 0 1px 0 rgba(255,255,255,.1);
+}
+
+.moocs-nav .navbar-collapse {
+  border-color: #7CC6D7;
+}
+.moocs-nav .navbar-brand {
+  color: #fff;
+}
+.moocs-nav .navbar-nav > li > a {
+  color: #fff;
+}
+.moocs-nav .navbar-nav > li > a:hover {
+  color: #E7F3EF;
+}
+.moocs-nav .navbar-nav > .active > a,
+.moocs-nav .navbar-nav > .active > a:hover {
+  color: #fff;
+  background-color: #7CC6D7;
+}
+.moocs-nav .navbar-toggle {
+  border-color: #563d7c;
+}
+.moocs-nav .navbar-toggle:hover {
+  background-color: #7CC6D7;
+  border-color: #7CC6D7;
+}
+
+/* JUMBOTRON
+-------------------------------------------------- */
+.jumbotron {
+	margin-top: 80px;
+	background-color: #E7F3EF;
+}
+
+.jumbotron h1 {
+	color:#DD8472;
+}
+
+.jumbotron label {
+	color:#8C6429;
+}
+
+.jumbotron .btn-success {
+	background-color: #55C3DC;
+	border-color: #7CC6D7;
+	padding:10px 50px 10px 50px;
+}
+
+/* BUTTONS
+-------------------------------------------------- */
+
+.btn-primary {
+	background-color: #55C3DC;
+	border-color: #7CC6D7;
+}
+
+.btn-success {
+	background-color: #55C3DC;
+	border-color: #7CC6D7;
+}
+
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.open .dropdown-toggle.btn-success { 
+	background-color: #7CC6D7;
+	border-color: #7CC6D7;
+}
+
+.btn-info {
+
+}
+
+.btn-default {
+
+}
+
+.btn-warning {
+
+}
+
+.btn-danger {
+
+}
+
+
+/* FORMS
+-------------------------------------------------- */
+.form {
+  padding:20px 150px 40px 150px;
+}
+
+.jumbo {
+  margin:20px 20px 40px 20px;
+}
+
+.buttons {
+  margin-bottom:50px;
+}
+
+
+
+/* SEARCH
+-------------------------------------------------- */
+.result {
+  border-bottom: 1px #E7F3EF solid;
+  padding: 10px 0 20px 0;
+}

@@ -1,0 +1,18 @@
+<div class="page-header" style="margin-top:0px">
+	<h2><%= @resource.name %></h2>
+</div>
+
+<center>
+<audio controls>
+    <source src="<%= @resource.url %>" type="audio/ogg" />
+    <source src="<%= @resource.url %>" type="audio/mpeg" />
+    <object type="application/x-shockwave-flash" data="player.swf?soundFile=<%= @resource.url %>">
+        <param name="movie" value="player.swf?soundFile=<%= @resource.url %>" />
+        <a href="<%= @resource.url %>">Download</a>
+    </object>
+</audio>
+</center>
+
+<div class="resource-content">
+	<%=raw @resource.content %>
+</div>

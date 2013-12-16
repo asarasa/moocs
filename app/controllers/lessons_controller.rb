@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
-  before_action :set_course, only: [:view_resource, :use_resource, :index, :new, :create, :show, :edit, :update, :destroy]  
-  before_action :set_lesson, only: [:view_resource, :use_resource, :show, :edit, :update, :destroy]
+  before_action :set_course, only: [:view_resource, :use_resource, :delete_resource, :index, :new, :create, :show, :edit, :update, :destroy]  
+  before_action :set_lesson, only: [:view_resource, :use_resource, :delete_resource, :show, :edit, :update, :destroy]
   before_action :authorize_teacher, only: [:use_resource, :new, :create, :edit, :update, :destroyed]
 
   # GET /lessons
@@ -9,6 +9,8 @@ class LessonsController < ApplicationController
     @lessons = @course.lessons
     if is_teacher?
       render 'teacher_index'
+    elsif (!is_member?)
+      redirect_to course_path(@course)
     end
   end
 
@@ -17,6 +19,7 @@ class LessonsController < ApplicationController
   def show
     @resources = Resource.find(@lesson.resources)
     if is_teacher? && !params[:student]
+      @avaliable_resources = current_user.resources - @resources 
       render 'teacher_show'
     end
   end
@@ -35,8 +38,11 @@ class LessonsController < ApplicationController
       redirect_to course_lesson_path(@course, @lesson), notice: 'The resource is already in the lesson.'
     else
       @lesson.resources.push(params[:resource_id])
-      @lesson.save
-      redirect_to course_lesson_path(@course, @lesson), notice: 'The resource was successfully added.'
+      if @lesson.save
+        redirect_to course_lesson_path(@course, @lesson), notice: 'The resource was successfully added.'
+      else
+        redirect_to course_lesson_path(@course, @lesson), notice: 'Error.'
+      end
     end
   end
 
@@ -45,6 +51,15 @@ class LessonsController < ApplicationController
     @resources = Resource.find(@lesson.resources)
 
     render "show"
+  end
+
+  def delete_resource
+    @lesson.resources.delete(params[:resource_id])
+    if @lesson.save
+        redirect_to course_lesson_path(@course, @lesson), notice: 'The resource was successfully deleted.'
+    else
+        redirect_to course_lesson_path(@course, @lesson), notice: 'Error.'
+    end
   end
 
   # POST /lessons

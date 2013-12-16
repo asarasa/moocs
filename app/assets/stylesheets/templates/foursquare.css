@@ -1,29 +1,26 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require bootstrap
- *= require_self
- *= require users
- *= require bootstrap-datetimepicker.min
+ * Foursquare Temaplte
+ * url: http://www.colourlovers.com/web/trends/websites/7855/FourSquare
  */
 
 body {
   padding-top: 50px;
-  color:#666666;
+  color:#73726D;
+}
+
+a {
+	color:#55C3DC;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	color: #848380;
 }
 
 .alert {
   text-align: center;
-  background-color: #eeeeee;
-  border-color:#eeeeee;  
-  color:#73726D;
+	color:#8C6429;
+	background-color: #A8CB17;
+	border-color:#B4CC51;  
 }
 
 .center { 
@@ -44,49 +41,92 @@ body {
 
 .moocs-nav {
   text-shadow: 0 -1px 0 rgba(0,0,0,.15);
-  background-color: #563d7c;
-  border-color: #463265;
+  background-color: #17649A;
+  border-color: #3D79A2;
   box-shadow: 0 1px 0 rgba(255,255,255,.1);
 }
 
 .moocs-nav .navbar-collapse {
-  border-color: #463265;
+  border-color: #3D79A2;
 }
 .moocs-nav .navbar-brand {
   color: #fff;
 }
 .moocs-nav .navbar-nav > li > a {
-  color: #cdbfe3;
+  color: #fff;
 }
 .moocs-nav .navbar-nav > li > a:hover {
-  color: #fff;
+  color: #E7F3EF;
 }
 .moocs-nav .navbar-nav > .active > a,
 .moocs-nav .navbar-nav > .active > a:hover {
   color: #fff;
-  background-color: #463265;
+  background-color: #3D79A2;
 }
 .moocs-nav .navbar-toggle {
   border-color: #563d7c;
 }
 .moocs-nav .navbar-toggle:hover {
-  background-color: #463265;
-  border-color: #463265;
+  background-color: #3D79A2;
+  border-color: #3D79A2;
 }
 
 /* JUMBOTRON
 -------------------------------------------------- */
 .jumbotron {
-  margin-top: 50px;
+	margin-top: 80px;
+	background-color: #eeeeee;
 }
 
 .jumbotron h1 {
-  color:#563d7c;
+	color:#A8CB17;
 }
 
 .jumbotron .btn-success {
-  padding:10px 50px 10px 50px;
+	background-color: #40B3DF;
+	border-color: #5DB6D7;
+	padding:10px 50px 10px 50px;
 }
+
+/* BUTTONS
+-------------------------------------------------- */
+
+.btn-primary {
+	background-color: #40B3DF;
+	border-color: #5DB6D7;
+}
+
+.btn-success {
+	background-color: #40B3DF;
+	border-color: #5DB6D7;
+}
+
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.open .dropdown-toggle.btn-success { 
+	background-color: #3D79A2;
+	border-color: #3D79A2;
+}
+
+.btn-info {
+
+}
+
+.btn-default {
+
+}
+
+.btn-warning {
+
+}
+
+.btn-danger {
+
+}
+
 
 /* FORMS
 -------------------------------------------------- */
@@ -98,16 +138,14 @@ body {
   margin:20px 20px 40px 20px;
 }
 
-
 .buttons {
   margin-bottom:50px;
-  padding-bottom:50px;
 }
+
 
 /* SEARCH
 -------------------------------------------------- */
 .result {
   border-bottom: 1px #E7F3EF solid;
-  padding: 0px 0 20px 0;
-  margin: 0 0 20px 0;
+  padding: 10px 0 20px 0;
 }

@@ -1,11 +1,12 @@
-<div class="form-signin">
-	<h2 class="form-signin-heading">
-		Editing  course 
-		<%= link_to 'Delete', @course, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
-	</h2>
+<div class="form">
+	<h2 class="form-signin-heading">Editing  course</h2>
 
 	<%= render 'form' %>
 
 	
 </div>
-<%= link_to 'Back', course_path(@course), :class => 'btn btn-default' %>
+
+<div class="buttons">
+	<%= link_to 'Back', course_path(@course), :class => 'btn btn-default left' %>
+	<%= link_to 'Delete', @course, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger right' %>
+</div>

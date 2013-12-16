@@ -1,29 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @resource.name %>
-</p>
+<% if @resource.type == "video" %>
+  <%= render 'resources/video' %>     
+  <% elsif @resource.type == "audio" %>
+  <%= render 'resources/audio' %>
+<% elsif @resource.type == "pdf" %>        
+  <%= render 'resources/pdf' %>
+<% elsif @resource.type == "text" %>
+  <%= render 'resources/text' %>      
+<% end %>
 
-<p>
-  <strong>Content:</strong>
-  <%= @resource.content %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= @resource.type %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <% if @resource.type == "video" %>
-  	<iframe width="560" height="315" src="//www.youtube.com/embed/<%= @resource.url %>" frameborder="0" allowfullscreen></iframe>
-  <% else %> 
-  	<%= @resource.url %>
-  <% end %>
-</p>
-
-
-<%= link_to 'Edit', edit_resource_path(@resource) %> |
-<%= link_to 'Back', resources_path %>
+<div class="buttons">
+	<%= link_to 'Back', user_resources_path, :class => 'btn btn-default left' %>
+	<%= link_to 'Edit', edit_resource_path(@resource), :class => 'btn btn-info right' %>
+</div>

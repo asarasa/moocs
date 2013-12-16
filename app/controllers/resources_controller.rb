@@ -25,7 +25,8 @@ class ResourcesController < ApplicationController
   # POST /resources.json
   def create
     @resource = Resource.new(resource_params)
-    if @resource.type == "video"
+
+    if @resource.type == "video" && @resource.url.include?("youtube")
       @resource.url = @resource.url.match(/v=([^\/.]*)\&?|&/)[1]
     end
     @resource.user = current_user
@@ -74,6 +75,6 @@ class ResourcesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
-      params.require(:resource).permit(:name, :content, :type, :url, :data)
+      params.require(:resource).permit(:name, :content, :type, :url)
     end
 end

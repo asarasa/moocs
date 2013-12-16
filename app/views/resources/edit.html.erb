@@ -1,9 +1,11 @@
-<div class="form-signin">
+<div class="form">
 	<h2 class="form-signin-heading">Editing resource</h2>
 
 	<%= render 'form' %>
 
 </div>
 
-<%= link_to 'Show', @resource %> |
-<%= link_to 'Back', resources_path %>
+<div class="buttons">
+	<%= link_to 'Back', resources_path, :class => 'btn btn-default left' %>
+	<%= link_to 'Show', @resource, :class => 'btn btn-info right' %>
+</div>

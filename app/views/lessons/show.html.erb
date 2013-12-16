@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="page-header">
-  <h2><%= @lesson.name %> <small><%= @lesson.description %></small></h2>
+  <h2><%= @lesson.name %> <small><%=raw @lesson.description %></small></h2>
 </div>
 
 <div class="row">
@@ -20,7 +20,13 @@
 		      <tr>
 		      	<td>
 		      	<% if resource.type == "video" %>
-		      		<img src="/assets/1387049801_social_4.png" alt="video">
+		      		<img src="/assets/1387049800_social_4.png" alt="video">
+		      	<% elsif resource.type == "audio" %>
+		      		<img src="/assets/1387133987_media-optical-audio.png" alt="video">
+		      	<% elsif resource.type == "pdf" %>
+		      		<img src="/assets/1387134021_application-pdf.png" alt="video">
+		      	<% elsif resource.type == "text" %>
+		      		<img src="/assets/1387134064_readme.png" alt="video">
 		      	<% end %>
 		      	</td>
 		        <td><%= resource.name %></td>
@@ -35,13 +41,14 @@
 		<% if @resource.nil? %>
 			<h3 style="text-align:center">Please, select a recourse in the left menu.</h3>
 		<% else %>
-			<div class="page-header" style="margin-top:0px">
-			  <h2><%= @resource.name %> <small> in <%= @lesson.name %> lesson</small></h2>
-			</div>
 			<% if @resource.type == "video" %>
-  				<iframe width="720" height="480" src="//www.youtube.com/embed/<%= @resource.url %>" frameborder="0" allowfullscreen></iframe>			
-  			<% else %>
-				<p><%= @resource.content %></p>
+				<%= render 'resources/video' %>			
+  			<% elsif @resource.type == "audio" %>
+				<%= render 'resources/audio' %>
+			<% elsif @resource.type == "pdf" %>				
+				<%= render 'resources/pdf' %>
+			<% elsif @resource.type == "text" %>
+				<%= render 'resources/text' %>			
   			<% end %>
 		<% end %>
 	</div>

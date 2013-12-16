@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 private
+	#[jimmys, foursquare]
+	def template
+		@template = "/assets/templates/dashboard"
+	end
+	helper_method :template
+
 	def current_user
 		@current_user ||= User.find(session[:user_id]) if session[:user_id]
 	end
@@ -18,6 +24,16 @@ private
 	end
 
 	def is_teacher?
-		@course.teachers.include?(current_user.id)
+		if !current_user.nil?
+			@course.teachers.include?(current_user.id)
+		end
 	end
+	helper_method :is_teacher?
+
+	def is_member?
+		if (!current_user.nil?)
+			@course.users.include?(current_user)
+		end
+	end	
+	helper_method :is_member?	
 end
