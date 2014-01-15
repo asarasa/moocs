@@ -1,5 +1,12 @@
 Moocs::Application.routes.draw do
-  resources :resources
+  resources :resources do   
+    resources :quizzes do
+      match "new_answers", :to => "quizzes#new_answers", :as => "new_answers", :via => [:get, :post, :patch]
+      match "solve", :to => "quizzes#solve", :as => "solve", :via => [:get, :post, :patch]
+      get 'add_answers', to:'quizzes#add_answers', as: 'add_answers'      
+     
+    end
+   end  
 
   resources :courses do
     resources :lessons
@@ -13,7 +20,6 @@ Moocs::Application.routes.draw do
 
   resources :users
   resources :sessions
-
   root 'welcome#index'
   get 'lastest_users', to: 'welcome#users', as: 'lastest_users'
   get 'lastest_courses', to: 'welcome#courses', as: 'lastest_courses'
@@ -27,6 +33,8 @@ Moocs::Application.routes.draw do
   get 'courses/:course_id/lessons/:id/del_resource/:resource_id', to:'lessons#delete_resource', as: 'del_resource'
 
   get 'search', to:'welcome#search', as: 'search'
+  
+  
 
 
   # The priority is based upon order of creation: first created -> highest priority.

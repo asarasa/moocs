@@ -32,7 +32,9 @@
 				<p><%= @course.end_date.to_formatted_s(:short)    %></p>
 				<h4>ESTIMATED EFFORT</h4>
 				<p><%= @course.estimated_effort %></p>
-				<h4>PREREQUISITES</h4>
+				<h4>TAGS</h4>
+				<p><%=raw @course.tags.join(" ; ") if @course.tags %></p>
+        <h4>PREREQUISITES</h4>
 				<p><%=raw @course.prerequisites %></p>
 			</div>
     	</div>

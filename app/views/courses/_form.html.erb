@@ -42,6 +42,11 @@
     <%= f.text_field :estimated_effort, :class => 'form-control' %>
   </div> 
   <div class="form-group">
+    <%= f.label :tags %><br>
+    <%= f.text_field :tags, :class => 'form-control' %>
+    Enter tags between semicolons
+  </div> 
+  <div class="form-group">
     <%= f.label :prerequisites, "Prerrequisites" %><br>
     <%= f.text_area :prerequisites, :class => 'form-control' %>
   </div>   

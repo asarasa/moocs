@@ -21,7 +21,7 @@ class WelcomeController < ApplicationController
 
 	def search
 		@searchterm = params[:q]
-		@courses = Course.any_of({ :name => /.*#{@searchterm}.*/ })
+    @courses = Course.any_of({ :name => /.*#{@searchterm}.*/ }, { :name => /.*#{@searchterm}.*/ })
 
 		render 'search_results'
 	end

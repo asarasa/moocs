@@ -9,6 +9,7 @@ class Course
   field :start_date, type: DateTime
   field :end_date, type: DateTime
   field :teachers, type: Array
+  field :tags, type: Array
   has_and_belongs_to_many :users
   embeds_many :lessons
 end

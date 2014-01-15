@@ -41,6 +41,7 @@ class CoursesController < ApplicationController
   # POST /courses.json
   def create
     @course = Course.new(course_params)
+    @course.tags = params[:course][:tags].split(";")
     @course.users.push(current_user)
     @course.teachers = [current_user.id]
 

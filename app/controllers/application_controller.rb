@@ -36,4 +36,18 @@ private
 		end
 	end	
 	helper_method :is_member?	
+  
+  def is_myresource?
+		if (!current_user.nil?)
+      current_user.resources.include?(@resource)
+		end
+	end	
+	helper_method :is_myresource?	
+  
+  def did_quiz?
+    if (!current_user.nil?)
+      @quiz.users.include?(current_user)
+		end
+	end	
+	helper_method :did_quiz?	
 end

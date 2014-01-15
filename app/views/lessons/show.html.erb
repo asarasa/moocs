@@ -50,6 +50,7 @@
 			<% elsif @resource.type == "text" %>
 				<%= render 'resources/text' %>			
   			<% end %>
+        <%= link_to 'Quizzes', resource_quizzes_path(@resource), :class => 'btn btn-default' %>
 		<% end %>
 	</div>
 </div>

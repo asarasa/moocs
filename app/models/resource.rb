@@ -6,4 +6,5 @@ class Resource
   field :url, type: String
 
   belongs_to :user
+  embeds_many :quizzes
 end
