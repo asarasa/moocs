@@ -1,0 +1,43 @@
+<%= form_for  [@resource, @quiz],url: resource_quiz_solve_path(@resource,@quiz) do |f| %>
+ <% if @quiz.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
+
+      <ul>
+      <% @quiz.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Question:</strong>
+  <%=raw @quiz.question %>
+</p>
+
+<p>
+  
+  <strong>Answers:</strong>
+  <br>
+  <%  @quiz.answers.each do |answer| %>
+    <%= f.fields_for "answer", index:answer do|answers_form|%>
+      <%= answers_form.label :answers , answer %>
+      <% if @quiz.multianswer == true %>
+         <%= answers_form.check_box :results %> <br>
+      <%else%>
+         <%= answers_form.radio_button :results,:checked => false %> <br>
+      <%end%>
+    <%end%>     
+  <% end %>
+ 
+</p>
+
+
+ <div class="actions">
+    <%= f.submit "Send" %>
+ </div>
+
+  <%= link_to 'Back', resource_quizzes_path(@resource) %>
+<% end %>
