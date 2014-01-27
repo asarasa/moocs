@@ -15,7 +15,7 @@
  */
 
 body {
-  padding-top: 50px;
+  padding-top: 80px;
   color:#666666;
 }
 
@@ -47,6 +47,7 @@ body {
   background-color: #563d7c;
   border-color: #463265;
   box-shadow: 0 1px 0 rgba(255,255,255,.1);
+  font-size: 16px;
 }
 
 .moocs-nav .navbar-collapse {
@@ -72,6 +73,10 @@ body {
 .moocs-nav .navbar-toggle:hover {
   background-color: #463265;
   border-color: #463265;
+}
+
+.moocs-nav .collapse {
+  padding-top:15px;
 }
 
 /* JUMBOTRON
