@@ -1,5 +1,8 @@
-<h1>New quiz</h1>
+<div class="form">
+  <h2 class="form-signin-heading">New quiz</h2>
 
 <%= render 'form' %>
 
-<%= link_to 'Back',  resource_quizzes_path(@resource) %>
+</div>
+
+<%= link_to 'Back',  resource_quizzes_path(@resource), :class => 'btn btn-default' %>

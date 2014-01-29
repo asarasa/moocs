@@ -116,3 +116,16 @@ body {
   padding: 0px 0 20px 0;
   margin: 0 0 20px 0;
 }
+
+/* Quizzes
+-------------------------------------------------- */
+.question {
+  padding:10px;
+}
+
+.answers {
+  padding:10px;
+}
+
+
+

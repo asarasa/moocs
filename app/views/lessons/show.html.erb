@@ -50,10 +50,12 @@
 			<% elsif @resource.type == "text" %>
 				<%= render 'resources/text' %>			
   			<% end %>
-        <%= link_to 'Quizzes', resource_quizzes_path(@resource), :class => 'btn btn-default' %>
+        	<%= link_to 'Quizzes', resource_quizzes_path(@resource), :class => 'btn btn-primary btn-block' %>
 		<% end %>
 	</div>
 </div>
 
 
+<div style="margin:50px">
 <%= link_to 'Back', course_lessons_path(@course), :class => 'btn btn-default' %>
+</div>

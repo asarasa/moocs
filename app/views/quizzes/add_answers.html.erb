@@ -1,4 +1,6 @@
-<h1>Adding answers</h1>
+<div class="form">
+  <h2 class="form-signin-heading">Adding answers</h2>
+
 <%= form_for  [@resource, @quiz] ,url: resource_quiz_new_answers_path(@resource,@quiz)   do |f| %>
   <% if @quiz.errors.any? %>
     <div id="error_explanation">
@@ -11,23 +13,34 @@
       </ul>
     </div>
   <% end %>
-  <h3> <%=raw @quiz.question%> </h3>
-  <%= f.label :answers %><br>
-  <% @quiz.numanswers.to_i.times do |answer| %>
-    <div class="field">
-      <%= f.fields_for "answer", index:answer do|answers_form|%>
-      <%= answers_form.text_field :answers %> 
-       <% if @quiz.multianswer == true %>
-         <%= answers_form.check_box :results %> <br>
-       <%else%>
-         <%= answers_form.radio_button :results,:checked => false %> <br>
-       <%end%>
-      <%end%>
-    </div>
-    <br>
-   <% end %>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="question">
+    <h3><%=raw @quiz.question%></h3>
   </div>
+
+  <div class="answers">
+    <%= f.label :answers %>
+    <% @quiz.numanswers.to_i.times do |answer| %>
+      <div class="checkbox">
+        <%= f.fields_for "answer", index:answer do|answers_form|%>
+                    
+          <% if @quiz.multianswer == true %>
+            <%= answers_form.check_box :results %>
+          <%else%>
+            <%= answers_form.radio_button :results,:checked => false %>
+          <%end%>
+          
+          <%= answers_form.text_field :answers, :class => "form-control" %> 
+
+        <%end%>
+      </div>
+    <% end %>
+  </div>
+   
+  <div class="actions center">
+      <%= f.submit "Submit", :class => 'btn btn-lg btn-primary' %>
+   </div>
 <% end %>
-<%= link_to 'Back', edit_resource_quiz_path(@resource,@quiz) %>
+
+</div>
+
+<%= link_to 'Back', edit_resource_quiz_path(@resource,@quiz), :class => 'btn btn-default' %>

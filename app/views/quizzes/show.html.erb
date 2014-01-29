@@ -1,4 +1,7 @@
-<%= form_for  [@resource, @quiz],url: resource_quiz_solve_path(@resource,@quiz) do |f| %>
+<div class="form">
+  <h2 class="form-signin-heading"><%= @resource.name %> quiz</h2>
+
+<%= form_for [@resource, @quiz],url: resource_quiz_solve_path(@resource,@quiz) do |f| %>
  <% if @quiz.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
@@ -10,34 +13,37 @@
       </ul>
     </div>
   <% end %>
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Question:</strong>
-  <%=raw @quiz.question %>
-</p>
-
-<p>
+  <div class="question">
+    <h3>Question:</h3>
+    <%=raw @quiz.question %>
+  </div>
   
-  <strong>Answers:</strong>
-  <br>
-  <%  @quiz.answers.each do |answer| %>
-    <%= f.fields_for "answer", index:answer do|answers_form|%>
-      <%= answers_form.label :answers , answer %>
-      <% if @quiz.multianswer == true %>
-         <%= answers_form.check_box :results %> <br>
-      <%else%>
-         <%= answers_form.radio_button :results,:checked => false %> <br>
-      <%end%>
-    <%end%>     
-  <% end %>
+  <div class="answers">
+    <h3>Answers:</h3>
+    
+    <% @quiz.answers.each do |answer| %>
+      <%= f.fields_for "answer", index:answer do |answers_form|%>
+        
+        <div class="checkbox">
+          <%= answers_form.label :answers , answer %>
+  
+          <% if @quiz.multianswer == true %>
+            <%= answers_form.check_box :results %> <br>
+          <%else%>
+            <%= answers_form.radio_button :results,:checked => false %> <br>
+          <%end%>
+        </div>
+      
+      <%end%>     
+    <% end %>
+  </div>
  
-</p>
-
-
- <div class="actions">
-    <%= f.submit "Send" %>
+ <div class="actions center">
+    <%= f.submit "Submit", :class => 'btn btn-lg btn-primary' %>
  </div>
 
-  <%= link_to 'Back', resource_quizzes_path(@resource) %>
 <% end %>
+</div>
+
+<%= link_to 'Back', resource_quizzes_path(@resource), :class => 'btn btn-default' %>

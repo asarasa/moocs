@@ -37,9 +37,9 @@ private
 	end	
 	helper_method :is_member?	
   
-  def is_myresource?
+  	def is_myresource?
 		if (!current_user.nil?)
-      current_user.resources.include?(@resource)
+    		current_user.resources.include?(@resource)
 		end
 	end	
 	helper_method :is_myresource?	

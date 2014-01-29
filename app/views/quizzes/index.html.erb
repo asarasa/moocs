@@ -1,6 +1,6 @@
 <h1>Listing quizzes</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Question</th>
@@ -28,7 +28,7 @@
         <% else %>
          <%  if (!current_user.nil?)%>
           <% if quiz.users.include?(current_user.id)%>
-            <td>HECHO</td>
+            <td>Done</td>
           <%else%>
             <td><%= link_to 'Solve',  resource_quiz_path(@resource,quiz) %></td>
           <%end%>

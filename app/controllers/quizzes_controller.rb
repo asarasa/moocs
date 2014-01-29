@@ -40,11 +40,11 @@ class QuizzesController < ApplicationController
         if @quiz.update()
           format.html { redirect_to resource_quizzes_path(@resource), notice: 'Quiz was successfully solved' }
         else
-          format.html { render action: 'show' }
+          format.html { render action: 'show', notice: 'Quiz was not succefully solved' }
         end
       end    
     else 
-       render 'show'
+       redirect_to resource_quiz_path(@resource, @quiz), notice: 'Quiz was not successfully solved'
     end    
   end
 
