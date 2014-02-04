@@ -1,0 +1,38 @@
+<h1>Listing messages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>From</th>
+      <th>Date</th>
+      <th>Order</th>
+      <th>Title</th>
+      <th>Text</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @messages.each do |message| %>
+      <tr>
+        <td><%= message.from %></td>
+        <td><%= message.date %></td>
+        <td><%= message.order %></td>
+        <td><%= message.title %></td>
+        <td><%=raw message.text %></td>
+        <% if can_edit_message?(message) %>
+          <td><%= link_to 'Show', course_topic_message_path(@course,@topic,message) %></td>      
+          <td><%= link_to 'Edit', edit_course_topic_message_path(@course,@topic,message) %></td>
+          <td><%= link_to 'Reply', course_topic_message_reply_path(@course,@topic,message) %></td>
+          <td><%= link_to 'Destroy', [@course,@topic,message], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>  
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<% if can_create_message? %>
+  <%= link_to 'New Message', new_course_topic_message_path(@course,@topic) %>
+<%end%>

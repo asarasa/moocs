@@ -35,6 +35,8 @@ end
 ruby '2.0.0'
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 
+gem 'lazy_high_charts'
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
 

@@ -18,6 +18,9 @@
 					<%= link_to 'Join', join_course_path(@course.id), :class => 'btn btn-success' %>
 				<% else %>
 					<%= link_to 'Lessons', course_lessons_path(@course.id), :class => 'btn btn-warning' %>
+           <br> <br>
+          <%= link_to 'Forum', course_topics_path(@course), :class => 'btn btn-success' %>
+          <%= link_to 'Tracking', course_tracking_path(@course), :class => 'btn btn-danger' %>
 				<% end %>
     		</div>
     	</div>    	

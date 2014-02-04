@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>From:</strong>
+  <%= @message.from %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @message.date %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @message.order %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @message.title %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @message.text %>
+</p>
+
+<%= link_to 'Edit', edit_course_topic_message_path(@course,@topic,@message) %> |
+<%= link_to 'Back', course_topic_messages_path(@course,@topic) %>

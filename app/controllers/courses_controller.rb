@@ -18,6 +18,38 @@ class CoursesController < ApplicationController
       render 'teacher_show'
     end
   end
+  
+   def tracking
+    @course = Course.find(params[:course_id])
+    @lessons = @course.lessons   
+    if is_teacher?
+      @chart = LazyHighCharts::HighChart.new('graph') do |f|
+      f.title({ :text=>"Course Statistics"})
+      f.options[:xAxis][:categories] =  ["leccion1", "leccion2"]
+      f.labels(:items=>[:html=>"Course rattings", :style=>{:left=>"20px", :top=>"100px", :color=>"black"} ])      
+      f.series(:type=> 'column',:name=> 'Worst',:data=> [3,4])
+      f.series(:type=> 'column', :name=> 'Best',:data=> [7,9])
+      f.series(:type=> 'spline',:name=> 'Average', :data=> [4.5,5.7])
+      f.series(:type=> 'pie',:name=> 'alumn average rattings', 
+        :data=> [
+          {:name=> '<5', :y=> 98, :color=> 'red'}, 
+          {:name=> '5-8', :y=> 15,:color=> 'blue'},
+          {:name=> '8-10', :y=> 3,:color=> 'green'}
+        ],
+        :center=> [40, 30], :size=> 100, :showInLegend=> false)
+      end
+      render 'teacher_tracking'
+    else  
+     @chart = LazyHighCharts::HighChart.new('graph') do |f|
+      f.title(:text => "Your course rating")
+      f.options[:xAxis][:categories] =  ["leccion1", "leccion2"]      
+      f.series(:type=> 'column',:name=> 'Your rating',:data=> [3,4])
+      f.series(:type=> 'column', :name=> 'Lesson Average',:data=> [7,9])
+      f.series(:type=> 'spline',:name=> 'Average', :data=> [4.5,5.7])
+     end  
+    end
+  end
+
 
   def join_course
     if @course.users.include? current_user
@@ -81,6 +113,7 @@ class CoursesController < ApplicationController
     end
   end
 
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
@@ -89,6 +122,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :desc, :abstract, :start_date, :end_date, :estimated_effort, :prerequisites)
+      params.require(:course).permit(:forumpermision,:name, :desc, :abstract, :start_date, :end_date, :estimated_effort, :prerequisites)
     end
 end

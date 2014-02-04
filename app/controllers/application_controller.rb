@@ -44,5 +44,37 @@ private
 	end	
 	helper_method :is_myresource?	
   
-
+  def have_forumpermission?
+    if (!@course.nil?)
+      @course.forumpermision == true
+    end  
+  end  
+  helper_method :have_forumpermission?	
+  
+   def can_create_topic?
+	    	is_teacher? or (is_member? and have_forumpermission?)
+    end	
+    helper_method :can_create_topic?	
+  
+    def can_edit_topic?(topic)
+      utopic = User.find(topic.createBy)
+      ucurrent = User.find(current_user)
+      is_teacher? or (is_member? and have_forumpermission? and utopic == ucurrent)
+    end	
+    helper_method :can_edit_topic?	
+  
+    def can_create_message?
+      utopic = User.find(@topic.createBy)
+      ucurrent = User.find(current_user)
+      is_teacher? or utopic == ucurrent or (is_member? and @topic == "Opened")
+    end	
+    helper_method :can_create_message?	
+  
+  def can_edit_message?(message)
+      utopic = User.find(@topic.createBy)
+      ucurrent = User.find(current_user)
+      umessage = User.find(message.from)
+      is_teacher? or utopic == ucurrent or (is_member? and @topic == "Opened" and umessage == ucurrent)
+    end	
+    helper_method :can_edit_message?	
 end

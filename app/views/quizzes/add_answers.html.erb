@@ -19,20 +19,19 @@
 
   <div class="answers">
     <%= f.label :answers %>
+    <%   index=0 %>
     <% @quiz.numanswers.to_i.times do |answer| %>
-      <div class="checkbox">
-        <%= f.fields_for "answer", index:answer do|answers_form|%>
-                    
+      <div class="checkbox">       
+        <%= f.fields_for "answer", index:answer do|answers_form|%>                   
           <% if @quiz.multianswer == true %>
             <%= answers_form.check_box :results %>
           <%else%>
-            <%= answers_form.radio_button :results,:checked => false %>
-          <%end%>
-          
-          <%= answers_form.text_field :answers, :class => "form-control" %> 
-
+            <%= f.radio_button :results , index %>
+          <%end%>      
+          <%= answers_form.text_field :answers, :class => "form-control" %>        
         <%end%>
       </div>
+    <%index = index + 1 %>
     <% end %>
   </div>
    

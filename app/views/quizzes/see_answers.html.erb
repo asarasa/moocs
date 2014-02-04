@@ -1,0 +1,21 @@
+<div class="question">
+    <h3>Question:</h3>
+    <%=raw @quiz.question %>
+</div>
+
+<div class="answers">
+    <h3>Answers:</h3>
+    <%index=0%>
+    <% @quiz.answers.each do |answer| %>        
+          <%if @quiz.results.include?(index)%>
+          <div style="color:#63F17F"> <!-- Rojo -->
+           <% else %>
+            <div style="color:#F16363"><!--Verde -->
+          <%end%>
+                <%= label "answer",answer %>
+            </div>
+    <%index=index+1%>
+    <% end %>
+  </div>
+
+<%= link_to 'Back', resource_quizzes_path(@resource), :class => 'btn btn-default' %>

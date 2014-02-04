@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @topic.title %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @topic.state %>
+</p>
+
+<p>
+  <strong>Creation date:</strong>
+  <%= @topic.creation_Date.strftime("%x") %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @user.username %>
+</p>
+
+
+<%= link_to 'Edit', edit_course_topic_path(@course,@topic) %> |
+<%= link_to 'Messages', course_topic_messages_path(@course,@topic) %> |
+<%= link_to 'Back', course_topics_path(@course) %>

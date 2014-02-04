@@ -15,6 +15,11 @@
 //= require turbolinks
 //= require_tree .
 
+//= require highcharts/highcharts                                                           
+//= require highcharts/highcharts-more                                                         
+//= require highcharts/highstock
+
+
 $('#datetimepicker_start').datetimepicker({
 	format: 'DD/MM/YYYY HH:mm',
 });

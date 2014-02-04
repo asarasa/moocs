@@ -11,7 +11,7 @@ class QuizzesController < ApplicationController
   # GET /quizzes/1
   # GET /quizzes/1.json
   def show
-    
+    @fail= params[:fail] 
   end
   
   def add_answers
@@ -19,32 +19,44 @@ class QuizzesController < ApplicationController
      @quiz = @resource.quizzes.find(params[:quiz_id])
   end
 
+  def see_answers    
+     @resource = Resource.find(params[:resource_id])
+     @quiz = @resource.quizzes.find(params[:quiz_id])
+     @quiz.users.push(current_user.id)
+     @quiz.update()
+  end
+  
   def solve
      params.require(:quiz).permit(:answer)
      @resource = Resource.find(params[:resource_id])
      @quiz = @resource.quizzes.find(params[:quiz_id])
      @quizzes = @resource.quizzes
-     @quiz.users = Array.new
-     index=0
-     hash = params[:quiz][:answer]
      list = Array.new  
-     hash.each do |a|    
-        if (a[1][:results] == "1")
-         list.push(index)
-        end  
-        index = index + 1
-     end
+     if @quiz.multianswer == true
+       index=0  
+       hash = params[:quiz][:answer]    
+       hash.each do |a|    
+          if (a[1][:results] == "1")
+           list.push(index)
+          end  
+          index = index + 1
+       end
+     else
+       result=params[:quiz][:results].to_i
+       list.push(result)
+     end  
     if (list == @quiz.results) 
       @quiz.users.push(current_user.id)
       respond_to do |format|
         if @quiz.update()
           format.html { redirect_to resource_quizzes_path(@resource), notice: 'Quiz was successfully solved' }
         else
-          format.html { render action: 'show', notice: 'Quiz was not succefully solved' }
+         
+          format.html { render action: 'show', notice: 'Update Error' }
         end
       end    
     else 
-       redirect_to resource_quiz_path(@resource, @quiz), notice: 'Quiz was not successfully solved'
+      redirect_to resource_quiz_path(@resource, @quiz,:fail => true), notice: 'Quiz was not successfully solved'
     end    
   end
 
@@ -55,12 +67,19 @@ class QuizzesController < ApplicationController
     @quiz.results = Array.new 
     index=0
     hash = params[:quiz][:answer]
-    hash.each do |a|
-      @quiz.answers.push(a[1][:answers])
-      if (a[1][:results] == "1")
-        @quiz.results.push(index)
-      end  
-      index = index + 1
+    if @quiz.multianswer == true
+      hash.each do |a|
+        @quiz.answers.push(a[1][:answers])
+        if (a[1][:results] == "1")
+          @quiz.results.push(index)
+        end  
+        index = index + 1
+      end
+    else 
+      hash.each do |a|
+        @quiz.answers.push(a[1][:answers])
+      end 
+      @quiz.results.push(params[:quiz][:results].to_i)      
     end
     respond_to do |format|
       if @quiz.update()

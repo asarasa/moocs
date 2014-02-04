@@ -1,0 +1,20 @@
+<h1>Listing topics</h1>
+<% @topics.each do |topic| %>
+<%= link_to(course_topic_messages_path(@course,topic)) do %>
+  <div style="background:#E6E6E6">
+    <%= topic.title %>
+    <%= topic.state %>
+    <%= topic.creation_Date.strftime("%x") %>
+    <%= topic.createBy %>
+<% end %>
+    <% if can_edit_topic?(topic) %>
+      <%= link_to 'Edit', edit_course_topic_path(@course,topic) %>
+      <%= link_to 'Destroy', [@course,topic], method: :delete, data: { confirm: 'Are you sure?' } %>  
+    <% end %>
+  </div>   
+  <br>
+<% end %>  
+<br>
+<% if can_create_topic? %>
+  <%= link_to 'New Topic', new_course_topic_path(@course) ,:class => 'btn btn-primary' %>
+<% end %>  

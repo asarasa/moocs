@@ -1,14 +1,24 @@
 Moocs::Application.routes.draw do
+
+
+
   resources :resources do   
     resources :quizzes do
       match "new_answers", :to => "quizzes#new_answers", :as => "new_answers", :via => [:get, :post, :patch]
       match "solve", :to => "quizzes#solve", :as => "solve", :via => [:get, :post, :patch]
       get 'add_answers', to:'quizzes#add_answers', as: 'add_answers'      
-     
+      get 'see_answers', to:'quizzes#see_answers', as: 'see_answers'  
     end
    end  
 
   resources :courses do
+    get 'tracking', to:'courses#tracking', as: 'tracking'  
+    resources :topics do
+      resources :messages do
+        get 'reply', to:'messages#reply', as: 'reply' 
+        match "response", :to => "messages#response", :as => "response", :via => [:get, :post, :patch]
+      end
+    end
     resources :lessons
   end
 

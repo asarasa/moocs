@@ -21,7 +21,7 @@
   
   <div class="answers">
     <h3>Answers:</h3>
-    
+     <%   index=0 %>
     <% @quiz.answers.each do |answer| %>
       <%= f.fields_for "answer", index:answer do |answers_form|%>
         
@@ -31,16 +31,20 @@
           <% if @quiz.multianswer == true %>
             <%= answers_form.check_box :results %> <br>
           <%else%>
-            <%= answers_form.radio_button :results,:checked => false %> <br>
+            <%= f.radio_button :results, index %> <br>
           <%end%>
         </div>
       
       <%end%>     
+     <%index = index + 1 %>
     <% end %>
   </div>
  
  <div class="actions center">
     <%= f.submit "Submit", :class => 'btn btn-lg btn-primary' %>
+    <% if @fail=='true'%>
+      <%= link_to 'See answers', resource_quiz_see_answers_path(@resource,@quiz), :class => 'btn btn-lg btn-warning' %>
+    <% end%>
  </div>
 
 <% end %>

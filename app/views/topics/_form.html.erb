@@ -1,0 +1,31 @@
+<%= form_for [@course,@topic] do |f| %>
+  <% if @topic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+
+      <ul>
+      <% @topic.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="form_row">
+    <label for="state">State:</label>
+      <br>      
+      <%= f.radio_button :state,"Opened" ,:checked => false %> 
+      <label>Open</label>
+      <br>
+      <%= f.radio_button :state, "Closed" ,:checked => false %> 
+      <label>Close</label>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
