@@ -16,7 +16,6 @@ Moocs::Application.routes.draw do
     resources :topics do
       resources :messages do
         get 'reply', to:'messages#reply', as: 'reply' 
-        match "response", :to => "messages#response", :as => "response", :via => [:get, :post, :patch]
       end
     end
     resources :lessons

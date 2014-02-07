@@ -15,6 +15,7 @@ class User
 
 
   validates_uniqueness_of :email, :username
+  validates_presence_of :username, :email, :password_digest
 
   has_secure_password
 

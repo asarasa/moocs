@@ -6,4 +6,6 @@ class Lesson
   field :end_date, type: DateTime
   field :resources, type: Array
   embedded_in :courses
+
+  validates_presence_of :name, :description, :start_date, :end_date
 end

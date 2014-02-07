@@ -67,9 +67,9 @@ class LessonsController < ApplicationController
   # POST /lessons
   # POST /lessons.json
   def create
-    lesson = Lesson.new(lesson_params)
-    lesson.resources = Array.new
-    @course.lessons.push(lesson)
+    @lesson = Lesson.new(lesson_params)
+    @lesson.resources = Array.new
+    @course.lessons.push(@lesson)
 
     respond_to do |format|
       if @course.save

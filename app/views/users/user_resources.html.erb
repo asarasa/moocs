@@ -23,13 +23,13 @@
 	        <td><%= resource.name %></td>
 	        <td>
 		      	<% if resource.type == "video" %>
-		      		<img src="/assets/1387049800_social_4.png" alt="video">
+		      		<%= image_tag("1387049800_social_4.png", :alt => "video") %>
 		      	<% elsif resource.type == "audio" %>
-		      		<img src="/assets/1387133987_media-optical-audio.png" alt="video">
+		      		<%= image_tag("1387133987_media-optical-audio.png", :alt => "audio") %>
 		      	<% elsif resource.type == "pdf" %>
-		      		<img src="/assets/1387134021_application-pdf.png" alt="video">
+		      		<%= image_tag("1387134021_application-pdf.png", :alt => "PDF") %>
 		      	<% elsif resource.type == "text" %>
-		      		<img src="/assets/1387134064_readme.png" alt="video">
+		      		<%= image_tag("1387134064_readme.png", :alt => "Text") %>
 		      	<% end %>
 	        </td>
 	        <td><%= resource.url %></td>

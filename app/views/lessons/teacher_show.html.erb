@@ -21,13 +21,13 @@
 		      <tr>
 		      	<td>
 		      	<% if resource.type == "video" %>
-		      		<img src="/assets/1387049800_social_4.png" alt="video" height="24px" width="24px">
+		      		<%= image_tag("1387049800_social_4.png", :height => "24px", :width => "24px", :alt => "video") %>
 		      	<% elsif resource.type == "audio" %>
-		      		<img src="/assets/1387133987_media-optical-audio.png" alt="video" height="24px" width="24px">
+		      		<%= image_tag("1387133987_media-optical-audio.png", :height => "24px", :width => "24px", :alt => "audio") %>
 		      	<% elsif resource.type == "pdf" %>
-		      		<img src="/assets/1387134021_application-pdf.png" alt="video" height="24px" width="24px">
+		      		<%= image_tag("1387134021_application-pdf.png", :height => "24px", :width => "24px", :alt => "pdf") %>
 		      	<% elsif resource.type == "text" %>
-		      		<img src="/assets/1387134064_readme.png" alt="video" height="24px" width="24px">
+		      		<%= image_tag("1387134064_readme.png", :height => "24px", :width => "24px", :alt => "text") %>
 		      	<% end %>
 		      	</td>
 		        <td><%= resource.name %></td>
@@ -61,7 +61,7 @@
 		        <td><%= resource.type %></td>
 		        <td><%= resource.url %></td>
 		        <td><%= link_to 'Show', resource %></td>
-            <td><%= link_to 'Quizzes', resource_quizzes_path(resource) %></td>
+            	<td><%= link_to 'Quizzes', resource_quizzes_path(resource) %></td>
 		        <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
 		        <td><%= link_to 'Delete', del_resource_path(@course, @lesson, resource) %></td>
 		      </tr>

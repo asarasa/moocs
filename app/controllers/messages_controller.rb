@@ -24,14 +24,13 @@ class MessagesController < ApplicationController
   end
   
   def reply
-    @message = @topic.messages.find(params[:message_id])
-    @message.text = @message.text + "<strong>Resp:</strong><br>"
-    @message.title = "RE:" + @message.title
+    prev_message = @topic.messages.find(params[:message_id])
+    @message = Message.new
+    @message.text = prev_message.text + "<strong>Resp:</strong><br>"
+    @message.title = "RE:" + prev_message.title
+    render 'new'
   end
   
-
-     
-
   # POST /messages
   # POST /messages.json
   def create

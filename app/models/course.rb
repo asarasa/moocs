@@ -14,4 +14,6 @@ class Course
   has_and_belongs_to_many :users
   has_and_belongs_to_many :topics
   embeds_many :lessons
+
+  validates_presence_of :name, :abstract, :desc, :start_date, :end_date, :teachers
 end

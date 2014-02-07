@@ -8,4 +8,6 @@ class Quiz
   field :multianswer, type: Mongoid::Boolean
   
   embedded_in :resource
+  validates_presence_of :question, :numanswers, :answers, :results
+
 end
