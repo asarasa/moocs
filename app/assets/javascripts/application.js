@@ -10,28 +10,17 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+// require_tree .
+//
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
-
+//= require tinymce/tinymce.min
+//= require tinymce/jquery.tinymce.min
+//= require moment.min
+//= require bootstrap.min
+//= require bootstrap-datetimepicker.min
+//= require forms
 //= require highcharts/highcharts                                                           
 //= require highcharts/highcharts-more                                                         
 //= require highcharts/highstock
-
-
-$('#datetimepicker_start').datetimepicker({
-	format: 'DD/MM/YYYY HH:mm',
-});
-$('#datetimepicker_end').datetimepicker({
-	format: 'DD/MM/YYYY HH:mm',
-});
-$('#datetimepicker_end').datetimepicker();
-$("#datetimepicker_start").on("change.dp",function (e) {
-   $('#datetimepicker_end').data("DateTimePicker").setStartDate(e.date);
-});
-$("#datetimepicker_end").on("change.dp",function (e) {
-   $('#datetimepicker_start').data("DateTimePicker").setEndDate(e.date);
-});
-
-tinymce.init({selector:'textarea'});
