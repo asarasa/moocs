@@ -15,8 +15,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require tinymce/tinymce.min
-//= require tinymce/jquery.tinymce.min
 //= require moment.min
 //= require bootstrap.min
 //= require bootstrap-datetimepicker.min
