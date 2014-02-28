@@ -1,13 +1,13 @@
 <div class="jumbotron">
-	<h1 class="center"><span style="color:#323639">Welcome to </span>Moocs!</h1>
+	<h1 class="center"><%=t :welcome %></h1>
 
 	<div class="form">
 		<%= form_tag("/search", method: "get") do %>
 			<div class="form-group jumbo">
-				<%= text_field_tag(:q, nil, :class => 'form-control', :placeholder => "Search for a course") %>
+				<%= text_field_tag(:q, nil, :class => 'form-control', :placeholder => t(:search_placeholder)) %>
 			</div>
 			<div class="center">
-				<%= submit_tag("Search", :class => 'btn btn-success') %>
+				<%= submit_tag(t(:search), :class => 'btn btn-success') %>
 			</div>
 		<% end %>
 	</div>
@@ -18,21 +18,21 @@
 	<div class="col-lg-4">
 		<div class="center">
 			<%= image_tag("create.png", :height => '140px', :width => "140px", :alt => "Create course") %>
-			<h2>Create</h2>
+			<h2><%=t :create %></h2>
 		</div>
 		<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
 	</div><!-- /.col-lg-4 -->
 	<div class="col-lg-4">
 		<div class="center">
 			<%= image_tag("discover.png", :height => '140px', :width => "140px", :alt => "Discover courses") %>
-			<h2>Discover</h2>
+			<h2><%=t :discover %></h2>
 		</div>
 		<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
 	</div><!-- /.col-lg-4 -->
 	<div class="col-lg-4">
 		<div class="center">
 			<%= image_tag("learn.png", :height => '140px', :width => "140px", :alt => "Learn") %>
-			<h2>Learn</h2>
+			<h2><%=t :learn %></h2>
 		</div>
 		<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
 	</div><!-- /.col-lg-4 -->

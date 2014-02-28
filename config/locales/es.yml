@@ -19,35 +19,35 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
+es:
   #General
-  show_course: "Show course"
+  show_course: "Mostrar curso"
   #Actions
-  back: "Back"
-  delete: "Delete"
-  submit: "Submit"  
+  back: "Volver"
+  delete: "Borrar"
+  submit: "Enviar"
   #menu
-  home: "Home"
-  users: "Users"
-  courses: "Courses"
-  my_courses: "My courses"
-  my_resources: "My resources"
-  logout: "Log Out"
-  signup: "Sign Up"
-  login: "Log In"
-  language: "Language"
-  spanish: "Spanish"
-  english: "English"
+  home: "Inicio"
+  users: "Usuarios"
+  courses: "Cursos"
+  my_courses: "Mis cursos"
+  my_resources: "Mis recursos"
+  logout: "Salir"
+  signup: "Registrate"
+  login: "Entra"
+  language: "Idioma"
+  spanish: "Español"
+  english: "Inglés"  
   #welcome#index
-  welcome: "Welcome to Moocs!"
-  create: "Create"
-  discover: "Discover"
-  learn: "Learn"  
-  search: "Search"
-  search_placeholder: "Search for a course"
+  welcome: "Bienvenido a Moocs!"
+  create: "Crea"
+  discover: "Descubre"
+  learn: "Aprende"
+  search: "Buscar"
+  search_placeholder: "Buscar un curso"
   #welcome#courses
-  no_courses: "No courses available at this time, check back soon."
-  new_courses: "New courses"
-  popular_courses: "Popular courses"
+  no_courses: "No hay cursos disponibles en este momento."
+  new_courses: "Cursos nuevos"
+  popular_courses: "Cursos populares"
   #welcome#users
-  lastest_users: "Lastest users"
+  lastest_users: "Últimos usuarios"

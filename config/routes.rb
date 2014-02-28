@@ -2,48 +2,52 @@ Moocs::Application.routes.draw do
 
 
 
-  resources :resources do   
-    resources :quizzes do
-      match "new_answers", :to => "quizzes#new_answers", :as => "new_answers", :via => [:get, :post, :patch]
-      match "solve", :to => "quizzes#solve", :as => "solve", :via => [:get, :post, :patch]
-      get 'add_answers', to:'quizzes#add_answers', as: 'add_answers'      
-      get 'see_answers', to:'quizzes#see_answers', as: 'see_answers'  
-    end
-   end  
+  scope "/:locale" do
+    resources :users
+    resources :sessions
 
-  resources :courses do
-    get 'tracking', to:'courses#tracking', as: 'tracking'  
-    resources :topics do
-      resources :messages do
-        get 'reply', to:'messages#reply', as: 'reply' 
+    resources :courses do
+      get 'tracking', to:'courses#tracking', as: 'tracking'  
+      resources :topics do
+        resources :messages do
+          get 'reply', to:'messages#reply', as: 'reply' 
+        end
       end
+      resources :lessons
     end
-    resources :lessons
+
+    resources :resources do   
+      resources :quizzes do
+        match "new_answers", :to => "quizzes#new_answers", :as => "new_answers", :via => [:get, :post, :patch]
+        match "solve", :to => "quizzes#solve", :as => "solve", :via => [:get, :post, :patch]
+        get 'add_answers', to:'quizzes#add_answers', as: 'add_answers'      
+        get 'see_answers', to:'quizzes#see_answers', as: 'see_answers'  
+      end
+     end  
+
+    get 'signup', to: 'users#new', as: 'signup'
+    get 'show_profile', to: 'users#show', as: 'show_profile'
+    get 'edit_profile', to: 'users#edit', as: 'edit_profile'
+    get 'login', to: 'sessions#new', as: 'login'
+    get 'logout', to: 'sessions#destroy', as: 'logout'
+
+
+    get 'lastest_users', to: 'welcome#users', as: 'lastest_users'
+    get 'lastest_courses', to: 'welcome#courses', as: 'lastest_courses'
+    get 'join_course/:id', to: 'courses#join_course', as:'join_course'
+
+    get 'user_courses', to: 'users#user_courses', as: 'user_courses'
+    get 'user_resources', to: 'users#user_resources', as:'user_resources'
+
+    get 'courses/:course_id/lessons/:id/view_resource/:resource_id', to:'lessons#view_resource', as: 'view_resource'
+    get 'courses/:course_id/lessons/:id/use_resource/:resource_id', to:'lessons#use_resource', as: 'use_resource'
+    get 'courses/:course_id/lessons/:id/del_resource/:resource_id', to:'lessons#delete_resource', as: 'del_resource'
+
+    get 'search', to:'welcome#search', as: 'search'
   end
-
-  get 'signup', to: 'users#new', as: 'signup'
-  get 'show_profile', to: 'users#show', as: 'show_profile'
-  get 'edit_profile', to: 'users#edit', as: 'edit_profile'
-  get 'login', to: 'sessions#new', as: 'login'
-  get 'logout', to: 'sessions#destroy', as: 'logout'
-
-  resources :users
-  resources :sessions
+  
+  get '/:locale' => 'welcome#index', as: 'index'
   root 'welcome#index'
-  get 'lastest_users', to: 'welcome#users', as: 'lastest_users'
-  get 'lastest_courses', to: 'welcome#courses', as: 'lastest_courses'
-  get 'join_course/:id', to: 'courses#join_course', as:'join_course'
-
-  get 'user_courses', to: 'users#user_courses', as: 'user_courses'
-  get 'user_resources', to: 'users#user_resources', as:'user_resources'
-
-  get 'courses/:course_id/lessons/:id/view_resource/:resource_id', to:'lessons#view_resource', as: 'view_resource'
-  get 'courses/:course_id/lessons/:id/use_resource/:resource_id', to:'lessons#use_resource', as: 'use_resource'
-  get 'courses/:course_id/lessons/:id/del_resource/:resource_id', to:'lessons#delete_resource', as: 'del_resource'
-
-  get 'search', to:'welcome#search', as: 'search'
-  
-  
 
 
   # The priority is based upon order of creation: first created -> highest priority.
