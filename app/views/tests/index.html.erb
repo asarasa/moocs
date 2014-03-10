@@ -1,0 +1,35 @@
+<h1>Listing tests</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tests.each do |test| %>
+      <tr>
+        <td><%= test.name %></td>
+        <td><%= test._type %></td>
+        <td><%= link_to 'Edit', edit_resource_test_path(@resource,test) %></td>   
+        <%if test._type == "Quiz" and !is_myresource?%>
+         <% if test.users.include?(current_user)%>
+            <td>Done</td>
+          <%else%>
+            <td><%= link_to 'Solve',  resource_quiz_path(@resource,test) %></td>
+          <%end%>  
+        <%end%>
+        <td><%= link_to 'Destroy', [@resource,test], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Questionnaire', new_resource_questionnaire_path(@resource) ,:class => 'btn btn-success' %>
+<%= link_to 'New Quiz', new_resource_quiz_path(@resource) ,:class => 'btn btn-warning' %>

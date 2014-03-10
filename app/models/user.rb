@@ -10,9 +10,13 @@ class User
   field :admin, type: Boolean, default: false
   field :register_date, type: DateTime
   field :last_login, type: DateTime
-  has_and_belongs_to_many :courses
+  
+  has_and_belongs_to_many :courses, class_name: "Course",inverse_of: :users
+  has_and_belongs_to_many :courses_teacher, class_name: "Course",inverse_of: :teachers
+  
   has_many :resources
-
+  
+  belongs_to :tests
 
   validates_uniqueness_of :email, :username
   validates_presence_of :username, :email, :password_digest

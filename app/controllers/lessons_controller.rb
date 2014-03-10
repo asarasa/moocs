@@ -1,6 +1,7 @@
 class LessonsController < ApplicationController
   before_action :set_course, only: [:view_resource, :use_resource, :delete_resource, :index, :new, :create, :show, :edit, :update, :destroy]  
   before_action :set_lesson, only: [:view_resource, :use_resource, :delete_resource, :show, :edit, :update, :destroy]
+  before_action :set_resource, only: [:use_resource,:view_resource,:delete_resource]
   before_action :authorize_teacher, only: [:use_resource, :new, :create, :edit, :update, :destroyed]
 
   # GET /lessons
@@ -19,7 +20,7 @@ class LessonsController < ApplicationController
   # GET /lessons/1
   # GET /lessons/1.json
   def show
-    @resources = Resource.find(@lesson.resources)
+    @resources = @lesson.resources
     if is_teacher? && !params[:student]
       @avaliable_resources = current_user.resources - @resources 
       render 'teacher_show'
@@ -36,10 +37,10 @@ class LessonsController < ApplicationController
   end
 
   def use_resource
-    if (@lesson.resources.include?(params[:resource_id]))
+    if (@lesson.resources.include?(@resource))
       redirect_to course_lesson_path(@course, @lesson), notice: 'The resource is already in the lesson.'
     else
-      @lesson.resources.push(params[:resource_id])
+      @lesson.resources << @resource
       if @lesson.save
         redirect_to course_lesson_path(@course, @lesson), notice: 'The resource was successfully added.'
       else
@@ -49,14 +50,13 @@ class LessonsController < ApplicationController
   end
 
   def view_resource
-    @resource = Resource.find(params[:resource_id])
-    @resources = Resource.find(@lesson.resources)
+    @resources = @lesson.resources
 
     render "show"
   end
 
   def delete_resource
-    @lesson.resources.delete(params[:resource_id])
+    @lesson.resources.delete(@resource)
     if @lesson.save
         redirect_to course_lesson_path(@course, @lesson), notice: 'The resource was successfully deleted.'
     else
@@ -113,6 +113,10 @@ class LessonsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.find(params[:course_id])
+    end
+  
+  def set_resource
+      @resource = Resource.find(params[:resource_id])
     end
 
 

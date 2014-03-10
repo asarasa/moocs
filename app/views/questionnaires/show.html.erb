@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @questionnaire.question %>
+</p>
+
+<p>
+  <strong>Answer:</strong>
+  <%= @questionnaire.answer %>
+</p>
+
+<%= link_to 'Edit', edit_resource_questionnaire_path(@resource,@questionnaire) %> |
+<%= link_to 'Back', resource_tests_path(@resource) %>

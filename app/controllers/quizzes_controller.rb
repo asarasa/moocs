@@ -1,11 +1,12 @@
 class QuizzesController < ApplicationController
-  before_action :set_resource, only: [:new_answers,:index, :new, :create, :show, :edit, :update, :destroy] 
+  before_action :set_resource, only: [:solve,:new_answers,:add_answers,:see_answers,:new,:create,:show, :edit, :update, :destroy]
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
+ 
 
   # GET /quizzes
   # GET /quizzes.json
   def index
-    @quizzes = @resource.quizzes
+    @quizzes = @resource.tests
   end
 
   # GET /quizzes/1
@@ -15,22 +16,19 @@ class QuizzesController < ApplicationController
   end
   
   def add_answers
-     @resource = Resource.find(params[:resource_id])
-     @quiz = @resource.quizzes.find(params[:quiz_id])
+    @quiz = @resource.tests.find(params[:quiz_id])
   end
 
   def see_answers    
-     @resource = Resource.find(params[:resource_id])
-     @quiz = @resource.quizzes.find(params[:quiz_id])
+    @quiz = @resource.tests.find(params[:quiz_id])
      @quiz.users.push(current_user.id)
      @quiz.update()
   end
   
   def solve
      params.require(:quiz).permit(:answer)
-     @resource = Resource.find(params[:resource_id])
-     @quiz = @resource.quizzes.find(params[:quiz_id])
-     @quizzes = @resource.quizzes
+     @quiz = @resource.tests.find(params[:quiz_id])
+    @quizzes = @resource.tests
      list = Array.new  
      if @quiz.multianswer == true
        index=0  
@@ -46,10 +44,10 @@ class QuizzesController < ApplicationController
        list.push(result)
      end  
     if (list == @quiz.results) 
-      @quiz.users.push(current_user.id)
+      @quiz.users << current_user
       respond_to do |format|
         if @quiz.update()
-          format.html { redirect_to resource_quizzes_path(@resource), notice: 'Quiz was successfully solved' }
+          format.html { redirect_to resource_tests_path(@resource), notice: 'Quiz was successfully solved' }
         else
          
           format.html { render action: 'show', notice: 'Update Error' }
@@ -62,7 +60,7 @@ class QuizzesController < ApplicationController
 
   
   def new_answers
-    @quiz = @resource.quizzes.find(params[:quiz_id])
+    @quiz = @resource.tests.find(params[:quiz_id])
     @quiz.answers = Array.new
     @quiz.results = Array.new 
     index=0
@@ -83,7 +81,7 @@ class QuizzesController < ApplicationController
     end
     respond_to do |format|
       if @quiz.update()
-        format.html { redirect_to resource_quizzes_path(@resource), notice: 'Quiz was successfully updated, update the answers.' }
+        format.html { redirect_to resource_tests_path(@resource), notice: 'Quiz was successfully updated, update the answers.' }
       else
         format.html { render action: 'edit' }
       end
@@ -103,8 +101,10 @@ class QuizzesController < ApplicationController
   # POST /quizzes.json
   def create
     @quiz = Quiz.new(quiz_params)
+    @quiz.answers = Array.new
+    @quiz.results = Array.new 
     @quiz.users = Array.new
-    @resource.quizzes.push(@quiz)
+    @resource.tests.push(@quiz)
     
     respond_to do |format|
       if @resource.save
@@ -132,7 +132,7 @@ class QuizzesController < ApplicationController
   def destroy
     @quiz.destroy
     respond_to do |format|
-      format.html { redirect_to resource_quizzes_url }
+      format.html { redirect_to resource_tests_path(@resource) }
       format.json { head :no_content }
     end
   end
@@ -140,13 +140,13 @@ class QuizzesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_quiz
-      @quiz = @resource.quizzes.find(params[:id])
+      @quiz = @resource.tests.find(params[:id])
      
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quiz_params
-      params.require(:quiz).permit(:question, :multianswer,:numanswers,:answer)
+      params.require(:quiz).permit(:question, :multianswer,:numanswers,:answer,:name)
     end
   
     

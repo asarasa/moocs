@@ -1,7 +1,6 @@
 Moocs::Application.routes.draw do
 
 
-
   scope "/:locale" do
     resources :users
     resources :sessions
@@ -16,15 +15,17 @@ Moocs::Application.routes.draw do
       resources :lessons
     end
 
-    resources :resources do   
-      resources :quizzes do
-        match "new_answers", :to => "quizzes#new_answers", :as => "new_answers", :via => [:get, :post, :patch]
-        match "solve", :to => "quizzes#solve", :as => "solve", :via => [:get, :post, :patch]
-        get 'add_answers', to:'quizzes#add_answers', as: 'add_answers'      
-        get 'see_answers', to:'quizzes#see_answers', as: 'see_answers'  
+    resources :resources do
+        resources :questionnaires
+        resources :tests
+        resources :quizzes do
+          match "new_answers", :to => "quizzes#new_answers", :as => "new_answers", :via => [:get, :post, :patch]
+          match "solve", :to => "quizzes#solve", :as => "solve", :via => [:get, :post, :patch]
+          get 'add_answers', to:'quizzes#add_answers', as: 'add_answers'      
+          get 'see_answers', to:'quizzes#see_answers', as: 'see_answers'  
       end
-     end  
-
+    end
+  
     get 'signup', to: 'users#new', as: 'signup'
     get 'show_profile', to: 'users#show', as: 'show_profile'
     get 'edit_profile', to: 'users#edit', as: 'edit_profile'

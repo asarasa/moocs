@@ -11,7 +11,6 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show 
-    @user=User.find(@topic.createBy)
   end
 
   # GET /topics/new
@@ -28,15 +27,15 @@ class TopicsController < ApplicationController
   # POST /topics
   # POST /topics.json
   def create
-    topic = Topic.new(topic_params)
-    topic.creation_Date = DateTime.now
-    topic.createBy = current_user.id
-    topic.nextmessage = 1
-    topic.messages = Array.new
-    @course.topics.push(topic)
+    @topic = Topic.new(topic_params)
+    @topic.creation_Date = DateTime.now
+    @topic.createBy = current_user.username
+    @topic.nextmessage = 1
+    @topic.messages = Array.new
+    @course.topics << @topic
     respond_to do |format|
-      if @course.save
-        format.html { redirect_to course_topic_path(@course,topic), notice: 'Topic was successfully created.' }
+      if @topic.save
+        format.html { redirect_to course_topic_path(@course,@topic), notice: 'Topic was successfully created.' }
         format.json { render action: 'show', status: :created, location: @topic }
       else
         format.html { render action: 'new' }

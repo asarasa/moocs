@@ -36,7 +36,7 @@ private
 
 	def is_teacher?
 		if !current_user.nil?
-			@course.teachers.include?(current_user.id)
+			@course.teachers.include?(current_user)
 		end
 	end
 	helper_method :is_teacher?
@@ -68,24 +68,17 @@ private
     helper_method :can_create_topic?	
   
     def can_edit_topic?(topic)
-      utopic = User.find(topic.createBy)
-      ucurrent = User.find(current_user)
-      is_teacher? or (is_member? and have_forumpermission? and utopic == ucurrent)
+      is_teacher? or (is_member? and have_forumpermission? and topic.createBy == current_user.username)
     end	
     helper_method :can_edit_topic?	
   
     def can_create_message?
-      utopic = User.find(@topic.createBy)
-      ucurrent = User.find(current_user)
-      is_teacher? or utopic == ucurrent or (is_member? and @topic == "Opened")
+      is_teacher? or topic.createBy == current_user.username or (is_member? and @topic == "Opened")
     end	
     helper_method :can_create_message?	
   
   def can_edit_message?(message)
-      utopic = User.find(@topic.createBy)
-      ucurrent = User.find(current_user)
-      umessage = User.find(message.from)
-      is_teacher? or utopic == ucurrent or (is_member? and @topic == "Opened" and umessage == ucurrent)
+    is_teacher? or  @topic.createBy == current_user.username or (is_member? and @topic == "Opened" and message.from == ucurrent)
     end	
     helper_method :can_edit_message?	
 end
