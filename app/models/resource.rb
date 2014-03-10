@@ -6,7 +6,8 @@ class Resource
   field :url, type: String
 
   belongs_to :user
-  embeds_many :quizzes
+  belongs_to :lesson
+  has_many :tests
 
   validates_presence_of :name, :content, :type, :url
 end

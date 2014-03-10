@@ -36,7 +36,7 @@ class MessagesController < ApplicationController
   def create
     message = Message.new(message_params)
     message.date = DateTime.now
-    message.from = current_user.id
+    message.from = current_user.username
     message.order = @topic.nextmessage
     @topic.messages.push(message)
     @topic.nextmessage =  @topic.nextmessage+1

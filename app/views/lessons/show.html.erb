@@ -50,7 +50,7 @@
 			<% elsif @resource.type == "text" %>
 				<%= render 'resources/text' %>			
   			<% end %>
-        	<%= link_to 'Quizzes', resource_quizzes_path(@resource), :class => 'btn btn-primary btn-block' %>
+        	<%= link_to 'Quizzes', resource_tests_path(@resource), :class => 'btn btn-primary btn-block' %>
 		<% end %>
 	</div>
 </div>

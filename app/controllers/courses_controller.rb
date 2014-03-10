@@ -13,7 +13,7 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-    @teachers = User.find(@course.teachers)
+    @teachers =@course.teachers
     if is_teacher?
       render 'teacher_show'
     end
@@ -74,12 +74,10 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     @course.tags = params[:course][:tags].split(";")
-    @course.users.push(current_user)
-    @course.teachers = [current_user.id]
+    @course.teachers << current_user
 
     respond_to do |format|
       if @course.save
-        current_user.courses.push(@course)
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render action: 'show', status: :created, location: @course }
       else

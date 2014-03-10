@@ -8,12 +8,15 @@ class Course
   field :prerequisites, type: String
   field :date_created, type: DateTime
   field :start_date, type: DateTime
-  field :end_date, type: DateTime
-  field :teachers, type: Array
+  field :end_date, type: DateTime 
   field :tags, type: Array
-  has_and_belongs_to_many :users
-  has_and_belongs_to_many :topics
+  
   embeds_many :lessons
-
+  
+  has_and_belongs_to_many :teachers , class_name: "User",inverse_of: :courses_teacher
+  has_and_belongs_to_many :users  , class_name: "User",inverse_of: :courses
+  
+  has_many :topics
+ 
   validates_presence_of :name, :abstract, :desc, :start_date, :end_date, :teachers
 end

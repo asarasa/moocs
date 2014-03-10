@@ -4,7 +4,8 @@ class Lesson
   field :description, type: String
   field :start_date, type: DateTime
   field :end_date, type: DateTime
-  field :resources, type: Array
+  
+  has_many :resources
   embedded_in :courses
 
   validates_presence_of :name, :description, :start_date, :end_date
