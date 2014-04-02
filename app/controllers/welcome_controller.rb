@@ -15,8 +15,6 @@ class WelcomeController < ApplicationController
 		else
 			@courses = all_courses
 		end
-		logger.debug @courses.empty?
-		#logger.debug "all_courses - current_user.courses : #{@courses}"
 	end
 
 	def search
@@ -25,5 +23,4 @@ class WelcomeController < ApplicationController
 
 		render 'search_results'
 	end
-
 end

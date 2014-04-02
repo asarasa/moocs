@@ -30,6 +30,10 @@ private
 		redirect_to login_url, alert: "Not authorized" if current_user.nil?
 	end
 
+  def unauthorize
+    redirect_to login_url, alert: "You can't sign up if already has logged" if current_user
+  end
+
 	def authorize_teacher
 		redirect_to root_url, alert: "You are not the teacher" if !is_teacher?
 	end

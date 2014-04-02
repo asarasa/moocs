@@ -13,8 +13,7 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-    @teachers =@course.teachers
-    if is_teacher?
+    if @course.is_member?(current_user, "teacher")
       render 'teacher_show'
     end
   end
@@ -52,11 +51,10 @@ class CoursesController < ApplicationController
 
 
   def join_course
-    if @course.users.include? current_user
-      redirect_to @course, notice: 'You are already enrolled in this course.'
-    else
-      @course.users.push(current_user)
+    if @course.add_member(current_user, "student")
       redirect_to course_lessons_path(@course), notice: 'You have successfully registered.'
+    else
+      redirect_to @course, notice: 'You are already enrolled in this course.'
     end
   end
 
@@ -74,10 +72,9 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     @course.tags = params[:course][:tags].split(";")
-    @course.teachers << current_user
 
     respond_to do |format|
-      if @course.save
+      if @course.add_member(user, "teacher") && @course.save
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render action: 'show', status: :created, location: @course }
       else
