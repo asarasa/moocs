@@ -6,8 +6,8 @@ class Course
   field :estimated_effort, type: String
   field :prerequisites, type: String
   field :date_created, type: DateTime, default: DateTime.now
-  field :start_date, type: DateTime
-  field :end_date, type: DateTime 
+  field :start_date, type: DateTime, default: DateTime.now
+  field :end_date, type: DateTime , default: DateTime.now + 1
   field :forumpermision , type: Boolean
   field :tags, type: Array
   

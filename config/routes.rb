@@ -45,6 +45,13 @@ Moocs::Application.routes.draw do
     get 'courses/:course_id/lessons/:id/del_resource/:resource_id', to:'lessons#delete_resource', as: 'del_resource'
 
     get 'search', to:'welcome#search', as: 'search'
+
+    scope '/admin' do
+      get "/", to: 'admin#index', as: 'admin' 
+      get "users", to: 'admin#users', as: 'admin_users'
+      get "courses", to: 'admin#courses', as: 'admin_courses'
+      get "resources", to: 'admin#resources', as: 'admin_resources'
+    end
   end
   
   get '/:locale' => 'welcome#index', as: 'index'

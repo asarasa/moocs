@@ -14,7 +14,7 @@
     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="info">
     	<div class="panel panel-default"  style="margin-top:50px">
     		<div class="panel-body center">
-		        <% if !is_member? %>
+		        <% if !@course.is_member?('student', current_user) %>
 					<%= link_to 'Join', join_course_path(@course.id), :class => 'btn btn-success' %>
 				<% else %>
 					<%= link_to 'Lessons', course_lessons_path(@course.id), :class => 'btn btn-warning' %>
