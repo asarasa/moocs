@@ -28,6 +28,9 @@
                 </ul>
               </li>            
         			<% if current_user %>
+                <% if current_user.admin %>
+                  <li><%= link_to "Admin", admin_path %></li>
+                <% end %>
                 <li><%= link_to current_user.email, show_profile_path %></li>
                 <li><%= link_to t(:my_courses), user_courses_path %></li>
                 <li><%= link_to t(:my_resources), user_resources_path %></li>

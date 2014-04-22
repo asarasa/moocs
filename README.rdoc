@@ -1,9 +1,3 @@
 == README
 
-<<<<<<< HEAD
 Basic application to create "Massive Open Online Courses" using Ruby on Rails and MongoDB
-=======
-
-
-Basic application to create "Massive Open Online Courses" using Ruby on Rails and MongoDB
->>>>>>> add-lesson

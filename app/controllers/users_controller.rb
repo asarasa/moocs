@@ -1,14 +1,16 @@
 class UsersController < ApplicationController
+	before_action :authorize, except: [:new, :create]
+	before_action :unauthorize, only: [:new, :create]
+
 	def new
 		@user = User.new
 	end
 
 	def create
 		@user = User.new user_params
-		@user.register_date = DateTime.now
+		@user.last_login = DateTime.now
 		if @user.save
 			session[:user_id] = @user.id
-	  		@user.update(:last_login => DateTime.now)
 			redirect_to root_url, notice: "Thank you for signing up!"
 		else
 			render "new"
@@ -16,12 +18,9 @@ class UsersController < ApplicationController
 	end
 
 	def user_courses
-    @courses_as_student = current_user.courses
-    @courses_as_teacher = current_user.courses_teacher
 	end
 
 	def user_resources
-		@resources = current_user.resources
 	end
 
 	def show
@@ -33,7 +32,7 @@ class UsersController < ApplicationController
 	end
 
 	def update
-	    @user = current_user
+	  @user = current_user
 		
 		respond_to do |format|
 		if @user.update(user_params)
@@ -52,9 +51,9 @@ private
 
     if current_user.nil? # Guest
       # Remove all keys from params[:user] except :email, :password, and :password_confirmation
-      params.require(:user).permit :username, :email, :password, :password_confirmation
+      params.require(:user).permit :name, :lastname, :email, :password, :password_confirmation
     else  
-      params.require(:user).permit :username, :email, :password, :password_confirmation		
+      params.require(:user).permit :name, :lastname, :email, :password, :password_confirmation		
 
     #elsif current_user.has_role :admin
     #  params.require(:user).permit! # Allow all user parameters

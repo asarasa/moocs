@@ -4,12 +4,12 @@
 			<h2>As student<h2>
 		</div>
 
-		<% if @courses_as_student.empty? %>
+		<% if current_user.courses_by(:student).to_a.empty? %>
 			<div class="center">
 				<h3>You are not member of any course</h3>
 			</div>
 		<% else %>
-			<% @courses_as_student.each do |course| %>
+			<% current_user.courses_by(:student).to_a.each do |course| %>
 				<div class="result">
 					<h3><%= course.name %></h3>
 					<p><%= course.abstract %></p>
@@ -27,12 +27,12 @@
 		<div class="page-header">
 			<h2>As teacher <h2>
 		</div>
-		<% if @courses_as_teacher.empty? %>
+		<% if current_user.courses_by(:teacher).to_a.empty? %>
 			<div class="center">
 				<h3>You are not a teacher of any course</h3>
 			</div>
 		<% else %>
-			<% @courses_as_teacher.each do |course| %>
+			<% current_user.courses_by(:teacher).to_a.each do |course| %>
 				<div class="result">
 					<h3><%= course.name %></h3>
 					<p><%= course.abstract %></p>

@@ -1,0 +1,25 @@
+<div class="page-header">
+  <h2>Welcome to the admin panel</h2>
+</div>
+
+<div class="row">
+	<div class="col-lg-4">
+		<div class="center">
+			<%= image_tag("learn.png", :height => '140px', :width => "140px", :alt => "Learn") %>
+			<h2><%= link_to t(:users), admin_users_path %></h2>
+		</div>
+	</div><!-- /.col-lg-4 -->
+	<div class="col-lg-4">
+		<div class="center">
+			<%= image_tag("create.png", :height => '140px', :width => "140px", :alt => "Create course") %>
+			<h2><%= link_to t(:courses), admin_courses_path %></h2>
+		</div>
+
+	</div><!-- /.col-lg-4 -->
+	<div class="col-lg-4">
+		<div class="center">
+			<%= image_tag("discover.png", :height => '140px', :width => "140px", :alt => "Discover courses") %>
+			<h2><%= link_to t(:resources), admin_path %></h2>
+		</div>
+	</div><!-- /.col-lg-4 -->
+</div>

@@ -1,4 +1,4 @@
-<% if @resources.empty? %>
+<% if @current_user.resources.empty? %>
 	<h3 style="text-align:center">No has creado ningún recurso.</h3>
 <% else %>
 	<div class="page-header">
@@ -18,7 +18,7 @@
 	  </thead>
 
 	  <tbody>
-	    <% @resources.each do |resource| %>
+	    <% @current_user.resources.each do |resource| %>
 	      <tr>
 	        <td><%= resource.name %></td>
 	        <td>
