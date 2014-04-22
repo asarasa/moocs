@@ -28,7 +28,7 @@ class User
   end
 
   def courses_by(type)
-    Course.in(id: members.by_user(type, self.id).map(&:course_id))
+    Course.in(id: members.by_user(self.id, type).map(&:course_id))
   end
 
 end

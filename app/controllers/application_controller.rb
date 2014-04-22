@@ -30,6 +30,14 @@ private
 		redirect_to login_url, alert: "Not authorized" if current_user.nil?
 	end
 
+  def authorize_member
+    if !current_user.nil?
+      if !@course.is_member?(current_user)
+        redirect_to course_path(@course), alert: "You are not member of this course."
+      end
+    end
+  end   
+
   def authorize_admin
     if current_user.nil?
       redirect_to login_url, alert: "Not authorized"
@@ -38,29 +46,19 @@ private
     end
   end
 
+  def authorize_teacher
+    if current_user.nil?
+      redirect_to login_url, alert: "Not authorized"
+    else    
+      redirect_to root_url, alert: "You are not the teacher" if !@course.is?(current_user, 'teacher')
+    end
+  end  
+
   def unauthorize
     redirect_to login_url, alert: "You can't sign up if already has logged" if current_user
   end
 
-	def authorize_teacher
-		redirect_to root_url, alert: "You are not the teacher" if !is_teacher?
-	end
-
-	def is_teacher?
-		if !current_user.nil?
-			@course.teachers.include?(current_user)
-		end
-	end
-	helper_method :is_teacher?
-
-	def is_member?
-		if (!current_user.nil?)
-			@course.users.include?(current_user)
-		end
-	end	
-	helper_method :is_member?	
-  
-  	def is_myresource?
+ 	def is_myresource?
 		if (!current_user.nil?)
     		current_user.resources.include?(@resource)
 		end

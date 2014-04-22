@@ -2,26 +2,23 @@ class LessonsController < ApplicationController
   before_action :set_course, only: [:view_resource, :use_resource, :delete_resource, :index, :new, :create, :show, :edit, :update, :destroy]  
   before_action :set_lesson, only: [:view_resource, :use_resource, :delete_resource, :show, :edit, :update, :destroy]
   before_action :set_resource, only: [:use_resource,:view_resource,:delete_resource]
+  before_action :authorize_member
   before_action :authorize_teacher, only: [:use_resource, :new, :create, :edit, :update, :destroyed]
 
   # GET /lessons
   # GET /lessons.json
   def index
     @lessons = @course.lessons
-    if is_teacher?
+    if @course.is?(current_user, 'teacher')
       render 'teacher_index'
-    elsif (!is_member?)
-      redirect_to course_path(@course)
     end
   end
 
-
-  
   # GET /lessons/1
   # GET /lessons/1.json
   def show
     @resources = @lesson.resources
-    if is_teacher? && !params[:student]
+    if @course.is?(current_user, 'teacher') && !params[:student]
       @avaliable_resources = current_user.resources - @resources 
       render 'teacher_show'
     end
@@ -115,10 +112,9 @@ class LessonsController < ApplicationController
       @course = Course.find(params[:course_id])
     end
   
-  def set_resource
+    def set_resource
       @resource = Resource.find(params[:resource_id])
     end
-
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lesson_params

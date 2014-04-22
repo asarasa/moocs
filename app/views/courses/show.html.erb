@@ -1,32 +1,40 @@
 <div class="row row-offcanvas row-offcanvas-right">
+
+	<!-- Content -->
 	<div class="col-xs-12 col-sm-9">
 		<div class="page-header">
 		  <h1><%= @course.name %></h1>
 		</div>
-        <p><%=raw @course.desc %></p>		
-
-        <div class="buttons">
-
-			<%= link_to 'Back to home', root_url, :class => 'btn btn-default left' %>
-		</div>
+      <p><%=raw @course.desc %></p>		
+      <div class="buttons">
+				<%= link_to 'Back to home', root_url, :class => 'btn btn-default left' %>
+			</div>
 	</div>
+	<!-- End Content -->
 
-    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="info">
-    	<div class="panel panel-default"  style="margin-top:50px">
-    		<div class="panel-body center">
-		        <% if !@course.is_member?('student', current_user) %>
+
+	<!-- Sidebar -->
+  <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="info">
+  	<div class="panel panel-default"  style="margin-top:50px">
+  		<div class="panel-body center">
+	    	<% if !@course.is_member?(current_user) %>
 					<%= link_to 'Join', join_course_path(@course.id), :class => 'btn btn-success' %>
 				<% else %>
+					<% if @course.is?(current_user, 'teacher') %>
+						<%= link_to 'Edit', edit_course_path(@course), :class => 'btn btn-info' %>    			
+					<% end %>
+					
 					<%= link_to 'Lessons', course_lessons_path(@course.id), :class => 'btn btn-warning' %>
-           <br> <br>
-          <%= link_to 'Forum', course_topics_path(@course), :class => 'btn btn-success' %>
-          <%= link_to 'Tracking', course_tracking_path(@course), :class => 'btn btn-danger' %>
-				<% end %>
-    		</div>
-    	</div>    	
-    	<div class="panel panel-success">
-            <div class="panel-heading">
-		 	   <h3 class="panel-title">Info</h3>
+					<br> <br>
+        	
+        	<%= link_to 'Forum', course_topics_path(@course), :class => 'btn btn-success' %>
+        	<%= link_to 'Tracking', course_tracking_path(@course), :class => 'btn btn-danger' %>
+			<% end %>
+  		</div>
+  	</div>    	
+  	<div class="panel panel-success">
+      <div class="panel-heading">
+	 	  	<h3 class="panel-title">Info</h3>
 			</div>    	
 			<div class="panel-body">	
 	    		<h4>STARTS</h4>
@@ -37,23 +45,24 @@
 				<p><%= @course.estimated_effort %></p>
 				<h4>TAGS</h4>
 				<p><%=raw @course.tags.join(" ; ") if @course.tags %></p>
-        <h4>PREREQUISITES</h4>
+	      <h4>PREREQUISITES</h4>
 				<p><%=raw @course.prerequisites %></p>
 			</div>
-    	</div>
-    	<div class="panel panel-info" style="margin-top:50px">
-            <div class="panel-heading">
-		 	   <h3 class="panel-title">Teacher/s</h3>
+  	</div>
+  	<div class="panel panel-info" style="margin-top:50px">
+    	<div class="panel-heading">
+	 	  	<h3 class="panel-title">Teacher/s</h3>
 			</div>    	
 			<div class="panel-body">
 				<% @course.members_by("teacher").each do |teacher| %>	
 		    		<h4>Name</h4>
-					<p><%= teacher.username %></p>
+					<p><%= teacher.name %></p>
 					<h4>e-mail</h4>
 					<p><%= teacher.email %></p>
 				<% end %>	
 			</div>
-    	</div>    	
-    </div><!--/span-->	
+  	</div>    	
+  </div>
+  <!-- End Sidebar -->
 </div>
 

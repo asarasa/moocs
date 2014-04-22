@@ -13,9 +13,6 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-    if @course.is_member?(current_user, "teacher")
-      render 'teacher_show'
-    end
   end
   
    def tracking

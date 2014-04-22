@@ -24,7 +24,7 @@ class Course
   end
 
   def members_by(type)
-    User.in(id: members.by_course(type, self.id).map(&:user_id))
+    User.in(id: members.by_course(self.id, type).map(&:user_id))
   end
 
   def add_member(user, type)
@@ -32,8 +32,12 @@ class Course
     member.save
   end
 
-  def is_member?(user, type)
-    members.exist?(type, user, self)
+  def is_member?(user)
+    members.exist?(user, self)
+  end
+
+  def is?(user, type)
+    members.exist_by_type?(user, self, type)
   end
 
   private

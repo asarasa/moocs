@@ -16,12 +16,12 @@ describe Member do
 
   it "returns a members by user" do
     member = create(:member, user: @user, course: @course, type: :student)
-    expect(Member.by_user(:student, @user.id).to_a).to eq [member]
+    expect(Member.by_user(@user.id, :student,).to_a).to eq [member]
   end
 
   it "returns a members by course" do
     member = create(:member, user: @user, course: @course, type: :student)
-    expect(Member.by_course(:student, @course.id).to_a).to eq [member]
+    expect(Member.by_course(@course.id, :student).to_a).to eq [member]
   end
 
   it "can not be 2 equal members" do
@@ -39,7 +39,7 @@ describe Member do
     context "member exist" do
       it "return true" do
         member = create(:member, user: @user, course: @course, type: :student)
-        expect(Member.exist?(:student, @user, @course)).to be_true
+        expect(Member.exist?(@user, @course)).to be_true
       end
     end
 
@@ -47,7 +47,7 @@ describe Member do
       it "return false" do
         diff_user = create(:user)
         member = create(:member, user: @user, course: @course, type: :student)
-        expect(Member.exist?(:student, diff_user, @course)).to be_false
+        expect(Member.exist?(diff_user, @course)).to be_false
       end
     end
   end
