@@ -17,10 +17,21 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def user_courses
+  def photo
+    current_user.photo = params[:photo][:photo]
+    if current_user.save
+      redirect_to show_profile_path
+    end
+  end
+	
+  
+  def user_courses
 	end
 
 	def user_resources
+	end
+  
+  def user_tests
 	end
 
 	def show

@@ -32,10 +32,13 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-ruby '2.0.0'
+ruby '2.1.1'
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 
 gem 'lazy_high_charts'
+
+gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem 'aws-sdk', '~> 1.3.4'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
@@ -68,3 +71,4 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+

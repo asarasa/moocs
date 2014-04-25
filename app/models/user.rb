@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include Mongoid::Paperclip
   include ActiveModel::SecurePassword
 
   field :email, type: String
@@ -9,10 +10,13 @@ class User
   field :admin, type: Boolean, default: false
   field :register_date, type: DateTime, default: DateTime.now
   field :last_login, type: DateTime
-  
+ 
   has_many :members
   has_many :resources
-  belongs_to :tests
+  has_many :tests
+  
+  has_mongoid_attached_file :photo
+  validates_attachment_content_type :photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 
   validates_presence_of :name, :lastname, :email, :password_digest
   validates :name, :lastname, length: { minimum: 3 }

@@ -1,11 +1,10 @@
 class TestsController < ApplicationController
   before_action :set_test, only: [:show, :edit, :update, :destroy]
-  before_action :set_resource, only: [:index,:edit]
 
   # GET /tests
   # GET /tests.json
   def index
-    @tests = @resource.tests
+    @tests = Tests.all
   end
 
   # GET /tests/1
@@ -21,11 +20,14 @@ class TestsController < ApplicationController
   # GET /tests/1/edit
   def edit
     if @test._type=="Quiz"
-      redirect_to(edit_resource_quiz_path(@resource,@test))
-    else
-      redirect_to(edit_resource_questionnaire_path(@resource,@test))
-    end
-    
+      redirect_to(edit_quiz_path(@test))
+    else 
+      if @test._type=="Homework"
+        redirect_to(edit_homework_path(@test))
+      else
+        redirect_to(edit_questionnaire_path(@test))
+      end
+    end    
   end
 
   # POST /tests
@@ -72,9 +74,6 @@ class TestsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_test
       @test = Test.find(params[:id])
-    end
-  def set_resource
-      @resource = Resource.find(params[:resource_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

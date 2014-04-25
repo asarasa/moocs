@@ -1,22 +1,20 @@
 class QuizzesController < ApplicationController
-  before_action :set_resource, only: [:solve,:new_answers,:add_answers,:see_answers,:new,:create,:show, :edit, :update, :destroy]
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
  
 
   # GET /quizzes
   # GET /quizzes.json
   def index
-    @quizzes = @resource.tests
+    @quizzes = Quizzes.All
   end
 
   # GET /quizzes/1
   # GET /quizzes/1.json
   def show
-    @fail= params[:fail] 
   end
   
   def add_answers
-    @quiz = @resource.tests.find(params[:quiz_id])
+    @quiz = Test.find(params[:quiz_id])
   end
 
   def see_answers    
@@ -28,7 +26,7 @@ class QuizzesController < ApplicationController
   def solve
      params.require(:quiz).permit(:answer)
      @quiz = @resource.tests.find(params[:quiz_id])
-    @quizzes = @resource.tests
+     @quizzes = @resource.tests
      list = Array.new  
      if @quiz.multianswer == true
        index=0  
@@ -54,13 +52,13 @@ class QuizzesController < ApplicationController
         end
       end    
     else 
-      redirect_to resource_quiz_path(@resource, @quiz,:fail => true), notice: 'Quiz was not successfully solved'
+      redirect_to resource_quiz_path(@resource, @quiz), notice: 'Quiz was not successfully solved'
     end    
   end
 
   
   def new_answers
-    @quiz = @resource.tests.find(params[:quiz_id])
+    @quiz = Test.find(params[:quiz_id])
     @quiz.answers = Array.new
     @quiz.results = Array.new 
     index=0
@@ -81,7 +79,7 @@ class QuizzesController < ApplicationController
     end
     respond_to do |format|
       if @quiz.update()
-        format.html { redirect_to resource_tests_path(@resource), notice: 'Quiz was successfully updated, update the answers.' }
+        format.html { redirect_to user_tests_path, notice: 'Quiz was successfully updated, update the answers.' }
       else
         format.html { render action: 'edit' }
       end
@@ -103,12 +101,10 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new(quiz_params)
     @quiz.answers = Array.new
     @quiz.results = Array.new 
-    @quiz.users = Array.new
-    @resource.tests.push(@quiz)
-    
+    @quiz.user = current_user
     respond_to do |format|
-      if @resource.save
-        format.html { redirect_to resource_quiz_add_answers_path(@resource,@quiz), notice: 'Quiz was successfully, enter the answers.' }
+      if @quiz.save
+        format.html { redirect_to quiz_add_answers_path(@quiz), notice: 'Quiz was successfully, enter the answers.' }
       else
         format.html { render action: 'new' }
       end
@@ -132,7 +128,7 @@ class QuizzesController < ApplicationController
   def destroy
     @quiz.destroy
     respond_to do |format|
-      format.html { redirect_to resource_tests_path(@resource) }
+      format.html { redirect_to user_tests_path }
       format.json { head :no_content }
     end
   end
@@ -140,7 +136,7 @@ class QuizzesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_quiz
-      @quiz = @resource.tests.find(params[:id])
+      @quiz = Test.find(params[:id])
      
     end
 
@@ -150,8 +146,4 @@ class QuizzesController < ApplicationController
     end
   
     
-  
-  def set_resource
-    @resource = Resource.find(params[:resource_id])
-  end
 end
