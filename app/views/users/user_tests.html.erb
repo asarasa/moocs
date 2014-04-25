@@ -1,0 +1,37 @@
+<% if @current_user.tests.empty? %>
+	<h3 style="text-align:center">No has creado ningún test.</h3>
+<% else %>
+	<div class="page-header">
+		<h2>Listing my tests</h2>
+	</div>
+
+	<table class="table table-stripped">
+	  <thead>
+	    <tr>
+	      <th>Name</th>
+	      <th>Type</th>
+	      <th></th>
+	      <th></th>
+	      <th></th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <% @current_user.tests.each do |test| %>
+	      <tr>
+	        <td><%= test.name %></td>
+          <td><%= test._type %></td>
+	        <td><%= link_to 'Show', test %></td>
+	        <td><%= link_to 'Edit', edit_test_path(test) %></td>
+	        <td><%= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure?' }%></td>
+         
+      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+<% end %>
+<center>
+  <%= link_to 'New homework', new_homework_path, :class => 'btn btn-default' %>
+	<%= link_to 'New quiz', new_quiz_path, :class => 'btn btn-success' %>
+  <%= link_to 'New questionnaire', new_questionnaire_path, :class => 'btn btn-info' %>
+</center>

@@ -1,7 +1,20 @@
 Moocs::Application.routes.draw do
 
+  
+  
 
   scope "/:locale" do
+
+  resources :tests
+  resources :homeworks
+  resources :quizzes do
+      match "new_answers", :to => "quizzes#new_answers", :as => "new_answers", :via => [:get, :post, :patch]
+      match "solve", :to => "quizzes#solve", :as => "solve", :via => [:get, :post, :patch]
+      get 'add_answers', to:'quizzes#add_answers', as: 'add_answers'      
+      get 'see_answers', to:'quizzes#see_answers', as: 'see_answers'  
+  end
+  resources :questionnaires
+  
     resources :users
     resources :sessions
 
@@ -17,7 +30,6 @@ Moocs::Application.routes.draw do
 
     resources :resources do
         resources :questionnaires
-        resources :tests
         resources :quizzes do
           match "new_answers", :to => "quizzes#new_answers", :as => "new_answers", :via => [:get, :post, :patch]
           match "solve", :to => "quizzes#solve", :as => "solve", :via => [:get, :post, :patch]
@@ -39,7 +51,9 @@ Moocs::Application.routes.draw do
 
     get 'user_courses', to: 'users#user_courses', as: 'user_courses'
     get 'user_resources', to: 'users#user_resources', as:'user_resources'
-
+    get 'user_tests', to: 'users#user_tests', as:'user_tests'
+    match 'photo', :to => 'users#photo',  :as =>'photo', :via => [:get, :post, :patch]
+    
     get 'courses/:course_id/lessons/:id/view_resource/:resource_id', to:'lessons#view_resource', as: 'view_resource'
     get 'courses/:course_id/lessons/:id/use_resource/:resource_id', to:'lessons#use_resource', as: 'use_resource'
     get 'courses/:course_id/lessons/:id/del_resource/:resource_id', to:'lessons#delete_resource', as: 'del_resource'

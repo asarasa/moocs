@@ -1,7 +1,6 @@
 <div class="form">
-  <h2 class="form-signin-heading"><%= @resource.name %> quiz</h2>
 
-<%= form_for [@resource, @quiz],url: resource_quiz_solve_path(@resource,@quiz) do |f| %>
+<%= form_for [ @quiz],url: quiz_solve_path(@quiz) do |f| %>
  <% if @quiz.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
@@ -43,11 +42,11 @@
  <div class="actions center">
     <%= f.submit "Submit", :class => 'btn btn-lg btn-primary' %>
     <% if @fail=='true'%>
-      <%= link_to 'See answers', resource_quiz_see_answers_path(@resource,@quiz), :class => 'btn btn-lg btn-warning' %>
+      <%= link_to 'See answers', quiz_see_answers_path(@quiz), :class => 'btn btn-lg btn-warning' %>
     <% end%>
  </div>
 
 <% end %>
 </div>
 
-<%= link_to 'Back', resource_quizzes_path(@resource), :class => 'btn btn-default' %>
+<%= link_to 'Back', user_tests_path, :class => 'btn btn-default' %>

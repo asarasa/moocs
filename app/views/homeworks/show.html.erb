@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @homework.name %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @homework.description %>
+</p>
+
+<%@homework.attachments.each do |attachment|%>
+  <%= link_to attachment.file_file_name, attachment.file.url(:original, false) %>
+<%end%>
+ 
+<%= link_to 'Edit', edit_homework_path(@homework) %> |
+<%= link_to 'Back', homeworks_path %>

@@ -33,7 +33,13 @@
                 <% end %>
                 <li><%= link_to current_user.email, show_profile_path %></li>
                 <li><%= link_to t(:my_courses), user_courses_path %></li>
-                <li><%= link_to t(:my_resources), user_resources_path %></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=t :resources %> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to t(:my_resources), user_resources_path %></li>
+                      <li><%= link_to t(:my_tests), user_tests_path %></li>
+                    </ul>
+                </li>                         
                 <li><%= link_to t(:logout), logout_path %></li>
         			<% else %>
         				<li><%= link_to t(:signup), signup_path %></li>

@@ -1,7 +1,22 @@
 <h1>Show profile</h1>
 
-<h3><%= @user.name %></h3>
-<h3><%= @user.email %></h3>
+<%= form_for(:photo, url: photo_path, :html => {:multipart => true}) do |f| %>
+<div class="row">
+  <div class="col-md-4">
+    <h3><%= @user.name %></h3>
+    <h3><%= @user.email %></h3>
+  </div>
+  <div class="col-md-4">
+    <%if @user.photo_file_name==nil%>
+      <%= image_tag 'buddyicon.jpg', :class => "img-thumbnail", :size => "260x180" %>
+    <% else%>
+      <%= image_tag @user.photo.url, :class => "img-thumbnail", :size => "260x180" %>
+    <% end %>
+    <%= f.file_field :photo %>
+    <%= f.submit "Upload" %>
+  </div>
+</div>
+<% end %>
 
 <div class="buttons">
 	<%= link_to 'Back', root_url, :class => "btn btn-default left" %>

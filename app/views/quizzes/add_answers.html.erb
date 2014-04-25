@@ -1,7 +1,7 @@
 <div class="form">
   <h2 class="form-signin-heading">Adding answers</h2>
 
-<%= form_for  [@resource, @quiz] ,url: resource_quiz_new_answers_path(@resource,@quiz)   do |f| %>
+<%= form_for  @quiz ,url: quiz_new_answers_path(@quiz)   do |f| %>
   <% if @quiz.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
@@ -42,4 +42,4 @@
 
 </div>
 
-<%= link_to 'Back', edit_resource_quiz_path(@resource,@quiz), :class => 'btn btn-default' %>
+<%= link_to 'Back', edit_quiz_path(@quiz), :class => 'btn btn-default' %>
