@@ -12,10 +12,17 @@
  *= require_self
  *= require users
  *= require bootstrap-datetimepicker.min
+ *= require card
+ *= require footer
  */
+
+@import url("//fonts.googleapis.com/css?family=Lobster|Cabin:400,700");
+@import url("//fonts.googleapis.com/css?family=Raleway:400,700");
 
 body {
   color:#666666;
+  margin:80px 0 0 0;
+  background-color: #EFEFEF;
 }
 
 .alert {
@@ -41,65 +48,29 @@ body {
 
 /* Navbar */
 
-.moocs-nav {
-  text-shadow: 0 -1px 0 rgba(0,0,0,.15);
-  background-color: #563d7c;
-  border-color: #463265;
-  box-shadow: 0 1px 0 rgba(255,255,255,.1);
-  font-size: 16px;
+.navbar .navbar-header .navbar-brand {
+  padding:12px 10px 0 20px;
 }
 
-.moocs-nav .navbar-collapse {
-  border-color: #463265;
-}
-.moocs-nav .navbar-brand {
-  color: #fff;
-}
-.moocs-nav .navbar-nav > li > a {
-  color: #cdbfe3;
-}
-.moocs-nav .navbar-nav > li > a:hover {
-  color: #fff;
-}
-.moocs-nav .navbar-nav > .active > a,
-.moocs-nav .navbar-nav > .active > a:hover {
-  color: #fff;
-  background-color: #463265;
-}
-.moocs-nav .navbar-toggle {
-  border-color: #563d7c;
-}
-.moocs-nav .navbar-toggle:hover {
-  background-color: #463265;
-  border-color: #463265;
-}
 
-.moocs-nav .collapse {
-  padding-top:15px;
-}
-
-/* JUMBOTRON
+/* HEADER
 -------------------------------------------------- */
-.jumbotron {
-  margin-top: 50px;
-}
-
-.jumbotron h1 {
-  color:#563d7c;
-}
-
-.jumbotron .btn-success {
-  padding:10px 50px 10px 50px;
+.header-intro {
+  padding:30px 0 0 0;
+  font-family: 'Lobster', cursive;
+  color:#ffffff;
+  font-size:50px;
+  text-shadow: -1px 0 #2c3e50, 0 1px #2c3e50, 1px 0 #2c3e50, 0 -1px #2c3e50;
 }
 
 /* FORMS
 -------------------------------------------------- */
 .form {
-  padding:20px 150px 40px 150px;
+  padding:20px 150px 50px 150px;
 }
 
 .jumbo {
-  margin:20px 20px 40px 20px;
+  margin:20px 20px 50px 20px;
 }
 
 
@@ -126,5 +97,37 @@ body {
   padding:10px;
 }
 
+/* Drag and drop resources */
+
+.drop {
+  width: 100%;
+  padding:10px;
+  border: 3px dashed #ccc;
+  padding: 10px;
+  clear: left;
+  text-align:center;
+  color: #666666;
+}
 
 
+.list-group-item {
+  cursor: move;
+}
+
+#list-group .list-group-item.moving {
+  opacity: 0.25;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  -o-transform: scale(0.8);
+}
+
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}

@@ -1,0 +1,14 @@
+
+<% if resource.type == "video" %>
+	<span class="glyphicon glyphicon-play"></span>
+<% elsif resource.type == "audio" %>
+	<span class="glyphicon glyphicon-headphones"></span>
+<% elsif resource.type == "pdf" %>
+	<span class="glyphicon glyphicon-file"></span>
+<% elsif resource.type == "text" %>
+	<span class="glyphicon glyphicon-pencil"></span>
+<% end %>
+<span style="padding-left: 10px">
+	<%= resource.name %>
+</span>
+<span class="glyphicon glyphicon-chevron-right right">

@@ -71,7 +71,7 @@ class CoursesController < ApplicationController
     @course.tags = params[:course][:tags].split(";")
 
     respond_to do |format|
-      if @course.add_member(user, "teacher") && @course.save
+      if @course.add_member(current_user, "teacher") && @course.save
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render action: 'show', status: :created, location: @course }
       else

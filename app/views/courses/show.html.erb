@@ -2,21 +2,24 @@
 
 	<!-- Content -->
 	<div class="col-xs-12 col-sm-9">
-		<div class="page-header">
-		  <h1><%= @course.name %></h1>
-		</div>
-      <p><%=raw @course.desc %></p>		
-      <div class="buttons">
-				<%= link_to 'Back to home', root_url, :class => 'btn btn-default left' %>
+		<div class="card">
+    	<h1 class="card-heading lg"><%= @course.name %></h1>
+      <div class="card-body">
+ 				<p><%=raw @course.desc %></p>				 
+
 			</div>
+		</div>
+	  <div class="buttons">
+			<%= link_to 'Back to home', root_url, :class => 'btn btn-default left' %>
+		</div>		
 	</div>
 	<!-- End Content -->
 
 
 	<!-- Sidebar -->
   <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="info">
-  	<div class="panel panel-default"  style="margin-top:50px">
-  		<div class="panel-body center">
+  	<div class="card">
+  		<div class="card-actions center">
 	    	<% if !@course.is_member?(current_user) %>
 					<%= link_to 'Join', join_course_path(@course.id), :class => 'btn btn-success' %>
 				<% else %>
@@ -32,12 +35,10 @@
 			<% end %>
   		</div>
   	</div>    	
-  	<div class="panel panel-success">
-      <div class="panel-heading">
-	 	  	<h3 class="panel-title">Info</h3>
-			</div>    	
-			<div class="panel-body">	
-	    		<h4>STARTS</h4>
+  	<div class="card">
+	 	  <h3 class="card-heading md">Info</h3>
+			<div class="card-body">	
+	    	<h4>STARTS</h4>
 				<p><%= @course.start_date.to_formatted_s(:short) %></p>
 				<h4>ENDS</h4>
 				<p><%= @course.end_date.to_formatted_s(:short)    %></p>
@@ -49,11 +50,9 @@
 				<p><%=raw @course.prerequisites %></p>
 			</div>
   	</div>
-  	<div class="panel panel-info" style="margin-top:50px">
-    	<div class="panel-heading">
-	 	  	<h3 class="panel-title">Teacher/s</h3>
-			</div>    	
-			<div class="panel-body">
+  	<div class="card" style="margin-top:50px">
+	 	  <h3 class="card-heading md">Teacher/s</h3>
+			<div class="card-body">
 				<% @course.members_by("teacher").each do |teacher| %>	
 		    		<h4>Name</h4>
 					<p><%= teacher.name %></p>

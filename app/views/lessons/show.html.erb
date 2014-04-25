@@ -1,40 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<div class="page-header">
-  <h2><%= @lesson.name %> <small><%=raw @lesson.description %></small></h2>
+<div class="card">
+  <h2 class="card-heading lg"><%= @lesson.name %></h2>
+  <div class="card-body">
+    <p><%=raw @lesson.description %></p>
+  </div>
 </div>
 
 <div class="row">
 	<div class="col-md-3">
-		<table class="table table-stripped">
-		  <thead>
-		    <tr>
-				<th></th>
-		    	<th>Name</th>
-		    	<th></th>
-		    </tr>
-		  </thead>
-
-		  <tbody>
-		    <% @resources.each do |resource| %>
-		      <tr>
-		      	<td>
-		      	<% if resource.type == "video" %>
-		      		<%= image_tag("1387049800_social_4.png", :alt => "video") %>
-		      	<% elsif resource.type == "audio" %>
-		      		<%= image_tag("1387133987_media-optical-audio.png", :alt => "audio") %>
-		      	<% elsif resource.type == "pdf" %>
-		      		<%= image_tag("1387134021_application-pdf.png", :alt => "PDF") %>
-		      	<% elsif resource.type == "text" %>
-		      		<%= image_tag("1387134064_readme.png", :alt => "Text") %>
-		      	<% end %>
-		      	</td>
-		        <td><%= resource.name %></td>
-		        <td><%=link_to( image_tag("1387049779_forward.png"), view_resource_path(@course, @lesson, resource)) %></td>
-		      </tr>
+		<div class="bs-component">
+      <div class="list-group">
+      	<% @resources.each do |resource| %>
+      		<% if !@resource.nil? %>
+	      		<% if resource.id == @resource.id %>
+		      		<%= link_to view_resource_path(@course, @lesson, resource), :class => "list-group-item active" do %>
+	  	    			<%= render partial: 'resource', object: resource %>
+	    	  		<% end %>
+	    	  	<% else %>
+		      		<%= link_to view_resource_path(@course, @lesson, resource), :class => "list-group-item" do %>
+		      			<%= render partial: 'resource', object: resource %>
+		      		<% end %>	    
+	    	  	<% end %>
+	    	  <% else %>
+	      		<%= link_to view_resource_path(@course, @lesson, resource), :class => "list-group-item" do %>
+	      			<%= render partial: 'resource', object: resource %>
+	      		<% end %>	    	  		
+	    	  <% end %>
 		    <% end %>
-		  </tbody>
-		</table>		
+      </div>
+    </div>
 	</div>
 
 	<div class="col-md-9">
@@ -43,13 +38,13 @@
 		<% else %>
 			<% if @resource.type == "video" %>
 				<%= render 'resources/video' %>			
-  			<% elsif @resource.type == "audio" %>
+  		<% elsif @resource.type == "audio" %>
 				<%= render 'resources/audio' %>
 			<% elsif @resource.type == "pdf" %>				
 				<%= render 'resources/pdf' %>
 			<% elsif @resource.type == "text" %>
 				<%= render 'resources/text' %>			
-  			<% end %>
+  		<% end %>
         	<%= link_to 'Quizzes', resource_tests_path(@resource), :class => 'btn btn-primary btn-block' %>
 		<% end %>
 	</div>

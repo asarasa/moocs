@@ -1,11 +1,11 @@
-<div class="page-header" style="margin-top:0px">
-	<h2><%= @resource.name %></h2>
-</div>
+<div class="card resource">
+	<h2 class="card-heading lg"><%= @resource.name %></h2>
 
-<object data="<%= @resource.url %>" type="application/pdf" width="100%" height="720">
-  alt : <a href="<%= @resource.url %>">Download</a>
-</object>
+	<div class="card-body">
+		<object data="<%= @resource.url %>" type="application/pdf" width="100%" height="720">
+  		alt : <a href="<%= @resource.url %>">Download</a>
+		</object>
 
-<div class="resource-content">
-	<%=raw @resource.content %>
+		<p><%=raw @resource.content %></p>
+	</div>
 </div>

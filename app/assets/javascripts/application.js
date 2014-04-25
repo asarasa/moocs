@@ -19,6 +19,7 @@
 //= require bootstrap.min
 //= require bootstrap-datetimepicker.min
 //= require forms
-//= require highcharts/highcharts                                                           
-//= require highcharts/highcharts-more                                                         
-//= require highcharts/highstock
+// require highcharts/highcharts                                                           
+// require highcharts/highcharts-more                                                         
+// require highcharts/highstock
+//= require draganddrop

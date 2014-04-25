@@ -1,11 +1,11 @@
-<div class="page-header" style="margin-top:0px">
-	<h2><%= @resource.name %></h2>
-</div>
+<div class="card resource">
+	<h2 class="card-heading lg"><%= @resource.name %></h2>
 
-<div class="resource-content">
- 	<%= @resource.content.html_safe %>
-</div>
+	<div class="card-body">
+ 		<p><%=raw @resource.content %></p>
 
-<div style="padding-top:30px; padding-bottom:30px;">
-	Link to source: <a href="<%= @resource.url %>">Wikipedia</a>
+ 		<div style="padding-top:30px; padding-bottom:30px;">
+			Link to source: <a href="<%= @resource.url %>"><%= @resource.name %></a>
+		</div>
+	</div>
 </div>

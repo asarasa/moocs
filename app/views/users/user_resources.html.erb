@@ -23,13 +23,13 @@
 	        <td><%= resource.name %></td>
 	        <td>
 		      	<% if resource.type == "video" %>
-		      		<%= image_tag("1387049800_social_4.png", :alt => "video") %>
+		      		<span class="glyphicon glyphicon-play"></span>
 		      	<% elsif resource.type == "audio" %>
-		      		<%= image_tag("1387133987_media-optical-audio.png", :alt => "audio") %>
+		      		<span class="glyphicon glyphicon-headphones"></span>
 		      	<% elsif resource.type == "pdf" %>
-		      		<%= image_tag("1387134021_application-pdf.png", :alt => "PDF") %>
+		      		<span class="glyphicon glyphicon-file"></span>
 		      	<% elsif resource.type == "text" %>
-		      		<%= image_tag("1387134064_readme.png", :alt => "Text") %>
+		      		<span class="glyphicon glyphicon-pencil"></span>
 		      	<% end %>
 	        </td>
 	        <td><%= resource.url %></td>

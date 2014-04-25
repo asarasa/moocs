@@ -9,9 +9,6 @@ class LessonsController < ApplicationController
   # GET /lessons.json
   def index
     @lessons = @course.lessons
-    if @course.is?(current_user, 'teacher')
-      render 'teacher_index'
-    end
   end
 
   # GET /lessons/1
@@ -34,16 +31,36 @@ class LessonsController < ApplicationController
   end
 
   def use_resource
+    ok = false;
     if (@lesson.resources.include?(@resource))
-      redirect_to course_lesson_path(@course, @lesson), notice: 'The resource is already in the lesson.'
+      ok = false;
     else
       @lesson.resources << @resource
       if @lesson.save
-        redirect_to course_lesson_path(@course, @lesson), notice: 'The resource was successfully added.'
+        ok = true
       else
-        redirect_to course_lesson_path(@course, @lesson), notice: 'Error.'
+        ok = false
       end
     end
+
+    respond_to do |format|
+      if ok
+        format.json { render json: ok, notice: 'The resource was successfully added.' }
+      else
+        format.json { render json: ok, notice: 'Error' }
+      end
+    end
+
+    # if (@lesson.resources.include?(@resource))
+    #   redirect_to course_lesson_path(@course, @lesson), notice: 'The resource is already in the lesson.'
+    # else
+    #   @lesson.resources << @resource
+    #   if @lesson.save
+    #     redirect_to course_lesson_path(@course, @lesson), notice: 'The resource was successfully added.'
+    #   else
+    #     redirect_to course_lesson_path(@course, @lesson), notice: 'Error.'
+    #   end
+    # end
   end
 
   def view_resource
@@ -54,10 +71,12 @@ class LessonsController < ApplicationController
 
   def delete_resource
     @lesson.resources.delete(@resource)
-    if @lesson.save
-        redirect_to course_lesson_path(@course, @lesson), notice: 'The resource was successfully deleted.'
-    else
-        redirect_to course_lesson_path(@course, @lesson), notice: 'Error.'
+    respond_to do |format|
+      if @lesson.save
+        format.json { render json: "true", notice: 'The resource was successfully deleted.' }
+      else
+        format.json { render json: "false", notice: 'Error' }
+      end
     end
   end
 
