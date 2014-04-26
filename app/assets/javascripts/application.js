@@ -13,10 +13,9 @@
 // require_tree .
 //
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require moment.min
 //= require bootstrap.min
+// require turbolinks
+//= require moment.min
 //= require bootstrap-datetimepicker.min
 //= require forms
 // require highcharts/highcharts                                                           
