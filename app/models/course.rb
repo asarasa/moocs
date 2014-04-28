@@ -11,7 +11,7 @@ class Course
   field :forumpermision , type: Boolean
   field :tags, type: Array
   
-  embeds_many :lessons
+  embeds_many :lectures
   has_many :members
   has_many :topics
  

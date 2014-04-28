@@ -17,7 +17,7 @@ class CoursesController < ApplicationController
   
    def tracking
     @course = Course.find(params[:course_id])
-    @lessons = @course.lessons   
+    @lectures = @course.lectures   
     if is_teacher?
       @chart = LazyHighCharts::HighChart.new('graph') do |f|
       f.title({ :text=>"Course Statistics"})
@@ -40,7 +40,7 @@ class CoursesController < ApplicationController
       f.title(:text => "Your course rating")
       f.options[:xAxis][:categories] =  ["leccion1", "leccion2"]      
       f.series(:type=> 'column',:name=> 'Your rating',:data=> [3,4])
-      f.series(:type=> 'column', :name=> 'Lesson Average',:data=> [7,9])
+      f.series(:type=> 'column', :name=> 'Lecture Average',:data=> [7,9])
       f.series(:type=> 'spline',:name=> 'Average', :data=> [4.5,5.7])
      end  
     end
@@ -49,7 +49,7 @@ class CoursesController < ApplicationController
 
   def join_course
     if @course.add_member(current_user, "student")
-      redirect_to course_lessons_path(@course), notice: 'You have successfully registered.'
+      redirect_to course_lectures_path(@course), notice: 'You have successfully registered.'
     else
       redirect_to @course, notice: 'You are already enrolled in this course.'
     end

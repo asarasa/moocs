@@ -13,6 +13,7 @@
 // require_tree .
 //
 //= require jquery
+//= require jquery_ujs
 //= require bootstrap.min
 // require turbolinks
 //= require moment.min
@@ -22,3 +23,4 @@
 // require highcharts/highcharts-more                                                         
 // require highcharts/highstock
 //= require draganddrop
+//= require lessons

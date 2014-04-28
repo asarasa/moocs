@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+			<% if resource.type.include? "video" %>
+				<span class="glyphicon glyphicon-play"></span>
+			<% elsif resource.type.include? "audio" %>
+				<span class="glyphicon glyphicon-headphones"></span>
+			<% elsif resource.type.include? "pdf" %>
+				<span class="glyphicon glyphicon-file"></span>
+			<% else %>
+				<span class="glyphicon glyphicon-pencil"></span>
+			<% end %>
+		<span style="padding-left: 10px">
+			<%= h resource.name %>
+		</span>
+		<span style="float:right">
+			<%= check_box_tag 'resource_ids[]', resource.id %>
+		</span>
+	</div>
+</div>

@@ -1,17 +1,16 @@
 <div class="card resource">
-	<h2 class="card-heading lg"><%= @resource.name %></h2>
+	<h2 class="card-heading lg"><%= resource.name %></h2>
 	<div class="card-body">
 		<div class="center">
 			<audio controls>
-			    <source src="<%= @resource.url %>" type="audio/ogg" />
-			    <source src="<%= @resource.url %>" type="audio/mpeg" />
-			    <object type="application/x-shockwave-flash" data="player.swf?soundFile=<%= @resource.url %>">
-			        <param name="movie" value="player.swf?soundFile=<%= @resource.url %>" />
-			        <a href="<%= @resource.url %>">Download</a>
+			    <source src="<%= resource.file %>" type="audio/ogg" />
+			    <source src="<%= resource.file %>" type="audio/mpeg" />
+			    <object type="application/x-shockwave-flash" data="player.swf?soundFile=<%= resource.file %>">
+			        <param name="movie" value="player.swf?soundFile=<%= resource.file %>" />
+			        <a href="<%= resource.file %>">Download</a>
 			    </object>
 			</audio>
 		</div>
-
-		<p><%=raw @resource.content %></p>
+		<p><%=raw resource.content %></p>
 	</div>
 </div>

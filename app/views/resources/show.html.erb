@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<% if @resource.type == "video" %>
-  <%= render 'resources/video' %>     
-  <% elsif @resource.type == "audio" %>
-  <%= render 'resources/audio' %>
-<% elsif @resource.type == "pdf" %>        
-  <%= render 'resources/pdf' %>
-<% elsif @resource.type == "text" %>
-  <%= render 'resources/text' %>      
-<% end %>
+<% if @resource.type.include? "video" %>
+	<%= render partial: "resources/video", locals: { resource: @resource } %>
+<% elsif @resource.type.include? "audio" %>
+	<%= render partial: "resources/audio", locals: { resource: @resource } %>
+<% elsif @resource.type.include? "pdf" %>        
+	<%= render partial: "resources/pdf", locals: { resource: @resource } %>
+<% else %>
+	<%= render partial: "resources/text", locals: { resource: @resource } %>
+<% end %>		
 
 <div class="buttons">
 	<%= link_to 'Back', user_resources_path, :class => 'btn btn-default left' %>
