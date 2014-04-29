@@ -54,10 +54,14 @@ Moocs::Application.routes.draw do
     get 'user_tests', to: 'users#user_tests', as:'user_tests'
     match 'photo', :to => 'users#photo',  :as =>'photo', :via => [:get, :post, :patch]
     
-    get 'courses/:course_id/lessons/:id/view_resource/:resource_id', to:'lessons#view_resource', as: 'view_resource'
+    get 'courses/:course_id/lessons/:id/view_resource/:resource_id', to:'lessons#view_resource', as: 'view_resource' 
     get 'courses/:course_id/lessons/:id/use_resource/:resource_id', to:'lessons#use_resource', as: 'use_resource'
     get 'courses/:course_id/lessons/:id/del_resource/:resource_id', to:'lessons#delete_resource', as: 'del_resource'
-
+     
+    get 'courses/:course_id/lessons/:id/view_test/:test_id', to:'lessons#view_test', as: 'view_test'
+    get 'courses/:course_id/lessons/:id/use_test/:test_id', to:'lessons#use_test', as: 'use_test'
+    get 'courses/:course_id/lessons/:id/del_test/:test_id', to:'lessons#delete_test', as: 'del_test'
+    
     get 'search', to:'welcome#search', as: 'search'
 
     scope '/admin' do

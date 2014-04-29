@@ -18,10 +18,13 @@ class UsersController < ApplicationController
 	end
 
   def photo
-    current_user.photo = params[:photo][:photo]
-    if current_user.save
-      redirect_to show_profile_path
-    end
+    if params[:photo] != nil
+      current_user.photo = params[:photo][:photo]
+      if current_user.save
+        redirect_to show_profile_path
+      end   
+    end  
+     redirect_to show_profile_path
   end
 	
   

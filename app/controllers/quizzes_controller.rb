@@ -1,5 +1,8 @@
 class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: []
+  before_action :set_member, only: []
+  before_action :set_lesson, only: []
  
 
   # GET /quizzes

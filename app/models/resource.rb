@@ -7,7 +7,6 @@ class Resource
 
   belongs_to :user
   belongs_to :lesson
-  has_many :tests
 
   validates_presence_of :name, :content, :type, :url
 end

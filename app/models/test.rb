@@ -4,7 +4,7 @@ class Test
   
  
   belongs_to :user
-  belongs_to :resource
+  belongs_to :lesson
   
   validates_presence_of :name
 end
