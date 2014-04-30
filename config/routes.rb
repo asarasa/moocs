@@ -58,7 +58,6 @@ Moocs::Application.routes.draw do
     get 'user_courses', to: 'users#user_courses', as: 'user_courses'
     get 'user_resources', to: 'users#user_resources', as:'user_resources'
     get 'user_tests', to: 'users#user_tests', as:'user_tests'
-    match 'photo', :to => 'users#photo',  :as =>'photo', :via => [:get, :post, :patch]
     
     get 'courses/:course_id/lectures/:id/view_resource/:resource_id', to:'lectures#view_resource', as: 'view_resource'
     get 'courses/:course_id/lectures/:id/use_resource/:resource_id', to:'lectures#use_resource', as: 'use_resource'

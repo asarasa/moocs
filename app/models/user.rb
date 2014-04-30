@@ -15,7 +15,7 @@ class User
   has_many :resources
   has_many :tests
   
-  has_mongoid_attached_file :photo
+  has_mongoid_attached_file :photo, :default_url => ActionController::Base.helpers.asset_path("buddyicon.jpg", :digest => false);
   validates_attachment_content_type :photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 
   validates_presence_of :name, :lastname, :email, :password_digest
@@ -33,6 +33,10 @@ class User
 
   def courses_by(type)
     Course.in(id: members.by_user(self.id, type).map(&:course_id))
+  end
+
+  before_validation do
+    self.email = email.downcase if attribute_present?("email")
   end
 
 end

@@ -1,5 +1,7 @@
 class Course
   include Mongoid::Document
+  include Mongoid::Paperclip
+  
   field :name, type: String
   field :abstract, type: String
   field :desc, type: String
@@ -10,13 +12,16 @@ class Course
   field :end_date, type: DateTime , default: DateTime.now + 1
   field :forumpermision , type: Boolean
   field :tags, type: Array
-  
+
+  has_mongoid_attached_file :banner, :default_url => ActionController::Base.helpers.asset_path("default-course.jpg", :digest => false);
+
   embeds_many :lectures
   has_many :members
   has_many :topics
  
   validates_uniqueness_of :name
   validates_presence_of :name, :abstract, :desc, :start_date, :end_date
+  validates_attachment_content_type :banner, :content_type => ["image/jpg", "image/jpeg", "image/png"]
   validate :end_date_cannot_be_smaller_than_start_date
 
   def all_members

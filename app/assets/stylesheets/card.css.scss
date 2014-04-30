@@ -68,6 +68,13 @@
   border-bottom: 1px solid #e5e5e5;  
 }
 
+.card .card-heading.title {
+  font-size: 30px;
+  font-weight: 300;
+  color: #777;
+  padding:0 20px 20px 20px;
+}
+
 .card .card-heading.image img {
   display: inline-block;
   width: 46px;
@@ -113,7 +120,7 @@
 }
 
 .card .card-body {
-  padding: 0 20px;
+  padding: 0 20px 20px 20px;
   margin-top: 20px;
 }
 
@@ -304,4 +311,19 @@
 .card.hovercard .bottom {
   padding: 0 20px;
   margin-bottom: 17px;
+}
+
+.card.profile .avatar {
+  padding:20px;
+  text-align: center;
+}
+
+.card.profile img {
+  width: 150px;
+  height: 150px;
+  max-width: 150px;
+  max-height: 150px;
+  -webkit-border-radius: 50%;
+     -moz-border-radius: 50%;
+          border-radius: 50%;
 }

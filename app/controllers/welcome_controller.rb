@@ -2,6 +2,7 @@ class WelcomeController < ApplicationController
 
 	def index
 		@mainpage = true
+		@courses = Course.desc(:start_date)
 	end
 
 	def users

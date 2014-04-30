@@ -1,31 +1,25 @@
 <% if @courses.empty? %>
-	<h3 style="text-align:center"><%=t :no_courses %></h3>
+	<div class="card">
+		<h2 class="card-heading title"><%=t :no_courses %></h2>
+	</div>
 <% else %>
 	<div class="row">
 		<div class="col-md-6">
-			<div class="page-header">
-				<h2><%=t :new_courses %></h2>
+			<div class="card">
+				<h2 class="card-heading title"><%=t :new_courses %></h2>
 			</div>
 
 			<% @courses.each do |course| %>
-				<div class="result">
-					<h3><%= course.name %></h3>
-					<p><%= course.abstract %></p>
-					<%= link_to t(:show_course), course_path(course.id), :class => "btn btn-primary" %>
-				</div>
+				<%= render partial: "courses/course", locals: { course: course } %>
 			<% end %>
 		</div>
 		<div class="col-md-6">
-			<div class="page-header">
-				<h2><%=t :popular_courses %></h2>
+			<div class="card">
+				<h2 class="card-heading title"><%=t :popular_courses %></h2>
 			</div>
 
 			<% @courses.each do |course| %>
-				<div class="result">
-					<h3><%= course.name %></h3>
-					<p><%= course.abstract %></p>
-					<%= link_to t(:show_course), course_path(course.id), :class => "btn btn-primary" %>
-				</div>
+				<%= render partial: "courses/course", locals: { course: course } %>
 			<% end %>
 		</div>
 	</div>	
