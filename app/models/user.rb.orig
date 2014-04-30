@@ -15,7 +15,12 @@ class User
   has_many :resources
   has_many :tests
   
+<<<<<<< HEAD
   has_mongoid_attached_file :photo
+=======
+  has_mongoid_attached_file :photo, :storage => :s3, :default_url => '/images/:attachment/buddyicon.jpg'
+>>>>>>> 8206abf8bdd30777c132893ea4bb5fee96c9e9af
+  validates_attachment_content_type :photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 
   validates_presence_of :name, :lastname, :email, :password_digest
   validates :name, :lastname, length: { minimum: 3 }
