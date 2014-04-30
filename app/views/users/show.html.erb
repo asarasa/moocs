@@ -3,15 +3,11 @@
     <div class="card profile">
       <h2 class="card-heading lg"><%= @user.name + " " + @user.lastname %> <small>profile</small></h2>
       <div class="avatar">
-<<<<<<< HEAD
         <% if @user.photo_file_name.nil? %>
           <%= image_tag 'buddyicon.jpg' %>         
         <% else %>
           <%= image_tag @user.photo %>
         <% end %>
-=======
-         <%= image_tag @user.photo %>
->>>>>>> 8206abf8bdd30777c132893ea4bb5fee96c9e9af
       </div>      
       <div class="card-body">
         <h4 align="center"><%= @user.email %></h4>
