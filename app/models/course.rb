@@ -13,7 +13,7 @@ class Course
   field :forumpermision , type: Boolean
   field :tags, type: Array
 
-  has_mongoid_attached_file :banner, :default_url => ActionController::Base.helpers.asset_path("default-course.jpg");
+  has_mongoid_attached_file :banner, :default_url => :default_url => '/images/:attachment/default-banner.jpg'
 
   embeds_many :lectures
   has_many :members
