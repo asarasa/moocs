@@ -17,7 +17,7 @@
   </div>
   <div class="form-group">
     <%= f.label :desc, "Description" %><br>
-    <%= f.text_area :desc, :class => 'form-control', :rows => 10 %>
+    <%= f.text_area :desc, :class => 'ckeditor', :rows => 10 %>
   </div>
   <div class="form-group">
     <%= f.label :abstract, "Abstract" %><br>
@@ -26,14 +26,14 @@
   <div class="form-group">
     <%= f.label :start_date, "Start date" %><br>
     <div class='input-group date' id='datetimepicker_start'>    
-      <%= f.datetime_field :start_date, :value => @course.start_date.strftime('%m/%d/%Y %H:%M'), :class => 'form-control' %>
+      <%= f.datetime_field :start_date, :value => @course.start_date.strftime('%d/%m/%Y %H:%M'), :class => 'form-control' %>
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
     </div>
   </div>  
   <div class="form-group">
     <%= f.label :end_date, "End date" %><br>
     <div class='input-group date' id='datetimepicker_end'>    
-      <%= f.datetime_field :end_date, :value => @course.end_date.strftime('%m/%d/%Y %H:%M'), :class => 'form-control' %>
+      <%= f.datetime_field :end_date, :value => @course.end_date.strftime('%d/%m/%Y %H:%M'), :class => 'form-control' %>
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
     </div>
   </div>     

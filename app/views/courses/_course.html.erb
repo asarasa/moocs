@@ -1,6 +1,10 @@
 <div class="card promo">
 	<div class="card-top">
-		<%= image_tag course.banner, :height => '140px',:width => "100%", :alt => course.name %>
+		<% if course.banner_file_name.nil? %>
+			<%= image_tag 'default-banner.jpg', :height => '140px',:width => "100%", :alt => course.name %>
+		<% else %>
+			<%= image_tag course.banner, :height => '140px',:width => "100%", :alt => course.name %>
+		<% end %>
 	</div>
 	<div class="card-body">
 		<h2><%= link_to course.name, course_path(course), :class => "h2" %></h2>
