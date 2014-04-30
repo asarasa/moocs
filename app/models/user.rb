@@ -15,7 +15,7 @@ class User
   has_many :resources
   has_many :tests
   
-  has_mongoid_attached_file :photo, :default_url => '/images/:attachment/buddyicon.jpg'
+  has_mongoid_attached_file :photo, :storage => :s3, :default_url => '/images/:attachment/buddyicon.jpg'
   validates_attachment_content_type :photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 
   validates_presence_of :name, :lastname, :email, :password_digest
