@@ -15,7 +15,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap.min
-// require turbolinks
+//= require turbolinks
 //= require moment.min
 //= require bootstrap-datetimepicker.min
 // require highcharts/highcharts                                                           
@@ -23,5 +23,6 @@
 // require highcharts/highstock
 //= require draganddrop
 //= require lessons
-//= require ckeditor/ckeditor
+//= require ckeditor/override
+//= require ckeditor/init
 //= require forms

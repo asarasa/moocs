@@ -67,6 +67,9 @@ GEM
       nio4r (>= 0.5.0)
     childprocess (0.5.2)
       ffi (~> 1.0, >= 1.0.11)
+    ckeditor (4.0.11)
+      mime-types
+      orm_adapter (~> 0.5.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.4)
@@ -146,6 +149,7 @@ GEM
       mini_portile (~> 0.5.0)
     optionable (0.2.0)
     origin (2.1.0)
+    orm_adapter (0.5.0)
     paperclip (4.1.1)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -252,6 +256,7 @@ DEPENDENCIES
   aws-sdk
   bcrypt-ruby (~> 3.1.2)
   capybara (~> 2.1.0)
+  ckeditor
   coffee-rails (~> 4.0.0)
   database_cleaner (~> 1.0.1)
   factory_girl_rails (~> 4.2.1)

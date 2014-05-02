@@ -12,17 +12,17 @@ class Lecture
 
   def start_date_formatted
   	if self.start_date.nil?
-  		DateTime.now.strftime('%m/%d/%Y %H:%M')
+  		DateTime.now.strftime('%d/%m/%Y %H:%M')
   	else
-  		self.start_date.strftime('%m/%d/%Y %H:%M')
+  		self.start_date.strftime('%d/%m/%Y %H:%M')
   	end
   end
 
   def end_date_formatted
   	if self.end_date.nil? 
-  		DateTime.now.strftime('%m/%d/%Y %H:%M')
+  		DateTime.now.strftime('%d/%m/%Y %H:%M')
   	else
-			self.end_date.strftime('%m/%d/%Y %H:%M')
+			self.end_date.strftime('%d/%m/%Y %H:%M')
 		end
   end
 end

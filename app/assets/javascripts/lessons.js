@@ -134,3 +134,17 @@ $("span[data-lesson-id]").click (function( e ) {
   });
 
 })();
+
+function changetext(id)
+{
+  var selected = document.querySelector('#selected_resources');
+  var checked = $( "input:checked" );
+  var resources = "";
+  for (var i = 0; i < checked.length; i++) {
+    resources += checked.parent().parent().parent()[i].outerHTML
+  }
+  resources = resources.replace(new RegExp("input", 'g'), "del");
+  console.log(resources);
+
+  selected.innerHTML = resources;
+}

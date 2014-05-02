@@ -15,9 +15,9 @@
     <%= f.label :name %><br>
     <%= f.text_field :name, :class => 'form-control' %>
   </div>
-  <div class="form-group">
+  <div class="form-group" data-no-turbolink>
     <%= f.label :description, "Description" %><br>
-    <%= f.text_area :description, :class => 'ckeditor' %>
+    <%= f.cktext_area :description %>
   </div>
   <div class="form-group">
     <%= f.label :start_date, "Start date" %><br>

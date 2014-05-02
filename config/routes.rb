@@ -1,8 +1,6 @@
 Moocs::Application.routes.draw do
 
-  
-  
-
+  mount Ckeditor::Engine => '/ckeditor'
   scope "/:locale" do
 
     resources :tests
