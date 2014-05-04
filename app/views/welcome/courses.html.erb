@@ -4,22 +4,27 @@
 	</div>
 <% else %>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="card">
-				<h2 class="card-heading title"><%=t :new_courses %></h2>
+				<h2 class="card-heading title"><%=t :categories %></h2>
 			</div>
-
-			<% @courses.each do |course| %>
-				<%= render partial: "courses/course", locals: { course: course } %>
-			<% end %>
+			
+			<ul class="list-group">
+				<% Course::CATEGORIES.each do |category| %>
+					<li class="list-group-item"><%= t("course.categories.#{category}") %><%= link_to "", index_path, remote: true, :class => "glyphicon glyphicon-chevron-right right"%></li>
+				<% end %>
+			</ul>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-8">
 			<div class="card">
 				<h2 class="card-heading title"><%=t :popular_courses %></h2>
 			</div>
 
-			<% @courses.each do |course| %>
-				<%= render partial: "courses/course", locals: { course: course } %>
+			<div class="row">
+				<% @courses.each do |course| %>
+					<div class="col-md-6">
+						<%= render partial: "courses/course", locals: { course: course } %>
+					</div>
 			<% end %>
 		</div>
 	</div>	

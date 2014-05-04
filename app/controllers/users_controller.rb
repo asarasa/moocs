@@ -2,6 +2,10 @@ class UsersController < ApplicationController
 	before_action :authorize, except: [:new, :create]
 	before_action :unauthorize, only: [:new, :create]
 
+	def index
+		@users = User.all.entries
+	end
+
 	def new
 		@user = User.new
 	end
@@ -31,11 +35,19 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@user = current_user
+		if !params[:id].nil? && current_user.admin
+			@user = User.find(params[:id])
+		else
+			@user = current_user
+		end
 	end
 
 	def update
-	  @user = current_user
+		if !params[:id].nil? && current_user.admin
+			@user = User.find(params[:id])
+		else
+	  	@user = current_user
+	  end
 		
 		respond_to do |format|
 		if @user.update(user_params)

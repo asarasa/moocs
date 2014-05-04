@@ -1,6 +1,8 @@
 class Course
   include Mongoid::Document
   include Mongoid::Paperclip
+
+  CATEGORIES = %w(art biology business chemistry csia csse csss cst education)
   
   field :name, type: String
   field :abstract, type: String
@@ -12,6 +14,7 @@ class Course
   field :end_date, type: DateTime , default: DateTime.now + 1
   field :forumpermision , type: Boolean
   field :tags, type: Array
+  field :category, type: String
 
   has_mongoid_attached_file :banner
 
@@ -21,6 +24,7 @@ class Course
  
   validates_uniqueness_of :name
   validates_presence_of :name, :abstract, :desc, :start_date, :end_date
+  validates :category, inclusion: { in: CATEGORIES,  message: "%{value} is not a valid category" }
   validates_attachment_content_type :banner, :content_type => ["image/jpg", "image/jpeg", "image/png"]
   validate :end_date_cannot_be_smaller_than_start_date
 

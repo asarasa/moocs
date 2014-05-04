@@ -50,7 +50,7 @@ private
     if current_user.nil?
       redirect_to login_url, alert: "Not authorized"
     else    
-      redirect_to root_url, alert: "You are not the teacher" if !@course.is?(current_user, 'teacher')
+      redirect_to root_url, alert: "You are not the teacher" if !@course.is?(current_user, 'teacher') && !current_user.admin
     end
   end  
 

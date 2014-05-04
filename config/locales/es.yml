@@ -51,6 +51,18 @@ es:
   popular_courses: "Cursos populares"
   #welcome#users
   lastest_users: "Últimos usuarios"
+  #model#course
+  course:
+    categories:
+      art: "Arte"
+      biology: "Biología y ciencias naturales"
+      business: "Administración de empresas"
+      chemistry: "Química"
+      csia: "Ciencias de la computación: Inteligencia artificial"
+      csse: "Ciencias de la computación: Ingeniería del software"
+      csss: "Ciencias de la computación: Sistemas y Seguridad"
+      cst: "Ciencias de la computación: Teoría"
+      education: "Educación"
 
   errors: &errors
     format:  '%{attribute} %{message}'
