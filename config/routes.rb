@@ -51,6 +51,7 @@ Moocs::Application.routes.draw do
 
     get 'lastest_users', to: 'welcome#users', as: 'lastest_users'
     get 'lastest_courses', to: 'welcome#courses', as: 'lastest_courses'
+    get 'lastest_courses/:category', to:'welcome#category', as: 'category'
     get 'join_course/:id', to: 'courses#join_course', as:'join_course'
 
     get 'user_courses', to: 'users#user_courses', as: 'user_courses'
@@ -62,6 +63,7 @@ Moocs::Application.routes.draw do
     get 'courses/:course_id/lectures/:id/del_resource/:resource_id', to:'lectures#delete_resource', as: 'del_resource'
 
     get 'search', to:'welcome#search', as: 'search'
+
 
     scope '/admin' do
       get "/", to: 'admin#index', as: 'admin' 
