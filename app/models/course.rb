@@ -12,8 +12,8 @@ class Course
   field :date_created, type: DateTime, default: DateTime.now
   field :start_date, type: DateTime, default: DateTime.now
   field :end_date, type: DateTime , default: DateTime.now + 1
+  field :active, type: Boolean, default: false
   field :forumpermision , type: Boolean
-  field :tags, type: Array
   field :category, type: String
 
   has_mongoid_attached_file :banner
@@ -47,6 +47,19 @@ class Course
 
   def is?(user, type)
     members.exist_by_type?(user, self, type)
+  end
+
+  def change_state
+    if (self.active)
+      self.active = false
+    else
+      self.active = true
+    end
+    if self.save
+      true
+    else
+      false
+    end
   end
 
   private

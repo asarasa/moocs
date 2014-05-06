@@ -16,6 +16,7 @@ class User
   has_many :tests
   
   has_mongoid_attached_file :photo
+  validates_attachment_content_type :photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 
   validates_presence_of :name, :lastname, :email, :password_digest
   validates :name, :lastname, length: { minimum: 3 }
@@ -32,6 +33,12 @@ class User
 
   def courses_by(type)
     Course.in(id: members.by_user(self.id, type).map(&:course_id))
+  end
+
+  def active_courses
+    courses = []
+    courses += (Course.in(id: members.by_user(self.id, 'student').map(&:course_id)).where(active: true)).to_a
+    courses += (Course.in(id: members.by_user(self.id, 'teacher').map(&:course_id))).to_a
   end
 
   before_validation do

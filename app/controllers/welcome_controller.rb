@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
 
 	def index
 		@mainpage = true
-		@courses = Course.desc(:start_date)
+		@courses = Course.desc(:start_date).where(active: true)
 	end
 
 	def users
@@ -10,7 +10,7 @@ class WelcomeController < ApplicationController
 	end
 
 	def courses
-		all_courses = Course.desc(:date_created)
+		all_courses = Course.desc(:date_created).where(active: true)
 		if current_user
 			@courses = all_courses - current_user.courses
 		else
@@ -20,7 +20,7 @@ class WelcomeController < ApplicationController
 
 	def category
 		@category = params[:category];
-		@courses = Course.where(category: @category)
+		@courses = Course.where(category: @category).where(active: true)
 		@category = I18n.t("course.categories.#{@category}")
 		logger.debug @courses.length
 	    respond_to do |format|

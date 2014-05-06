@@ -56,39 +56,6 @@ class LessonsController < ApplicationController
     end
   end    
 
-  def use_resource
-    ok = false;
-    if (@lecture.resources.include?(@resource))
-      ok = false;
-    else
-      @lecture.resources << @resource
-      if @lecture.save
-        ok = true
-      else
-        ok = false
-      end
-    end
-
-    respond_to do |format|
-      if ok
-        format.json { render json: ok, notice: 'The resource was successfully added.' }
-      else
-        format.json { render json: ok, notice: 'Error' }
-      end
-    end
-
-    # if (@lecture.resources.include?(@resource))
-    #   redirect_to course_lecture_path(@course, @lecture), notice: 'The resource is already in the lecture.'
-    # else
-    #   @lecture.resources << @resource
-    #   if @lecture.save
-    #     redirect_to course_lecture_path(@course, @lecture), notice: 'The resource was successfully added.'
-    #   else
-    #     redirect_to course_lecture_path(@course, @lecture), notice: 'Error.'
-    #   end
-    # end
-  end
-
   # POST /lectures
   # POST /lectures.json
   def create

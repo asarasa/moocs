@@ -1,5 +1,10 @@
 <div class="card promo">
 	<div class="card-top">
+		<% if course.is?(current_user, 'teacher') %>
+			<span class="label label-success label-card"><%=t :teacher %></span>
+		<% elsif course.is?(current_user, 'student') %>
+			<span class="label label-warning label-card"><%=t :student %></span>			
+		<% end %>
 		<% if course.banner_file_name.nil? %>
 			<%= image_tag 'default-banner.jpg', :height => '140px',:width => "100%", :alt => course.name %>
 		<% else %>

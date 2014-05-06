@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :join_course, :edit, :update, :destroy]
+  before_action :set_course, only: [:change_state, :show, :join_course, :edit, :update, :destroy]
   before_action :authorize, only: [:join_course, :edit, :new, :create, :update, :destroy]
-  before_action :authorize_teacher, only: [:edit, :update, :destroy]
+  before_action :authorize_teacher, only: [:change_state, :edit, :update, :destroy]
 
 
   # GET /courses
@@ -46,6 +46,16 @@ class CoursesController < ApplicationController
     end
   end
 
+  def change_state
+    respond_to do |format|
+      if @course.change_state
+        format.html { redirect_to @course, notice: 'State was successfully changed.' }
+      else
+        format.html { redirect_to @course, notice: 'State was not successfully changed.' }
+      end
+    end
+  end   
+
 
   def join_course
     if @course.add_member(current_user, "student")
@@ -68,7 +78,6 @@ class CoursesController < ApplicationController
   # POST /courses.json
   def create
     @course = Course.new(course_params)
-    @course.tags = params[:course][:tags].split(";")
 
     respond_to do |format|
       if @course.add_member(current_user, "teacher") && @course.save
@@ -109,7 +118,11 @@ class CoursesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
-      @course = Course.find(params[:id])
+      if !params[:id].nil?
+        @course = Course.find(params[:id])
+      else
+        @course = Course.find(params[:course_id])
+      end      
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

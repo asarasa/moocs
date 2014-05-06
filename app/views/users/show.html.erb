@@ -16,9 +16,9 @@
   </div>
   <div class="col-md-8">
     <div class="card">
-      <h2 class="card-heading title">Courses <small>Listing <%= @user.courses.length %> courses</small></h2>
+      <h2 class="card-heading title">Courses <small>Listing <%= @user.active_courses.length %> courses</small></h2>
     </div>
-    <% @user.courses.each_with_index do |course, index| %>
+    <% @user.active_courses.each_with_index do |course, index| %>
     
       <% if (index + 1) % 2 == 1 || index == 0 %>
         <div class="row">
