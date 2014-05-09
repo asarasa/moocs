@@ -22,6 +22,16 @@
 en:
   #General
   show_course: "Show course"
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%b %d"
+      long: "%B %d, %Y"
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"  
+      short: "%b %d %H:%M"
+      long: "%B %d, %Y %H:%M"
   #Actions
   back: "Back"
   delete: "Delete"

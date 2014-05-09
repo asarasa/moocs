@@ -1,5 +1,7 @@
 /* Card style from http://aozora.github.io/bootplus */
 
+//= depend_on_asset "intro-header.png"
+
 .card {
   padding-top: 20px;
   margin: 10px 0 20px 0;
@@ -25,7 +27,7 @@
   padding-top: 0;
   overflow: hidden;
   vertical-align: top;
-  background: url(image-path("intro-header.png")) no-repeat center center; 
+  background: url(asset_path("intro-header.png")) no-repeat center center; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

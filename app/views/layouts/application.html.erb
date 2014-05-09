@@ -4,7 +4,6 @@
   <title>Moocs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -21,8 +20,8 @@
           	</ul>
           	<ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=t :language %> <b class="caret"></b></a>
-                <ul class="dropdown-menu">
+                <a id="dropdown-language" class="dropdown-toggle" data-toggle="dropdown" href="#"><%=t :language %> <b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-language">
                   <li><%= link_to t(:spanish), index_path("es") %></li>
                   <li><%= link_to t(:english), index_path("en") %></li>
                 </ul>
@@ -34,8 +33,8 @@
                 <li><%= link_to current_user.email, show_profile_path %></li>
                 <li><%= link_to t(:my_courses), user_courses_path %></li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=t :resources %> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
+                  <a id="dropdown-resources" class="dropdown-toggle" data-toggle="dropdown"><%=t :resources %> <b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-resources">
                       <li><%= link_to t(:my_resources), user_resources_path %></li>
                       <li><%= link_to t(:my_tests), user_tests_path %></li>
                     </ul>
@@ -50,7 +49,7 @@
       </div>
     </div>
 
-	<div class="container">	   
+	<div id="notice" class="container">	   
 		<% flash.each do |name, msg| %>
 		<div class="alert alert-default">
 			<%= content_tag :div, msg, id: "flash_#{name}" %>
@@ -69,8 +68,7 @@
     </div>
   </footer>
 
-
-<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
-<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 </body>
 </html>

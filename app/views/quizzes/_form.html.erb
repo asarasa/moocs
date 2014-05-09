@@ -1,8 +1,10 @@
-<%= form_for   @quiz do |f| %>
-  <% if @quiz.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
 
+<%= form_for @quiz do |f| %>
+  <div class="form">
+   
+      <% if @quiz.errors.any? %>
+        <div id="error_explanation">
+        <h2><%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
       <ul>
       <% @quiz.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -10,27 +12,96 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="form-group">
-    <%= f.label :question %>
-    <%= f.text_area :question, :class => 'form-control' %>
-  </div>
+    <%if !@course.nil?%>
+      <input type='hidden' name='course_id' value='<%=@course%>'></input>
+      <input type='hidden' name='lecture_id' value='<%=@lecture%>'></input>
+    <% end %>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :question %>
+        <%= f.text_area :question, :class => 'form-control' %>
+      </div>
+      
+       <div class="field">
+        <%= label "answer","answer" %>
+        <%= text_field "answer","answer" %>
+        <%= label "valid","valid" %>
+        <%= check_box "valid" ,"valid"%>
+        <a id= "add_answer" onclick ="addToTable()" class ="btn btn-default right">add answer</a>
+      </div>
+     </div>
+     <div class="col-md-4">
+       <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Answer</th>
+            <th>Valid</th>
+            <th>Delete</th>
+          </tr>
+          </thead>
+        <tbody>
+          <%if !@quiz.nil?%>
+            <%@quiz.answers.each_with_index do |l,index|%>              
+              <tr id='<%=l.answer + l.valid.to_s%>'>
+                <td>
+                  <input type='hidden'  name='array[<%=index%>][answer]' value='<%=l.answer%>'><%=l.answer%></input>
+                </td>
+                <td>
+                  <input type='hidden' name='array[<%=index%>][valid]' value='<%=l.valid %>'></input>
+                <%if l.valid%>
+                  <span class='glyphicon glyphicon-ok'></span>
+                <%else%>
+                  <span class='glyphicon glyphicon-remove'></span>
+                <%end%>
+                </td>
+                <td>
+                  <a onclick="removeNode('<%=l.answer + l.valid.to_s%>')" class='btn glyphicon glyphicon-circle-arrow-left'></a>
+                </td>
+              </tr>
+            <%end%>
+          <%end%>
+        </tbody>
+      </table>
+     </div>
+    </div>
+</div>
 
-  <div class="checkbox">
-    <%= f.label :multianswer %>
-    <%= f.check_box :multianswer %>
-  </div>
+<script>
+  var index=100
+  function addToTable() {
+   var answer = document.getElementById('answer_answer');
+   var valid = document.getElementById('valid_valid');
+   var table = document.getElementsByTagName("tbody")[0];
+   var icon;
+   if (valid.checked){
+    icon=("glyphicon glyphicon-ok")
+   } else {
+    icon=("glyphicon glyphicon-remove")
+   }
+    var tmp = (" <tr id='"+answer.value+valid.checked.toString()+"'><td><input type='hidden'  name='array["+index+"][answer]' value='"+answer.value+"'>"+answer.value+" </input></td><td><input type='hidden' name='array["+index+"][valid]' value='"+valid.checked+"'></input><span class='"+icon+"'></span></td><td><a onclick=\"removeNode('"+answer.value+valid.checked.toString()+"')\" class='btn glyphicon glyphicon-circle-arrow-left'></a></td></tr>");
+    table.innerHTML += tmp;
+    index++;
+  }
+  
+  function removeNode(node) {
+    var button = document.getElementById(node);
+    var table = document.getElementsByTagName("tbody")[0];
+    table.removeChild(button);
+   
+  }
+</script>
 
-  <div class="form-group">
-    <%= f.label :numanswers, "Number of answers" %>
-    <%= f.text_field :numanswers, :class => 'form-control' %>
-  </div>
+
+<div class="actions">
+<%= link_to 'Back',  user_tests_path, :class => 'btn btn-default' %>
+<%= f.submit "Submit", :class => 'btn btn-primary right' %>
 
 
-  <div class="actions center">
-    <%= f.submit "Submit", :class => 'btn btn-lg btn-primary' %>
-  </div>
 <% end %>
+ </div>

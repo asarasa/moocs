@@ -38,6 +38,7 @@ gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 gem 'lazy_high_charts'
 
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem 'aws-sdk'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'

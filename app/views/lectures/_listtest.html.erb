@@ -1,0 +1,10 @@
+<% if listtest.active %>
+	<span data-testinlecture-id="<%= listtest.id %>" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>" id="testinlecture_active" class="glyphicon glyphicon-eye-open"></span>
+<% else %>
+	<span data-testinlecture-id="<%= listtest.id %>" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>" id="testinlecture_inactive" class="glyphicon glyphicon-eye-close"></span>
+<% end %>
+
+<span style="padding-left: 10px">
+	<%= listtest.test.name %>
+</span>
+<%= link_to "", solve_path(@course, @lecture, listtest), remote: true, :class => "glyphicon glyphicon-chevron-right right"%>

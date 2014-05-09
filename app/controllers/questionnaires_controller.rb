@@ -1,5 +1,8 @@
 class QuestionnairesController < ApplicationController
-  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy]
+  before_action :set_questionnaire, only: [:solve,:show, :edit, :update, :destroy]
+  before_action :set_course, only: []
+  before_action :set_member, only: []
+  before_action :set_lesson, only: []
 
   # GET /questionnaires
   # GET /questionnaires.json
@@ -10,6 +13,19 @@ class QuestionnairesController < ApplicationController
   # GET /questionnaires/1
   # GET /questionnaires/1.json
   def show
+  end
+  
+  def solve
+    if !params[:answer].nil?
+      @answer = params[:answer]
+    else
+      @answer = ""
+    end
+    @correct = @questionnaire.answer
+    respond_to do |format|
+          format.js {}
+          format.json {}
+    end  
   end
 
   # GET /questionnaires/new
@@ -64,7 +80,13 @@ class QuestionnairesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_questionnaire
-      @questionnaire = Questionnaire.find(params[:id])
+      if !params[:id].nil?
+        @questionnaire = Test.find(params[:id])
+      elsif !params[:questionnaire_id].nil?
+        @questionnaire = Test.find(params[:questionnaire_id])
+      else
+        @questionnaire = Test.find(params[:test_id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

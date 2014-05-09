@@ -1,0 +1,68 @@
+<div class="card" style="margin-top:2px">
+	<h2 class="card-heading lg"><%= @lesson.name %>
+		<% if @course.is?(current_user, "teacher") %>
+			<small>
+				<%= link_to :delete, [@course,@lecture,@lesson], method: :delete, data: { confirm: 'Are you sure?' }, :class => "label label-danger right" %>
+				<%= link_to :edit, edit_course_lecture_lesson_path(@course, @lecture, @lesson), :class => "label label-warning right" %>
+			</small>
+		<% end %>
+	</h2>
+	<div class="card-body">
+		<%=raw @lesson.description %>
+	</div>
+	<div class="bs-component">
+		<ul class="nav nav-tabs card-heading">
+			<% @lesson.resources.each_with_index do |resource, index| %>
+				<% if index == 0 %>
+					<li class="active">
+				<% else %>
+					<li>
+				<% end %>
+					<%= render partial: "lessons/resource", locals: { resource: resource } %>
+				</li>
+			<% end %>
+      <% @lesson.tests.each_with_index do |test, index| %>
+				<% if index == 0 and @lesson.resources.to_a.empty?%>
+					<li class="active">
+				<% else %>
+					<li>
+				<% end %>
+					<%= render partial: "lessons/test", locals: { test: test } %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+</div>
+<div id="tabResources" class="tab-content">
+	<% @lesson.resources.each_with_index do |resource, index| %>
+		<% if index == 0 %>
+			<div class="tab-pane fade active in" id="<%=resource.id%>">
+		<% else %>
+			<div class="tab-pane fade in" id="<%=resource.id%>">
+		<% end %>
+				<% if resource.type.include? "video" %>
+					<%= render partial: "resources/video", locals: { resource: resource } %>
+				<% elsif resource.type.include? "audio" %>
+					<%= render partial: "resources/audio", locals: { resource: resource } %>
+				<% elsif resource.type.include? "pdf" %>        
+					<%= render partial: "resources/pdf", locals: { resource: resource } %>
+				<% else %>
+					<%= render partial: "resources/text", locals: { resource: resource } %>
+				<% end %>		
+		</div>
+	<% end %>
+   
+   <% @lesson.tests.each_with_index do |test, index| %> 
+		<% if index == 0 and  @lesson.resources.to_a.empty?%>
+        <div class="tab-pane fade active in" id="<%=test.id%>">
+		<% else %>
+			<div class="tab-pane fade in" id="<%=test.id%>">
+		<% end %>
+				<% if test._type.include? "Quiz" %>
+					<%= render partial: "tests/quiz", locals: { test: test } %>
+        <% else %>	
+          <%= render partial: "tests/questionnaire", locals: { test: test } %>
+				<% end %>		
+		</div>
+	<% end %>
+</div>

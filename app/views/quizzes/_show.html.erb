@@ -1,12 +1,12 @@
 <div class="form">
 
-<%= form_for [@test],url: quiz_solve_path(@test) do |f| %>
- <% if @test.errors.any? %>
+<%= form_for [test],url: quiz_solve_path(test) do |f| %>
+ <% if test.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@test.errors.count, "error") %> prohibited this quiz from being saved:</h2>
+      <h2><%= pluralize(test.errors.count, "error") %> prohibited this quiz from being saved:</h2>
 
       <ul>
-      <% @test.errors.full_messages.each do |msg| %>
+      <% test.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -15,19 +15,19 @@
 
   <div class="question">
     <h3>Question:</h3>
-    <%=raw @test.question %>
+    <%=raw test.question %>
   </div>
   
   <div class="answers">
     <h3>Answers:</h3>
      <% index=0 %>
-    <% @test.answers.each do |answer| %>
+    <% test.answers.each do |answer| %>
       <%= f.fields_for "answer", index:answer do |answers_form|%>
         
         <div class="checkbox">
           <%= answers_form.label :answers , answer %>
   
-          <% if @test.multianswer == true %>
+          <% if test.multianswer == true %>
             <%= answers_form.check_box :results %> <br>
           <%else%>
             <%= f.radio_button :results, index %> <br>

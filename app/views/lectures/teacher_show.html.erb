@@ -1,0 +1,67 @@
+<div class="card">
+  <h2 class="card-heading lg"><%= @lecture.name %> <small><%= link_to 'Change to student view', course_lecture_path(@course, @lecture, :student => "true") %></small></h2>
+  <div class="card-body">
+    <p><%=raw @lecture.description %></p>
+  </div>
+</div>
+
+<div class="modal fade select_tests" role="dialog" aria-labelledby="select_tests" aria-hidden="true">
+ <div class="modal-dialog modal-lg">
+   <div class="modal-content">
+     <%= form_for [@course, @lecture], url:course_lecture_selected_tests_path(@course, @lecture) do |f| %>
+      <div class="modal-header">
+        <h1>Select tests</h1>   
+      </div>
+      <div class="modal-body">      
+          <% @user_tests.each do |test| %>
+            <div class="form-group">
+             <input type="checkbox" id="<%=test.id.to_s + "select" %>" name="tests[]" value="<%=test.id%>" ><%=test.name%></input><br>
+            </div>
+           <% end %>        
+       </div>
+       <div class="modal-footer">
+         <div class="actions">
+          <%= f.submit "Ok", :class => 'btn btn-primary right' %>
+         </div>
+       </div>
+     <% end %> 
+     </div> 
+   </div>              
+</div>
+  
+<div class="row">
+	<div class="col-md-4">
+		<div class="bs-component">
+      <div id="lessons" class="list-group" >
+		    <% @lessons.each_with_index do |lesson, index| %>
+		    	<div id="<%= lesson.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
+						<%= render partial: 'listlesson', object: lesson, lecture: @lecture, course: @course %>
+		      </div>
+		    <% end %>
+        <% @testinlectures.each do |testinlecture| %>
+		    	<div id="<%= testinlecture.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
+						<%= render partial: 'listtest', object: testinlecture, lecture: @lecture, course: @course %>
+		      </div>
+		    <% end %>
+			</div>
+		</div>
+	</div>
+	<div id="lesson" class="col-md-8">
+		<% if !@lesson.nil? %>
+			<%= render @lesson %>
+		<% else %>
+			<div class="card" style="margin-top:2px">
+				<h2 class="card-heading lg">Crear lecciones</h2>
+				<div class="card-body">
+					<p>Para crear lecciones haz click en "Nueva lección".</p>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+
+<%= link_to 'Back', course_lectures_path(@course), :class => 'btn btn-default' %>
+<%= link_to 'New lesson', new_course_lecture_lesson_path(@course, @lecture), :class => 'btn btn-success right' %>
+<%= link_to 'New quiz', new_quiz_path(:course_id => @course, :lecture_id => @lecture), :class => 'btn btn-success right' %>
+<a class="btn btn-success right" data-toggle="modal" data-target=".select_tests">Select tests</a>

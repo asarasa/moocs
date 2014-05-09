@@ -1,12 +1,13 @@
-<h3>Course: <%= @course.name %></h3>
-<div class="form">
-	<h2 class="form-signin-heading">Editing lesson</h2>
+<div class="card">
+  <h2 class="card-heading lg"><%= @course.name %> <small><%= @lecture.name %></small></h2>
+  <div class="card-body">
+		<h3><%=t :edit_lesson %></h3>
+  </div>
+</div>
+
 
 <%= render 'form' %>
 
-</div>
-
 <div class="buttons">
-	<%= link_to 'Back', course_lessons_path(@course), :class => 'btn btn-default left' %>
-	<%= link_to 'Show', course_lesson_path(@course, @lesson), :class => 'btn btn-info right' %>
+	<%= link_to 'Back', course_lecture_path(@course, @lecture), :class => 'btn btn-default' %>
 </div>
