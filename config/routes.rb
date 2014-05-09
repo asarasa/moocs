@@ -1,31 +1,36 @@
 Moocs::Application.routes.draw do
 
-  
-  
-
+  mount Ckeditor::Engine => '/ckeditor'
   scope "/:locale" do
 
-  resources :tests
-  resources :homeworks
-  resources :quizzes do
-      match "new_answers", :to => "quizzes#new_answers", :as => "new_answers", :via => [:get, :post, :patch]
-      match "solve", :to => "quizzes#solve", :as => "solve", :via => [:get, :post, :patch]
-      get 'add_answers', to:'quizzes#add_answers', as: 'add_answers'      
-      get 'see_answers', to:'quizzes#see_answers', as: 'see_answers'  
-  end
-  resources :questionnaires
+    resources :tests
+    resources :homeworks
+    resources :quizzes do
+        match "new_answers", :to => "quizzes#new_answers", :as => "new_answers", :via => [:get, :post, :patch]
+        match "solve", :to => "quizzes#solve", :as => "solve", :via => [:get, :post, :patch]
+        get 'add_answers', to:'quizzes#add_answers', as: 'add_answers'      
+        get 'see_answers', to:'quizzes#see_answers', as: 'see_answers'  
+    end
+    resources :questionnaires
   
     resources :users
     resources :sessions
 
     resources :courses do
       get 'tracking', to:'courses#tracking', as: 'tracking'  
+      get 'change_state', to:'courses#change_state', as: 'change_state'
       resources :topics do
         resources :messages do
           get 'reply', to:'messages#reply', as: 'reply' 
         end
       end
-      resources :lessons
+      resources :lectures do
+        resources :lessons do
+          get "select_lesson", :to => "lessons#select_lesson", :as => "select_lesson"
+        end
+        match "change_order", :to => "lessons#change_order", :as => "change_order", :via => [:post]
+        match "change_state", :to => "lessons#change_state", :as => "change_state", :via => [:post]
+      end
     end
 
     resources :resources do
@@ -47,18 +52,19 @@ Moocs::Application.routes.draw do
 
     get 'lastest_users', to: 'welcome#users', as: 'lastest_users'
     get 'lastest_courses', to: 'welcome#courses', as: 'lastest_courses'
+    get 'lastest_courses/:category', to:'welcome#category', as: 'category'
     get 'join_course/:id', to: 'courses#join_course', as:'join_course'
 
     get 'user_courses', to: 'users#user_courses', as: 'user_courses'
     get 'user_resources', to: 'users#user_resources', as:'user_resources'
     get 'user_tests', to: 'users#user_tests', as:'user_tests'
-    match 'photo', :to => 'users#photo',  :as =>'photo', :via => [:get, :post, :patch]
     
-    get 'courses/:course_id/lessons/:id/view_resource/:resource_id', to:'lessons#view_resource', as: 'view_resource'
-    get 'courses/:course_id/lessons/:id/use_resource/:resource_id', to:'lessons#use_resource', as: 'use_resource'
-    get 'courses/:course_id/lessons/:id/del_resource/:resource_id', to:'lessons#delete_resource', as: 'del_resource'
+    get 'courses/:course_id/lectures/:id/view_resource/:resource_id', to:'lectures#view_resource', as: 'view_resource'
+    get 'courses/:course_id/lectures/:id/use_resource/:resource_id', to:'lectures#use_resource', as: 'use_resource'
+    get 'courses/:course_id/lectures/:id/del_resource/:resource_id', to:'lectures#delete_resource', as: 'del_resource'
 
     get 'search', to:'welcome#search', as: 'search'
+
 
     scope '/admin' do
       get "/", to: 'admin#index', as: 'admin' 

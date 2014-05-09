@@ -11,5 +11,3 @@ $("#datetimepicker_start").on("change.dp",function (e) {
 $("#datetimepicker_end").on("change.dp",function (e) {
    $('#datetimepicker_start').data("DateTimePicker").setEndDate(e.date);
 });
-
-tinymce.init({selector:'textarea'});

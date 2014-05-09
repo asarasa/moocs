@@ -1,14 +1,16 @@
 <% if @courses.empty? %>
-	<h3 style="text-align:center">No search results.</h3>
-<% else %>
-	<div class="page-header">
-		<h2>Search results <small>for <%= @searchterm %></small></h2>
+	<div class="card">
+		<h2 class="card-heading title center"><%=t :no_search_results %></h2>
 	</div>
-	<% @courses.each do |course| %>
-		<div class="result">
-			<h3><%= course.name %></h3>
-			<p><%= course.abstract %></p>	
-			<%= link_to "Show course", course_path(course.id), :class => "btn btn-primary" %>
-		</div>
-	<% end %>
+<% else %>
+	<div class="card">
+		<h2 class="card-heading title center"><%=t :search_results %> <small>for <%= @searchterm %></small></h2>
+	</div>
+	<div class="row">
+		<% @courses.each do |course| %>
+			<div class="col-md-4">
+				<%= render partial: "courses/course", locals: { course: course } %>
+			</div>
+		<% end %>
+	</div>
 <% end %>

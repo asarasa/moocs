@@ -1,0 +1,40 @@
+<%= form_for [@course, @lecture] do |f| %>
+  <% if @lecture.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lecture.errors.count, "error") %> prohibited this lecture from being saved:</h2>
+
+      <ul>
+      <% @lecture.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, :class => 'form-control' %>
+  </div>
+  <div class="form-group" data-no-turbolink>
+    <%= f.label :description, "Description" %><br>
+    <%= f.cktext_area :description %>
+  </div>
+  <div class="form-group">
+    <%= f.label :start_date, "Start date" %><br>
+    <div class='input-group date' id='datetimepicker_start'>
+
+      <%= f.datetime_field :start_date, :value => @lecture.start_date_formatted, :class => 'form-control' %>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+    </div>
+  </div>  
+  <div class="form-group">
+    <%= f.label :end_date, "End date" %><br>
+    <div class='input-group date' id='datetimepicker_end'>    
+      <%= f.datetime_field :end_date, :value => @lecture.end_date_formatted, :class => 'form-control' %>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+    </div>
+  </div>    
+  <div class="actions">
+    <%= f.submit "Submit", :class => 'btn btn-lg btn-primary btn-block ' %>
+  </div>
+<% end %>

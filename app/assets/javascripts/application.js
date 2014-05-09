@@ -14,12 +14,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap.min
 //= require turbolinks
 //= require moment.min
-//= require bootstrap.min
 //= require bootstrap-datetimepicker.min
-//= require forms
 // require highcharts/highcharts                                                           
 // require highcharts/highcharts-more                                                         
 // require highcharts/highstock
 //= require draganddrop
+//= require lessons
+//= require ckeditor/override
+//= require ckeditor/init
+//= require forms

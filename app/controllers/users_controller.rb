@@ -2,6 +2,10 @@ class UsersController < ApplicationController
 	before_action :authorize, except: [:new, :create]
 	before_action :unauthorize, only: [:new, :create]
 
+	def index
+		@users = User.all.entries
+	end
+
 	def new
 		@user = User.new
 	end
@@ -16,14 +20,6 @@ class UsersController < ApplicationController
 			render "new"
 		end
 	end
-
-  def photo
-    current_user.photo = params[:photo][:photo]
-    if current_user.save
-      redirect_to show_profile_path
-    end
-  end
-	
   
   def user_courses
 	end
@@ -39,11 +35,19 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@user = current_user
+		if !params[:id].nil? && current_user.admin
+			@user = User.find(params[:id])
+		else
+			@user = current_user
+		end
 	end
 
 	def update
-	  @user = current_user
+		if !params[:id].nil? && current_user.admin
+			@user = User.find(params[:id])
+		else
+	  	@user = current_user
+	  end
 		
 		respond_to do |format|
 		if @user.update(user_params)
@@ -62,9 +66,9 @@ private
 
     if current_user.nil? # Guest
       # Remove all keys from params[:user] except :email, :password, and :password_confirmation
-      params.require(:user).permit :name, :lastname, :email, :password, :password_confirmation
+      params.require(:user).permit :name, :lastname, :email, :photo, :password, :password_confirmation
     else  
-      params.require(:user).permit :name, :lastname, :email, :password, :password_confirmation		
+      params.require(:user).permit :name, :lastname, :email, :photo, :password, :password_confirmation		
 
     #elsif current_user.has_role :admin
     #  params.require(:user).permit! # Allow all user parameters

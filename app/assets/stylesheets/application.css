@@ -25,6 +25,12 @@ body {
   background-color: #EFEFEF;
 }
 
+img.desaturate { 
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
 .alert {
   text-align: center;
   background-color: #eeeeee;
@@ -110,11 +116,11 @@ body {
 }
 
 
-.list-group-item {
+#lessons .list-group-item {
   cursor: move;
 }
 
-#list-group .list-group-item.moving {
+#lessons .list-group .list-group-item.moving {
   opacity: 0.25;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
@@ -130,4 +136,14 @@ body {
   /* Required to make elements draggable in old WebKit */
   -khtml-user-drag: element;
   -webkit-user-drag: element;
+}
+
+.main-color {
+  color: #18bc9c;
+}
+
+.label-card {
+  float: right;
+  position:absolute;
+  margin:10px 10px 10px 0;
 }

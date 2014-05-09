@@ -1,0 +1,36 @@
+<div class="card">
+  <h2 class="card-heading lg"><%= @lecture.name %> <small><%= link_to 'Change to student view', course_lecture_path(@course, @lecture, :student => "true") %></small></h2>
+  <div class="card-body">
+    <p><%=raw @lecture.description %></p>
+  </div>
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+		<div class="bs-component">
+      <div id="lessons" class="list-group" >
+		    <% @lessons.each_with_index do |lesson, index| %>
+		    	<div id="<%= lesson.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
+						<%= render partial: 'listlesson', object: lesson, lecture: @lecture, course: @course %>
+		      </div>
+		    <% end %>
+			</div>
+		</div>
+	</div>
+	<div id="lesson" class="col-md-8">
+		<% if !@lesson.nil? %>
+			<%= render @lesson %>
+		<% else %>
+			<div class="card" style="margin-top:2px">
+				<h2 class="card-heading lg">Crear lecciones</h2>
+				<div class="card-body">
+					<p>Para crear lecciones haz click en "Nueva lección".</p>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+
+<%= link_to 'Back', course_lectures_path(@course), :class => 'btn btn-default' %>
+<%= link_to 'New lesson', new_course_lecture_lesson_path(@course, @lecture), :class => 'btn btn-success right' %>

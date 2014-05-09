@@ -10,7 +10,6 @@
 	    <tr>
 	      <th>Name</th>
 	      <th>Type</th>
-	      <th>Url</th>
 	      <th></th>
 	      <th></th>
 	      <th></th>
@@ -22,22 +21,19 @@
 	      <tr>
 	        <td><%= resource.name %></td>
 	        <td>
-		      	<% if resource.type == "video" %>
+		      	<% if resource.type.include? "video" %>
 		      		<span class="glyphicon glyphicon-play"></span>
-		      	<% elsif resource.type == "audio" %>
+		      	<% elsif resource.type.include? "audio" %>
 		      		<span class="glyphicon glyphicon-headphones"></span>
-		      	<% elsif resource.type == "pdf" %>
+		      	<% elsif resource.type.include? "pdf" %>
 		      		<span class="glyphicon glyphicon-file"></span>
-		      	<% elsif resource.type == "text" %>
+		      	<% else %>
 		      		<span class="glyphicon glyphicon-pencil"></span>
 		      	<% end %>
 	        </td>
-	        <td><%= resource.url %></td>
 	        <td><%= link_to 'Show', resource %></td>
 	        <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
-          <td><%= link_to 'Add Test', resource_tests_path(resource)%></td>
 	        <td><%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' }%></td>
-         
       </tr>
 	    <% end %>
 	  </tbody>

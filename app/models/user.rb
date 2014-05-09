@@ -35,4 +35,14 @@ class User
     Course.in(id: members.by_user(self.id, type).map(&:course_id))
   end
 
+  def active_courses
+    courses = []
+    courses += (Course.in(id: members.by_user(self.id, 'student').map(&:course_id)).where(active: true)).to_a
+    courses += (Course.in(id: members.by_user(self.id, 'teacher').map(&:course_id))).to_a
+  end
+
+  before_validation do
+    self.email = email.downcase if attribute_present?("email")
+  end
+
 end

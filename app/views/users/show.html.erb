@@ -1,22 +1,40 @@
-<h1>Show profile</h1>
-
-<%= form_for(:photo, url: photo_path, :html => {:multipart => true}) do |f| %>
 <div class="row">
   <div class="col-md-4">
-    <h3><%= @user.name %></h3>
-    <h3><%= @user.email %></h3>
+    <div class="card profile">
+      <h2 class="card-heading lg"><%= @user.name + " " + @user.lastname %> <small>profile</small></h2>
+      <div class="avatar">
+        <% if @user.photo_file_name.nil? %>
+          <%= image_tag 'buddyicon.jpg' %>         
+        <% else %>
+          <%= image_tag @user.photo %>
+        <% end %>
+      </div>      
+      <div class="card-body">
+        <h4 align="center"><%= @user.email %></h4>
+      </div>
+    </div>  
   </div>
-  <div class="col-md-4">
-    <%if @user.photo_file_name==nil%>
-      <%= image_tag 'buddyicon.jpg', :class => "img-thumbnail", :size => "260x180" %>
-    <% else%>
-      <%= image_tag @user.photo.url, :class => "img-thumbnail", :size => "260x180" %>
+  <div class="col-md-8">
+    <div class="card">
+      <h2 class="card-heading title">Courses <small>Listing <%= @user.active_courses.length %> courses</small></h2>
+    </div>
+    <% @user.active_courses.each_with_index do |course, index| %>
+    
+      <% if (index + 1) % 2 == 1 || index == 0 %>
+        <div class="row">
+      <% end %>
+
+        <div class="col-md-6">
+          <%= render partial: "courses/course", locals: { course: course } %>
+        </div>
+
+      <% if index % 2 == 1 %>   
+        </div>
+      <% end %>
+    
     <% end %>
-    <%= f.file_field :photo %>
-    <%= f.submit "Upload" %>
   </div>
 </div>
-<% end %>
 
 <div class="buttons">
 	<%= link_to 'Back', root_url, :class => "btn btn-default left" %>

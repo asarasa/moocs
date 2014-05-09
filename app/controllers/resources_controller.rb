@@ -26,10 +26,9 @@ class ResourcesController < ApplicationController
   def create
     @resource = Resource.new(resource_params)
 
-    if @resource.type == "video" && @resource.url.include?("youtube")
-      @resource.url = @resource.url.match(/v=([^\/.]*)\&?|&/)[1]
-    end
     @resource.user = current_user
+
+    logger.debug @resource.file.content_type
 
     respond_to do |format|
       if @resource.save
@@ -75,6 +74,6 @@ class ResourcesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
-      params.require(:resource).permit(:name, :content, :type, :url)
+      params.require(:resource).permit(:name, :content, :file)
     end
 end

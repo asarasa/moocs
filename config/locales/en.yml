@@ -22,6 +22,16 @@
 en:
   #General
   show_course: "Show course"
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%b %d"
+      long: "%B %d, %Y"
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"  
+      short: "%b %d %H:%M"
+      long: "%B %d, %Y %H:%M"
   #Actions
   back: "Back"
   delete: "Delete"
@@ -51,6 +61,18 @@ en:
   popular_courses: "Popular courses"
   #welcome#users
   lastest_users: "Lastest users"
+  #model#course
+  course:
+    categories:  
+      art: "Art"
+      biology: "Biology and Natural Sciences"
+      business: "Business Administration"
+      chemistry: "Chemistry"
+      csia: "Computer Science: Artificial Intelligence"
+      csse: "Computer Science: Software Engineering"
+      csss: "Computer Science: Systems and Security"
+      cst: "Computer Science: Theory"
+      education: "Education"
 
   errors: &errors
     format:  '%{attribute} %{message}'
