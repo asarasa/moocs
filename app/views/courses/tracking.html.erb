@@ -4,7 +4,7 @@
   <div class="card-body">
       <%= high_chart("my_id4", @chart)  %>
       <%if @course.is?(current_user,"student")%>
-    <h4> Your grade in this course is <%=@grade%></h4>
+    <h4> Your grade in this course is <%=@grade.round(2)%></h4>
       <% end%>
   </div>
   <div class="card-footer">

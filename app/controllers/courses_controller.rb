@@ -23,22 +23,25 @@ def tracking
     @average=Array.new
     @max=Array.new
     @min=Array.new
-    @lt5 =Array.new
-    @b58=Array.new
-    @gt8=Array.new
     cinco= (@course.num_tests * 5)
     ocho= (@course.num_tests * 8)
+    @lt5 = Member.where(:type => 'student',:grade.lt => cinco).count
+    @b58 = Member.where(:type => 'student',:grade.lt => ocho,:grade.gte => cinco).count
+    @gt8 = Member.where(:type => 'student',:grade.gte => ocho).count
+    logger.debug(cinco)
+    logger.debug(ocho)
+    logger.debug( @lt5)
+    logger.debug( @b58)
+    logger.debug( @gt8)
       @lectures.each do |lecture|
         lecture.testinlectures.each do |testinlecture|
           @categories << Test.find(testinlecture.test).name
-          @average << Score.where(testinlecture: testinlecture).avg(:score)
-          @max << Score.where(testinlecture: testinlecture).max(:score)
-          @min << Score.where(testinlecture: testinlecture).min(:score)       
-          @lt5 << Member.where(:grade.lt => cinco).count
-          @b58 << Member.where(:grade.lt => ocho,:grade.gte => cinco).count
-          @gt8 << Member.where(:grade.gte => ocho).count
+          @average << Score.where(testinlecture: testinlecture).avg(:score).round(2)
+          @max << Score.where(testinlecture: testinlecture).max(:score).round(2)
+          @min << Score.where(testinlecture: testinlecture).min(:score).round(2)     
         end  
       end  
+
       if @course.is?(current_user,"teacher") 
         @chart = LazyHighCharts::HighChart.new('graph') do |f|
           f.title( :text=>"Course Statistics")
@@ -67,13 +70,13 @@ def tracking
                           textShadow: '0 0 3px black'
                       }})
           f.series(:type=> 'spline',:color => :blue ,:name=> 'Average', :data=>  @average)
-          f.series(:type=> 'pie',:name=> 'alumn average rattings', 
+          f.series(:type=> 'pie',:name=> 'alumn grade', 
           :data=> [
             {:name=> '<5', :y=> @lt5 , :color=> 'red'}, 
             {:name=> '5-8', :y=> @b58,:color=> 'blue'},
             {:name=> '8-10', :y=> @gt8,:color=> 'green'}
           ],
-            :center=> [40, 30], :size=> 100, :showInLegend => false,:allowPointSelect => true,
+            :center=> [20, 10], :size=> 80, :showInLegend => false,:allowPointSelect => true,
                       :dataLabels=> {:enabled=> false })
 
         end
