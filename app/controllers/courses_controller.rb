@@ -28,11 +28,6 @@ def tracking
     @lt5 = Member.where(:type => 'student',:grade.lt => cinco).count
     @b58 = Member.where(:type => 'student',:grade.lt => ocho,:grade.gte => cinco).count
     @gt8 = Member.where(:type => 'student',:grade.gte => ocho).count
-    logger.debug(cinco)
-    logger.debug(ocho)
-    logger.debug( @lt5)
-    logger.debug( @b58)
-    logger.debug( @gt8)
       @lectures.each do |lecture|
         lecture.testinlectures.each do |testinlecture|
           @categories << Test.find(testinlecture.test).name

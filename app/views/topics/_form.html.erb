@@ -10,22 +10,22 @@
       </ul>
     </div>
   <% end %>
-
+<div class="card">
+ <h1 class="card-heading lg">	Create a new topic	 </h1>
+      <div class="card-body">
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <h3><%= f.label :title %><br></h3>
+    <%= f.cktext_area :title %>
   </div>
-
-  <div class="form_row">
-    <label for="state">State:</label>
-      <br>      
-      <%= f.radio_button :state,"Opened" ,:checked => false %> 
-      <label>Open</label>
-      <br>
-      <%= f.radio_button :state, "Closed" ,:checked => false %> 
-      <label>Close</label>
+    <br>
+    <h4>Select open if everybody can create topics:</h4>    
+        <%= f.radio_button :state,"Opened" ,:checked => false ,:style => "margin-left: 60px"%> 
+      <label style="font-style:normal">Open</label>
+      <%= f.radio_button :state, "Closed" ,:checked => false ,:style => "margin-left: 60px" %> 
+      <label  style="font-style:normal">Close</label>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+        <%= link_to 'Back', course_topics_path(@course),class: 'btn btn-default ' %>
+        <%= f.submit "Create topic" ,class: 'btn btn-primary right' %>
+ </div>
+</div>
 <% end %>

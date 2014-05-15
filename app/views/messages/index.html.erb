@@ -1,38 +1,28 @@
-<h1>Listing messages</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>From</th>
-      <th>Date</th>
-      <th>Order</th>
-      <th>Title</th>
-      <th>Text</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @messages.each do |message| %>
-      <tr>
-        <td><%= message.from %></td>
-        <td><%= message.date %></td>
-        <td><%= message.order %></td>
-        <td><%= message.title %></td>
-        <td><%=raw message.text %></td>
+ <% @messages.each do |message| %>
+     <div class="card">
+      <h6 style="margin-right: 10px"class="right"><%= message.date.to_s(:db) %></h6>
+    	<h1 class="card-heading lg"><%= message.order%>.   <%= message.title %> </h1>
+        <div class="card-body">
+        <%= link_to 'Reply', course_topic_message_reply_path(@course,@topic,message),class: 'btn btn-success btn-sm right' %>
         <% if can_edit_message?(message) %>
-          <td><%= link_to 'Show', course_topic_message_path(@course,@topic,message) %></td>      
-          <td><%= link_to 'Edit', edit_course_topic_message_path(@course,@topic,message) %></td>
-          <td><%= link_to 'Reply', course_topic_message_reply_path(@course,@topic,message) %></td>
-          <td><%= link_to 'Destroy', [@course,@topic,message], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%end%>  
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
+          <%= link_to 'Edit', edit_course_topic_message_path(@course,@topic,message), class: 'btn btn-warning btn-sm right'  %>
+          <%= link_to 'Destroy', [@course,@topic,message], method: :delete,class: 'btn btn-danger btn-sm right', data: { confirm: 'Are you sure?' } %>
+        <%end%>
+        <div class="row">
+           <div align="center" class="col-md-2">
+             <%= image_tag 'buddyicon.jpg' ,height:"50%", width:"90%"%>    
+             <br>
+             <br>
+              <%= message.from %>          
+          </div>      
+          <div style="margin" class="col-md-10">
+            <%=raw message.text %>
+          </div>           
+        </div>
+       </div>
+</div>   
+<% end %> 
 <% if can_create_message? %>
-  <%= link_to 'New Message', new_course_topic_message_path(@course,@topic) %>
+    <%= link_to 'Back', course_topics_path(@course),class: 'btn btn-default ' %>
+    <%= link_to 'New Message', new_course_topic_message_path(@course,@topic),class: 'btn btn-primary right' %>
 <%end%>

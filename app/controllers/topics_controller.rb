@@ -29,14 +29,14 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
     @topic.creation_Date = DateTime.now
-    @topic.createBy = current_user.username
+    @topic.createBy = current_user.name
     @topic.nextmessage = 1
     @topic.messages = Array.new
     @course.topics << @topic
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to course_topic_path(@course,@topic), notice: 'Topic was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @topic }
+        format.html { redirect_to course_topics_path(@course), notice: 'Topic was successfully created.' }
+        format.json { head :no_content }
       else
         format.html { render action: 'new' }
         format.json { render json: topic.errors, status: :unprocessable_entity }
@@ -50,7 +50,7 @@ class TopicsController < ApplicationController
     
     respond_to do |format|
       if @topic.update(topic_params)
-        format.html { redirect_to course_topic_path(@course,@topic), notice: 'Topic was successfully updated.' }
+        format.html { redirect_to course_topics_path(@course), notice: 'Topic was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = @topic.messages
+    @messages = @topic.messages.order_by(:order.asc)
   end
 
   # GET /messages/1
@@ -36,13 +36,13 @@ class MessagesController < ApplicationController
   def create
     message = Message.new(message_params)
     message.date = DateTime.now
-    message.from = current_user.username
+    message.from = current_user.name
     message.order = @topic.nextmessage
     @topic.messages.push(message)
     @topic.nextmessage =  @topic.nextmessage+1
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to course_topic_message_path(@course,@topic,message), notice: 'Message was successfully created.' }
+        format.html { redirect_to course_topic_messages_path(@course,@topic), notice: 'Message was successfully created.' }
         format.json { render action: 'show', status: :created, location: @message }
       else
         format.html { render action: 'new' }
@@ -56,7 +56,7 @@ class MessagesController < ApplicationController
   def update
     respond_to do |format|
       if @message.update(message_params)
-        format.html { redirect_to course_topic_message_path(@course,@topic,@message), notice: 'Message was successfully updated.' }
+        format.html { redirect_to course_topic_messages_path(@course,@topic), notice: 'Message was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
