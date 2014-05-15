@@ -14,6 +14,11 @@
 						<%= render partial: 'listlessonstudent', object: lesson, lecture: @lecture, course: @course %>
 		      </div>
 		    <% end %>
+          <% @testinlectures.each do |testinlecture| %>
+		    	<div id="<%= testinlecture.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
+						<%= render partial: 'listteststudent', object: testinlecture, lecture: @lecture, course: @course %>
+		      </div>
+		    <% end %>
 			</div>
 		</div>
 	</div>

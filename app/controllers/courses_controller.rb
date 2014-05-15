@@ -15,36 +15,100 @@ class CoursesController < ApplicationController
   def show
   end
   
-   def tracking
+def tracking
     @course = Course.find(params[:course_id])
     @lectures = @course.lectures   
-    if is_teacher?
-      @chart = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title({ :text=>"Course Statistics"})
-      f.options[:xAxis][:categories] =  ["leccion1", "leccion2"]
-      f.labels(:items=>[:html=>"Course rattings", :style=>{:left=>"20px", :top=>"100px", :color=>"black"} ])      
-      f.series(:type=> 'column',:name=> 'Worst',:data=> [3,4])
-      f.series(:type=> 'column', :name=> 'Best',:data=> [7,9])
-      f.series(:type=> 'spline',:name=> 'Average', :data=> [4.5,5.7])
-      f.series(:type=> 'pie',:name=> 'alumn average rattings', 
-        :data=> [
-          {:name=> '<5', :y=> 98, :color=> 'red'}, 
-          {:name=> '5-8', :y=> 15,:color=> 'blue'},
-          {:name=> '8-10', :y=> 3,:color=> 'green'}
-        ],
-        :center=> [40, 30], :size=> 100, :showInLegend=> false)
-      end
-      render 'teacher_tracking'
-    else  
-     @chart = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title(:text => "Your course rating")
-      f.options[:xAxis][:categories] =  ["leccion1", "leccion2"]      
-      f.series(:type=> 'column',:name=> 'Your rating',:data=> [3,4])
-      f.series(:type=> 'column', :name=> 'Lecture Average',:data=> [7,9])
-      f.series(:type=> 'spline',:name=> 'Average', :data=> [4.5,5.7])
-     end  
+    @categories = Array.new
+    @score = Array.new
+    @average=Array.new
+    @max=Array.new
+    @min=Array.new
+    @lt5 =Array.new
+    @b58=Array.new
+    @gt8=Array.new
+    cinco= (@course.num_tests * 5)
+    ocho= (@course.num_tests * 8)
+      @lectures.each do |lecture|
+        lecture.testinlectures.each do |testinlecture|
+          @categories << Test.find(testinlecture.test).name
+          @average << Score.where(testinlecture: testinlecture).avg(:score)
+          @max << Score.where(testinlecture: testinlecture).max(:score)
+          @min << Score.where(testinlecture: testinlecture).min(:score)       
+          @lt5 << Member.where(:grade.lt => cinco).count
+          @b58 << Member.where(:grade.lt => ocho,:grade.gte => cinco).count
+          @gt8 << Member.where(:grade.gte => ocho).count
+        end  
+      end  
+      if @course.is?(current_user,"teacher") 
+        @chart = LazyHighCharts::HighChart.new('graph') do |f|
+          f.title( :text=>"Course Statistics")
+          f.options[:xAxis][:categories] = @categories
+          f.options[:yAxis][:max] = 10
+          f.series(:type=> 'column',:color => :red,:name=> 'Worst',:data=> @min, :dataLabels => {
+                      :enabled=> true, 
+                      color: '#FFFFFF',
+            align: 'center',
+                      x: 4,
+                      y: 10,
+                      style: {
+                          fontSize: '13px',
+                          fontFamily: 'Verdana, sans-serif',
+                          textShadow: '0 0 3px black'
+                      }})
+          f.series(:type=> 'column',:color => :green, :name=> 'Best',:data=> @max, :dataLabels => {
+                      :enabled => true, 
+                      color: '#FFFFFF',
+                      align: 'center',
+                      x: 4,
+                      y: 10,
+                      style: {
+                          fontSize: '13px',
+                          fontFamily: 'Verdana, sans-serif',
+                          textShadow: '0 0 3px black'
+                      }})
+          f.series(:type=> 'spline',:color => :blue ,:name=> 'Average', :data=>  @average)
+          f.series(:type=> 'pie',:name=> 'alumn average rattings', 
+          :data=> [
+            {:name=> '<5', :y=> @lt5 , :color=> 'red'}, 
+            {:name=> '5-8', :y=> @b58,:color=> 'blue'},
+            {:name=> '8-10', :y=> @gt8,:color=> 'green'}
+          ],
+            :center=> [40, 30], :size=> 100, :showInLegend => false,:allowPointSelect => true,
+                      :dataLabels=> {:enabled=> false })
+
+        end
+      else     
+         @member = Member.where(user: current_user, course: @course).first
+         @lectures.each do |lecture|
+          lecture.testinlectures.each do |testinlecture|
+            score = Score.where(testinlecture: testinlecture , member: @member)
+            if !score.empty?
+              @score << score.first.score
+            end  
+          end  
+        end  
+         @chart = LazyHighCharts::HighChart.new('graph') do |f|
+           f.title(:text => "Your course rating")
+           f.options[:xAxis][:categories] = @categories
+           f.options[:yAxis][:max] = 10
+           f.series(:type=> 'column',:data=> @score, :dataLabels => {
+                     :enabled=> true,
+                     color:'#FFFFFF',
+                     align: 'center',
+                      x: 4,
+                      y: 20,
+                      style: {
+                          fontSize: '13px',
+                          fontFamily: 'Verdana, sans-serif',
+                          textShadow: '0 0 3px black'
+                        }})       
+           f.series(:type=> 'spline',:color => :blue , :name=> 'Average', :data=> @average) 
+           f.series(:type=> 'spline',:color => :green , :name=> 'Best', :data=> @max) 
+           f.series(:type=> 'spline',:color => :red , :name=> 'Worst', :data=> @min) 
+         end 
+         @grade = @member.grade / @course.num_tests
     end
-  end
+ end
 
   def change_state
     respond_to do |format|

@@ -1,0 +1,18 @@
+<%= form_for [test], url:questionnaire_solve_path(test) ,remote:true do |f| %>
+<div class="card resource">
+	<h2 class="card-heading lg"><%= test.name %></h2>
+
+	<div class="card-body">
+   <div class="question">
+      <%=raw test.question %>
+    </div>
+    <div class="field">
+      <%= f.label :answer %><br>
+      <input type='text_area' id="answer" name="answer" %>
+    </div>
+    <div class="actions center">
+    <%= f.submit "Submit", :class => 'btn btn-primary' %>
+ </div>
+   </div>
+	</div>
+<%end%>

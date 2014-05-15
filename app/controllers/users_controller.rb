@@ -20,6 +20,17 @@ class UsersController < ApplicationController
 			render "new"
 		end
 	end
+
+  def photo
+    if params[:photo] != nil
+      current_user.photo = params[:photo][:photo]
+      if current_user.save
+        redirect_to show_profile_path
+      end   
+    end  
+     redirect_to show_profile_path
+  end
+	
   
   def user_courses
 	end

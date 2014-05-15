@@ -21,15 +21,24 @@
 					<%= render partial: "lessons/resource", locals: { resource: resource } %>
 				</li>
 			<% end %>
+      <% @lesson.tests.each_with_index do |test, index| %>
+				<% if index == 0 and @lesson.resources.to_a.empty?%>
+					<li class="active">
+				<% else %>
+					<li>
+				<% end %>
+					<%= render partial: "lessons/test", locals: { test: test } %>
+				</li>
+			<% end %>
 		</ul>
 	</div>
 </div>
 <div id="tabResources" class="tab-content">
 	<% @lesson.resources.each_with_index do |resource, index| %>
 		<% if index == 0 %>
-			<div class="tab-pane fade active in" id="<%= resource.id %>">
+			<div class="tab-pane fade active in" id="<%=resource.id%>">
 		<% else %>
-			<div class="tab-pane fade in" id="<%= resource.id %>">
+			<div class="tab-pane fade in" id="<%=resource.id%>">
 		<% end %>
 				<% if resource.type.include? "video" %>
 					<%= render partial: "resources/video", locals: { resource: resource } %>
@@ -39,6 +48,20 @@
 					<%= render partial: "resources/pdf", locals: { resource: resource } %>
 				<% else %>
 					<%= render partial: "resources/text", locals: { resource: resource } %>
+				<% end %>		
+		</div>
+	<% end %>
+   
+   <% @lesson.tests.each_with_index do |test, index| %> 
+		<% if index == 0 and  @lesson.resources.to_a.empty?%>
+        <div class="tab-pane fade active in" id="<%=test.id%>">
+		<% else %>
+			<div class="tab-pane fade in" id="<%=test.id%>">
+		<% end %>
+				<% if test._type.include? "Quiz" %>
+					<%= render partial: "tests/quiz", locals: { test: test } %>
+        <% else %>	
+          <%= render partial: "tests/questionnaire", locals: { test: test } %>
 				<% end %>		
 		</div>
 	<% end %>

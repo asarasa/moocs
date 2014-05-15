@@ -1,0 +1,26 @@
+<%= form_for [@course,@lecture,test], url:multi_solved_path(@course,@lecture,test),remote:true do |f| %>
+
+
+
+<% test.answers.each do |answer| %>
+  <% if @course.is?(current_user, "student") and  @scores.empty? %>  
+     <input type="checkbox" id="<%=answer.id%>" name="answers[]" value="<%=answer.id%>" ><%=answer.answer%></input><br>
+  <%else%>
+    <% if answer.valid%> 
+     <input type="checkbox" id="<%=answer.id%>" name="answers[]" disabled="true" checked = "true" value="<%=answer.id%>" ><%=answer.answer%></input><br>
+    <%else%>
+     <input type="checkbox" id="<%=answer.id%>" name="answers[]" disabled="true" value="<%=answer.id%>" ><%=answer.answer%></input><br>
+    <% end%>
+  <% end%>
+<% end%>
+<%if !@scores.empty?%>
+  <h3>Your score is <%=@scores[0].score%> </h3>
+<%end%>
+<% if @course.is?(current_user, "student") and  @scores.empty? %>
+<div class="actions center">
+    <%= f.submit "Submit", :class => 'btn btn-primary' %>
+ </div>
+<% end%>
+
+<br>
+<% end%>

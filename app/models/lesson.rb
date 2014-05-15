@@ -2,10 +2,12 @@ class Lesson
   include Mongoid::Document
   field :name, type: String
   field :description, type: String
+
   field :active, type: Boolean
   field :order, type: Integer
 
   belongs_to :lecture
+  has_and_belongs_to_many :tests
   has_and_belongs_to_many :resources
 
   def change_state

@@ -1,4 +1,14 @@
 
-<h2> Tracking </h2>
+<div class="card">
+  <h2 class="card-heading lg">Tracking</h2>
+  <div class="card-body">
+      <%= high_chart("my_id4", @chart)  %>
+      <%if @course.is?(current_user,"student")%>
+    <h4> Your grade in this course is <%=@grade%></h4>
+      <% end%>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Back', course_path(@course), :class => 'btn btn-success' %>
+   </div>
+</div>
 
-  <%= high_chart("my_id4", @chart)  %>

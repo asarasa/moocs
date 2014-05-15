@@ -1,0 +1,21 @@
+<div class="card resource">
+	<h2 class="card-heading lg"><%= @test.name %>	
+    <% if @course.is?(current_user, "teacher") %>
+			<small>     	
+        <%= link_to :delete,testinlecture_delete_path(@course,@lecture,@testinlecture) , :class => 'label label-danger right',:method=> :post ,data: { confirm: 'Are you sure?' } %>	
+      </small>
+		<% end %>
+	</h2>
+
+	<div class="card-body">
+   <div class="question">
+    <%=raw @test.question %>
+  </div>
+  <% if @test.multianswer == true %>
+    <%= render partial: 'quizzes/multisolve', locals: {course: @course, lecture:@lecture, test: @test, score: @scores } %> 
+   <%else%>    
+    <%= render partial: 'quizzes/singlesolve', locals: {course: @course, lecture:@lecture ,test: @test, score: @scores } %> 
+  <%end%>
+
+  </div>
+</div>

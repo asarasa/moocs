@@ -1,12 +1,17 @@
 class Quiz < Test
   include Mongoid::Document
   field :question, type: String
-  field :numanswers, type: String
-  field :answers, type: Array
-  field :results, type: Array
-  field :multianswer, type: Mongoid::Boolean
+  
+  embeds_many :answers
   
   
-  validates_presence_of :question, :numanswers
+  validates_presence_of :question
 
+  def multianswer
+    if self.answers.where(valid: true).count == 1 
+      false
+    else
+      true
+    end
+  end
 end

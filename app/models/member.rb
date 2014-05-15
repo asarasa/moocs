@@ -2,6 +2,7 @@ class Member
   include Mongoid::Document
   field :type, type: String
   field :date, type: DateTime
+  field :grade, type: Float
 
   belongs_to :user
   belongs_to :course

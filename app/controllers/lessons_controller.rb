@@ -9,16 +9,17 @@ class LessonsController < ApplicationController
   def new
     @lesson = Lesson.new
     @resources = current_user.resources
+    @tests =  current_user.tests.any_of({:_type => "Quiz"},{:_type => "Questionnaire"})
   end
 
   # GET /lectures/1/edit
-  def edit
+  def edit  
     @resources = current_user.resources
+    @tests =  current_user.tests.any_of({:_type => "Quiz"},{:_type => "Questionnaire"})
   end
 
   def select_lesson
     @lesson = Lesson.find(params[:lesson_id])
-
     respond_to do |format|
       if !@lesson.nil?
         format.html { render @lesson }
@@ -45,8 +46,7 @@ class LessonsController < ApplicationController
   end  
 
   def change_state
-    lesson = Lesson.find(params[:id]);
-    
+    lesson = Lesson.find(params[:id]);    
     respond_to do |format|
       if lesson.change_state
         format.json { render json: "OK" }
@@ -61,11 +61,19 @@ class LessonsController < ApplicationController
   def create
     @lesson = Lesson.new(lesson_params)
     @lesson.resources = Array.new
+    @lesson.tests = Array.new
     resources = params[:resource_ids]
+    tests = params[:test_ids]
 
     if !resources.nil?
       resources.each do |resource|
         @lesson.resources << Resource.find(resource)
+      end
+    end
+    
+    if !tests.nil?
+      tests.each do |test|
+        @lesson.tests << Test.find(test)
       end
     end
 
@@ -90,12 +98,20 @@ class LessonsController < ApplicationController
   # PATCH/PUT /lectures/1.json
   def update
     @lesson.resources.clear
+    @lesson.tests.clear
     resources = params[:resource_ids]
-
-    resources.each do |resource|
-      @lesson.resources << Resource.find(resource)
+    tests = params[:test_ids]
+    
+    if !resources.nil?
+      resources.each do |resource|
+        @lesson.resources << Resource.find(resource)
+      end
+    end 
+    if !tests.nil?
+     tests.each do |test|
+        @lesson.tests << Test.find(test)
+     end
     end
-
     respond_to do |format|
       if @lesson.update(lesson_params)
         format.html { redirect_to course_lecture_path(@course, @lecture), notice: 'Lecture was successfully updated.' }

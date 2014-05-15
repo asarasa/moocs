@@ -1,0 +1,27 @@
+<div class="card resource">
+	<h2 class="card-heading lg"><%= @test.name %></h2>
+
+	<div class="card-body">
+    <h3 >Your score is <%= @score.score  %></h3>
+   <div class="question">
+    <%=raw @test.question %><br>
+     <% @test.answers.each do |test| %>
+       <% if @answer.to_s.eql?(test.id.to_s) %>
+         <input type="radio" id="<%=test.id%>" disabled="true" checked="true"><%=test.answer%></input> <br>
+           <%if @correct.to_s.eql?(test.id.to_s) %>
+             <span style='color : green' class='glyphicon glyphicon-ok'></span><br>
+           <% else%>
+             <span style='color : red' class='glyphicon glyphicon-remove'></span><br>
+           <% end%>
+      <% else%>
+         <input type="radio" id="<%=test.id%>" disabled="true" ><%=test.answer%></input><br>
+         <%if @correct.to_s.eql?(test.id.to_s) %>
+           <span style='color : red'  class='glyphicon glyphicon-remove'></span><br>
+         <% else%>
+           <span style='color : green' class='glyphicon glyphicon-ok'></span><br>
+         <% end%>
+      <% end%>
+    <% end%>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,57 @@
+
 <h1>show lesson</h1>
+<p id="notice"><%= notice %></p>
+
+<div class="card">
+  <h2 class="card-heading lg"><%= @lesson.name %></h2>
+  <div class="card-body">
+    <p><%=raw @lesson.description %></p>
+  </div>
+</div>
+
+<div class="row">
+	<div class="col-md-3">
+		<div class="bs-component">
+      <div class="list-group">
+      	<% @resources.each do |resource| %>
+      		<% if !@resource.nil? %>
+	      		<% if resource.id == @resource.id %>
+		      		<%= link_to view_resource_path(@course, @lesson, resource), :class => "list-group-item active" do %>
+	  	    			<%= render partial: 'resource', object: resource %>
+	    	  		<% end %>
+	    	  	<% else %>
+		      		<%= link_to view_resource_path(@course, @lesson, resource), :class => "list-group-item" do %>
+		      			<%= render partial: 'resource', object: resource %>
+		      		<% end %>	    
+	    	  	<% end %>
+	    	  <% else %>
+	      		<%= link_to view_resource_path(@course, @lesson, resource), :class => "list-group-item" do %>
+	      			<%= render partial: 'resource', object: resource %>
+	      		<% end %>	    	  		
+	    	  <% end %>
+		    <% end %>
+      </div>
+    </div>
+	</div>
+
+	<div class="col-md-9">
+		<% if @resource.nil? %>
+			<h3 style="text-align:center">Please, select a recourse in the left menu.</h3>
+		<% else %>
+			<% if @resource.type == "video" %>
+				<%= render 'resources/video' %>			
+  		<% elsif @resource.type == "audio" %>
+				<%= render 'resources/audio' %>
+			<% elsif @resource.type == "pdf" %>				
+				<%= render 'resources/pdf' %>
+			<% elsif @resource.type == "text" %>
+				<%= render 'resources/text' %>			
+  		<% end %>
+		<% end %>
+	</div>
+</div>
+
+
+<div style="margin:50px">
+<%= link_to 'Back', course_lessons_path(@course), :class => 'btn btn-default' %>
+</div>
