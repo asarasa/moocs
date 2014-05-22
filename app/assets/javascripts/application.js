@@ -13,9 +13,10 @@
 // require_tree .
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
+
 //= require bootstrap.min
-//= require turbolinks
 //= require moment.min
 //= require bootstrap-datetimepicker.min
 // require highcharts/highcharts                                                           
@@ -26,3 +27,4 @@
 //= require ckeditor/override
 //= require ckeditor/init
 //= require forms
+//= require turbolinks

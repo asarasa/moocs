@@ -20,18 +20,13 @@ class UsersController < ApplicationController
 			render "new"
 		end
 	end
-  
-  def user_courses
-	end
-
-	def user_resources
-	end
-  
-  def user_tests
-	end
 
 	def show
-		@user = current_user
+    if current_user.admin & !params[:id].nil?
+      @user = User.find(params[:id])
+    else
+		  @user = current_user
+    end
 	end
 
 	def edit

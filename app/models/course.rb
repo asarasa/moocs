@@ -42,11 +42,23 @@ class Course
   end
 
   def is_member?(user)
-    members.exist?(user, self)
+    if !user.nil? 
+      if user.admin
+        true
+      else
+        members.exist?(user, self)
+      end
+    end
   end
 
   def is?(user, type)
-    members.exist_by_type?(user, self, type)
+    if !user.nil? 
+      if user.admin
+        true
+      else
+        members.exist_by_type?(user, self, type)
+      end
+    end
   end
 
   def change_state
@@ -60,6 +72,26 @@ class Course
     else
       false
     end
+  end
+
+  def self.categories
+    map = %Q{
+      function() {
+        emit(this.category, {count: 1});
+      }
+    }
+
+    reduce = %Q{
+      function(key, values) {
+        var count = 0;
+        values.forEach(function(value) {
+          count += value['count'];
+        });
+        return {"count": count};
+      }
+    }
+
+    Course.where(active: :true).map_reduce(map, reduce).out(inline: true)
   end
 
   private

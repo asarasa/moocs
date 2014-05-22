@@ -1,29 +1,44 @@
-<h1>Listing resources</h1>
+<% if @resources.empty? %>
+  <h3 style="text-align:center">No has creado ningún recurso.</h3>
+<% else %>
+  <div class="page-header">
+    <h2>Listing my resources</h2>
+  </div>
 
-<table class="table table-stripped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Content</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @resources.each do |resource| %>
+  <table class="table table-stripped">
+    <thead>
       <tr>
-        <td><%= resource.name %></td>
-        <td><%= resource.content %></td>
-        <td><%= link_to 'Show', resource %></td>
-        <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
-        <td><%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Type</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New Resource', new_resource_path %>
+    <tbody>
+      <% @resources.each do |resource| %>
+        <tr>
+          <td><%= resource.name %></td>
+          <td>
+            <% if resource.type.include? "video" %>
+              <span class="glyphicon glyphicon-play"></span>
+            <% elsif resource.type.include? "audio" %>
+              <span class="glyphicon glyphicon-headphones"></span>
+            <% elsif resource.type.include? "pdf" %>
+              <span class="glyphicon glyphicon-file"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+          </td>
+          <td><%= link_to 'Show', resource %></td>
+          <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
+          <td><%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' }%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<center>
+  <%= link_to 'New resource', new_resource_path, :class => 'btn btn-success' %>
+</center>

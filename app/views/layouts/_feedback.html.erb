@@ -1,0 +1,42 @@
+<div id="feedback">
+  <a data-toggle="modal" data-target="#feedbackModal"><%=t :feedback %></a>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="feedbackLabel">Feedback</h4>
+      </div>
+      <%= form_for :feedback, url: feedback_path, remote: true do |f| %>
+        <div class="modal-body">
+          <div class="row">
+            <%= f.label :name, :class => 'col-lg-2' %>
+            <div class="col-lg-10">
+              <%= f.text_field :name, :class => 'form-control' %>
+            </div>
+          </div>
+          <div class="row">
+            <%= f.label :email, :class => 'col-lg-2' %>
+            <div class="col-lg-10">
+              <%= f.text_field :email, :class => 'form-control' %>
+            </div>
+          </div>
+          <div class="row">
+            <%= f.label :content, :class => 'col-lg-2' %>
+            <div class="col-lg-10">
+              <%= f.text_area :content, :class => 'form-control' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= f.submit :class => 'btn btn-primary' %>
+        </div>
+      <% end %>          
+    </div>
+  </div>
+</div>

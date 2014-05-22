@@ -1,0 +1,33 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>      
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @resources.each do |resource| %>
+      <tr>
+        <td><%= resource.name %></td>
+        <td>
+          <% if resource.type.include? "video" %>
+            <span class="glyphicon glyphicon-play"></span>
+          <% elsif resource.type.include? "audio" %>
+            <span class="glyphicon glyphicon-headphones"></span>
+          <% elsif resource.type.include? "pdf" %>
+            <span class="glyphicon glyphicon-file"></span>
+          <% else %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', resource %></td>
+        <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
+        <td><%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' }%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

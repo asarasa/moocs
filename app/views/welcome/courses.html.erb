@@ -10,16 +10,19 @@
 			</div>
 			
 			<ul class="list-group">
-				<% Course::CATEGORIES.each do |category| %>
+				<% @categories.each do |category| %>
 					<li class="list-group-item">
-						<div class="row">
-							<div class="col-md-10">
-								<%= t("course.categories.#{category}") %>
+						<a style="color:#666666" data-remote="true" href="<%= category_path(category['_id']) %>">
+							<div class="row">
+								<div class="col-md-10">
+									<span class="badge" style="margin-right:5px"><%= category['value']['count'].to_i %></span> 
+									<%= t("course.categories.#{category['_id']}") %>
+								</div>
+								<div class="col-md-2">
+									<span style="color:#18bc9c" class="glyphicon glyphicon-chevron-right right"></span>
+								</div>
 							</div>
-							<div class="col-md-2">
-								<%= link_to "", category_path(category), remote: true, :class => "glyphicon glyphicon-chevron-right right"%>
-							</div>
-						</div>
+						</a>
 					</li>
 				<% end %>
 			</ul>

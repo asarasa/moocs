@@ -4,7 +4,7 @@ class TestsController < ApplicationController
   # GET /tests
   # GET /tests.json
   def index
-    @tests = Tests.all
+    @tests = current_user.tests
   end
 
   # GET /tests/1

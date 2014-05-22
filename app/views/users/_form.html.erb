@@ -1,50 +1,55 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> No se ha podido crear el usuario:</h2>
+  <div class="card">
+    <h2 class="card-heading lg"><%= title %></h2>
+    <div class="card-body sign-up form form-horizontal" style="padding:2% 15% 2% 15%">
+      <%= form_for(@user) do |f| %>
+        <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> No se ha podido crear el usuario:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+            <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-  <div class="form-group">
-    <%= f.label :name, :class => 'col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :name, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :lastname, :class => 'col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :lastname, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :email, :class => 'col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :email, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :photo, :class => 'col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.file_field :photo, :class => 'form-control' %>
-    </div>
-  </div>       
-  <div class="form-group">
-    <%= f.label :password, :class => 'col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.password_field :password, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :password_confirmation, :class => 'col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.password_field :password_confirmation, :class => 'form-control' %>
+        <div class="form-group">
+          <%= f.label :name, :class => 'col-lg-2' %>
+          <div class="col-lg-10">
+            <%= f.text_field :name, :class => 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :lastname, :class => 'col-lg-2' %>
+          <div class="col-lg-10">
+            <%= f.text_field :lastname, :class => 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :email, :class => 'col-lg-2' %>
+          <div class="col-lg-10">
+            <%= f.text_field :email, :class => 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :photo, :class => 'col-lg-2' %>
+          <div class="col-lg-10">
+            <%= f.file_field :photo, :class => 'form-control' %>
+          </div>
+        </div>       
+        <div class="form-group">
+          <%= f.label :password, :class => 'col-lg-2' %>
+          <div class="col-lg-10">
+            <%= f.password_field :password, :class => 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :password_confirmation, :class => 'col-lg-2' %>
+          <div class="col-lg-10">
+            <%= f.password_field :password_confirmation, :class => 'form-control' %>
+          </div>
+        </div>
     </div>
   </div>
   <div class="actions">

@@ -31,13 +31,6 @@ img.desaturate {
   filter: grayscale(100%);
 }
 
-.alert {
-  text-align: center;
-  background-color: #eeeeee;
-  border-color:#eeeeee;  
-  color:#73726D;
-}
-
 .center { 
   text-align: center; 
 }
@@ -71,8 +64,8 @@ img.desaturate {
 
 /* FORMS
 -------------------------------------------------- */
-.form {
-  padding:20px 150px 50px 150px;
+.card-body .sign-up {
+  padding:2% 15% 2% 15%
 }
 
 .jumbo {
@@ -101,6 +94,103 @@ img.desaturate {
 
 .answers {
   padding:10px;
+}
+
+/* Current course indicator
+-------------------------------------------------- */
+
+#current-course {
+  height: 100%; 
+  width: 25%; 
+  position: fixed; 
+  text-align: center;
+  top: 96%;
+  left: 75%;
+  z-index: 999;
+  opacity:0.8;
+  filter:alpha(opacity=80); /* For IE8 and earlier */
+}
+
+#current-course a { 
+  display: block; 
+  cursor:pointer;
+  background: #2c3e50; 
+  height: 40%; 
+  width: 100%; 
+  padding: 10px;
+  color: #fff; 
+  font-family: Arial, sans-serif; 
+  font-size: 15px; 
+  font-weight: bold; 
+  text-decoration: none; 
+}
+
+#current-course a:hover { 
+  background: #18bc9c; 
+}
+
+#current-course .dropup {
+  border:0px;
+}
+
+#current-course .dropup .dropdown-menu {
+  width:100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 15px;
+  border: 0;
+  border-radius: 0;
+  -webkit-box-shadow: 0; 
+  box-shadow: 0; 
+  background-clip: 0;
+}
+
+#current-course .dropup .dropdown-menu ul{
+  border:0px;
+}
+
+#current-course .dropup .dropdown-menu li{
+  border:0px;
+}
+
+#current-course .dropup .dropdown-menu a{
+  border:0px;
+}
+
+
+/* Feedback
+-------------------------------------------------- */
+
+#feedback { 
+  height: 104px; 
+  width: 104px; 
+  position: fixed; 
+  top: 40%; 
+  z-index: 999;
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg); 
+  -moz-transform: rotate(-90deg); 
+  -o-transform: rotate(-90deg); 
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+#feedback a { 
+  display: block; 
+  cursor:pointer;
+  background: #2c3e50; 
+  height: 40%; 
+  width: 100%; 
+  padding: 8px 16px;
+  color: #fff; 
+  font-family: Arial, sans-serif; 
+  font-size: 17px; 
+  font-weight: bold; 
+  text-decoration: none; 
+}
+
+#feedback a:hover { 
+  background: #18bc9c; 
 }
 
 /* Drag and drop resources */

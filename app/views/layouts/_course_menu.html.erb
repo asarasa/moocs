@@ -1,0 +1,15 @@
+<% if !@course.nil? %>
+  <% if @course.is_member?(current_user) %>
+    <div id="current-course" data-no-turbolink>
+      <div class="dropup">
+        <a id="dropdown-course" class="dropdown-toggle" data-toggle="dropdown" href="#"><%= truncate(@course.name, length: 60) %></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-course">
+          <li><%= link_to 'Show', course_path(@course) %></li>
+          <li><%= link_to 'Lectures', course_lectures_path(@course.id) %></li>
+          <li><%= link_to 'Forum', course_topics_path(@course) %></li>
+          <li><%= link_to 'Tracking', course_tracking_path(@course) %></li>
+        </ul>
+      </div>             
+    </div>
+  <% end %>
+<% end %> 

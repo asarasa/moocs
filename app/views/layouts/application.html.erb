@@ -8,6 +8,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<script>
+</script>
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -21,8 +23,8 @@
       <div class="collapse navbar-collapse" id="navbar-main" data-no-turbolink>
       	<ul class="nav navbar-nav">
         	<li><%= link_to t(:home), root_url %></li>
-        	<li><%= link_to t(:users), lastest_users_path %></li>
         	<li><%= link_to t(:courses), lastest_courses_path %></li>
+          <li><%= link_to t(:faq), root_url %></li>
       	</ul>
       	<ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -36,13 +38,12 @@
             <% if current_user.admin %>
               <li><%= link_to "Admin", admin_path %></li>
             <% end %>
-            <li><%= link_to current_user.email, show_profile_path %></li>
-            <li><%= link_to t(:my_courses), user_courses_path %></li>
+            <li><%= link_to current_user.email, user_path(current_user) %></li>
             <li class="dropdown">
               <a id="dropdown-resources" class="dropdown-toggle" data-toggle="dropdown"><%=t :resources %> <b class="caret"></b></a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-resources">
-                  <li><%= link_to t(:my_resources), user_resources_path %></li>
-                  <li><%= link_to t(:my_tests), user_tests_path %></li>
+                  <li><%= link_to t(:my_resources), resources_path %></li>
+                  <li><%= link_to t(:my_tests), tests_path %></li>
                 </ul>
             </li>                         
             <li><%= link_to t(:logout), logout_path %></li>
@@ -55,14 +56,16 @@
     </div>
   </div>
 
-	<div id="notice" class="container">	   
-		<% flash.each do |name, msg| %>
-		<div class="alert alert-default">
-			<%= content_tag :div, msg, id: "flash_#{name}" %>
-		</div>
-		<% end %>
-	</div>
-	<!-- Main component for a primary marketing message or call to action -->
+  <div id="notice" class="container">    
+    <% flash.each do |name, msg| %>
+      <div class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= content_tag :div, msg, id: "flash_#{name}" %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render 'layouts/feedback' %>
 
 	<div class="container">
 		<%= yield %>
@@ -73,6 +76,8 @@
       <p>Moocs</p>
     </div>
   </footer>
+
+  <%= render 'layouts/course_menu' %>
 
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 </body>

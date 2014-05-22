@@ -1,35 +1,35 @@
-<h1>Listing tests</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<% if @tests.empty? %>
+  <h3 style="text-align:center">No has creado ningún test.</h3>
+<% else %>
+  <div class="page-header">
+    <h2>Listing my tests</h2>
+  </div>
 
-  <tbody>
-    <% @tests.each do |test| %>
+  <table class="table table-stripped">
+    <thead>
       <tr>
-        <td><%= test.name %></td>
-        <td><%= test._type %></td>
-        <td><%= link_to 'Edit', edit_resource_test_path(@resource,test) %></td>   
-        <%if test._type == "Quiz" and !is_myresource?%>
-         <% if test.users.include?(current_user)%>
-            <td>Done</td>
-          <%else%>
-            <td><%= link_to 'Solve',  resource_quiz_path(@resource,test) %></td>
-          <%end%>  
-        <%end%>
-        <td><%= link_to 'Destroy', [@resource,test], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Type</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New Questionnaire', new_resource_questionnaire_path(@resource) ,:class => 'btn btn-success' %>
-<%= link_to 'New Quiz', new_resource_quiz_path(@resource) ,:class => 'btn btn-warning' %>
+    <tbody>
+      <% @tests.each do |test| %>
+        <tr>
+          <td><%= test.name %></td>
+          <td><%= test._type %></td>
+          <td><%= link_to 'Show', test %></td>
+          <td><%= link_to 'Edit', edit_test_path(test) %></td>
+          <td><%= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure?' }%></td>
+         
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<center>
+  <%= link_to 'New quiz', new_quiz_path, :class => 'btn btn-success' %>
+</center>

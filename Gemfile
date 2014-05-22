@@ -20,6 +20,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -40,9 +41,9 @@ gem 'lazy_high_charts'
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'aws-sdk'
 
-
 #CKEditor - https://github.com/galetahub/ckeditor
 gem 'ckeditor'
+
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'

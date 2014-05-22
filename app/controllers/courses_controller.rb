@@ -2,6 +2,7 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:change_state, :show, :join_course, :edit, :update, :destroy]
   before_action :authorize, only: [:join_course, :edit, :new, :create, :update, :destroy]
   before_action :authorize_teacher, only: [:change_state, :edit, :update, :destroy]
+  before_action :authorize_admin, only: [:index]
 
 
   # GET /courses

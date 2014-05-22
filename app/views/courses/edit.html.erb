@@ -6,6 +6,6 @@
 </div>
 
 <div class="buttons">
-	<%= link_to 'Back', course_path(@course), :class => 'btn btn-default left' %>
+	<%= link_to 'Back', :back, :class => 'btn btn-default left' %>
 	<%= link_to 'Delete', @course, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger right' %>
 </div>
