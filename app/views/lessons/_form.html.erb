@@ -32,26 +32,45 @@
         <div class="card-body">
         <div id="selected_resources">
           <% @lesson.resources.each do |resource| %>
-            <%= render partial: 'selectedresource', locals: { resource: resource } %>          
+            <%= render partial: 'selectedresource', locals: { resource: resource },remote: true %>          
+          <% end %>
+          
+           <% @lesson.tests.each do |test| %>
+            <%= render partial: 'selectedtest', locals: { test: test },remote: true %>          
           <% end %>
         </div>
 
+       <a class="btn btn-primary" data-toggle="modal" data-target=".select_resources">Select resources</a>
 
-        <a class="btn btn-primary" data-toggle="modal" data-target=".select_resources">Select resources</a>
 
         <div class="modal fade select_resources" role="dialog" aria-labelledby="select_resources" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
                 <h4>Select the resources</h4>
+                <div class="bs-component">
+                  <ul class="nav nav-tabs card-heading">
+                    <li class='active'><a href='#resources' data-toggle='tab'>Resources</a></li>
+                     <li><a href='#tests' data-toggle="tab">Tests</a></li>
+                  </ul>
+                </div>
               </div>
               <div class="modal-body">
-                <div class="row">
+              <div id='tab' class="tab-content">
+                <div id='resources' class="tab-pane fade active in">                
                   <% @resources.each_with_index do |resource, index| %>
                       <div class="col-sm-6">
-                        <%= render partial: 'selectresource', locals: { resource: resource } %>
+                        <%= render partial: 'selectresource', locals: { resource: resource } %> 
                       </div>                      
                   <% end %>
+                 </div>
+                 <div id='tests' class='tab-pane fade in'>
+                  <% @tests.each_with_index do |test, index| %>
+                      <div class="col-sm-6">
+                        <%= render partial: 'selecttest', locals: { test: test } %> 
+                      </div>                      
+                  <% end %>
+                  </div> 
                 </div>
               </div>
               <div class="modal-footer">
@@ -66,7 +85,25 @@
     </div>    
   </div>
 
-  <div class="actions">
+
+ <div class="actions">
     <%= f.submit "Submit", :class => 'btn btn-primary right' %>
   </div>  
+<script>
+  function changetext(id)
+  {
+    var selected = document.querySelector('#selected_resources');
+    var checked = $( "input:checked" );
+    var resources = "";
+    for (var i = 0; i < checked.length; i++) {
+      resources += checked.parent().parent().parent()[i].outerHTML
+    }
+    resources = resources.replace(new RegExp("input", 'g'), "del");
+    console.log(resources);
+
+    selected.innerHTML = resources;
+  }
+ </script>
+
+ 
 <% end %>

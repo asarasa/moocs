@@ -78,7 +78,6 @@
   </footer>
 
   <%= render 'layouts/course_menu' %>
-
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-eval" => false, "data-turbolinks-track" => true %>
 </body>
 </html>

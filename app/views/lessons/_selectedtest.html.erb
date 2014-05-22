@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+			<% if test._type.include? "video" %>
+				<span class="glyphicon glyphicon-play"></span>
+			<% elsif test._type.include? "audio" %>
+				<span class="glyphicon glyphicon-headphones"></span>
+			<% elsif test._type.include? "pdf" %>
+				<span class="glyphicon glyphicon-file"></span>
+			<% else %>
+				<span class="glyphicon glyphicon-pencil"></span>
+			<% end %>
+		<span style="padding-left: 10px">
+			<%= h test.name %>
+		</span>
+	</div>
+</div>

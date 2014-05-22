@@ -1,0 +1,33 @@
+<div class="card resource">
+	<h2 class="card-heading lg"><%= @test.name %></h2>
+
+	<div class="card-body">
+   <%if !@score.nil?%>
+      <div class="right">
+        <label>Score: <label>
+          <br>
+       <h3 style="background-color:#619E83" class="img-thumbnail"><%=@score.score %></h3>
+     </div>
+    <%end%>
+   <div class="question">
+    <%=raw @test.question %><br>
+     <% @test.answers.each do |test| %>
+       <% if @answers.include?(test.id.to_s) %>
+         <input type="checkbox" id="<%=test.id%>"  disabled="true" checked="true"><%=test.answer%></input><br>      
+           <%if @correct.include?(test.id.to_s) %>
+             <span style='color : green' class='glyphicon glyphicon-ok'></span><br>
+           <% else%>
+             <span style='color : red' class='glyphicon glyphicon-remove'></span><br>
+           <% end%>
+      <% else%>
+         <input type="checkbox" id="<%=test.id%>"  disabled="true"><%=test.answer%></input><br>
+         <%if @correct.include?(test.id.to_s) %>
+           <span style='color : green'  class='glyphicon glyphicon-ok'></span><br>
+         <% else%>
+           <span style='color : red' class='glyphicon glyphicon-remove'></span><br>
+         <% end%>
+      <% end%>
+    <% end%>
+    </div>
+  </div>
+</div>

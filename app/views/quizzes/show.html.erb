@@ -1,52 +1,40 @@
 <div class="form">
 
-<%= form_for [ @quiz],url: quiz_solve_path(@quiz) do |f| %>
- <% if @quiz.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
-
-      <ul>
-      <% @quiz.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="question">
-    <h3>Question:</h3>
+ <div class="name">
+    <h3>Name:</h3>
+    <%=@quiz.name %>
+  </div>
+  
+ <div class="question">
+   <h3>Question:</h3>
     <%=raw @quiz.question %>
   </div>
   
-  <div class="answers">
-    <h3>Answers:</h3>
-     <%   index=0 %>
-    <% @quiz.answers.each do |answer| %>
-      <%= f.fields_for "answer", index:answer do |answers_form|%>
-        
-        <div class="checkbox">
-          <%= answers_form.label :answers , answer %>
-  
-          <% if @quiz.multianswer == true %>
-            <%= answers_form.check_box :results %> <br>
-          <%else%>
-            <%= f.radio_button :results, index %> <br>
-          <%end%>
-        </div>
-      
-      <%end%>     
-     <%index = index + 1 %>
-    <% end %>
-  </div>
- 
- <div class="actions center">
-    <%= f.submit "Submit", :class => 'btn btn-lg btn-primary' %>
-    <% if @fail=='true'%>
-      <%= link_to 'See answers', quiz_see_answers_path(@quiz), :class => 'btn btn-lg btn-warning' %>
-    <% end%>
- </div>
-
-<% end %>
-</div>
+  <h3>answers:</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Answer</th>
+            <th>Valid</th>
+          </tr>
+          </thead>
+        <tbody>
+       <%@quiz.answers.each_with_index do |l,index|%>              
+          <tr id='<%=l.answer + l.valid.to_s%>'>
+            <td>
+              <input type='hidden'  name='array[<%=index%>][answer]' value='<%=l.answer%>'><%=l.answer%></input>
+            </td>
+            <td>
+               <input type='hidden' name='array[<%=index%>][valid]' value='<%=l.valid %>'></input>
+               <%if l.valid%>
+                  <span class='glyphicon glyphicon-ok'></span>
+               <%else%>
+                  <span class='glyphicon glyphicon-remove'></span>
+               <%end%>
+             </td>
+           </tr>
+            <%end%>
+        </tbody>
+      </table>
 
 <%= link_to 'Back', :back, :class => 'btn btn-default' %>

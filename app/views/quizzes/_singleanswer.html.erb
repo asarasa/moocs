@@ -1,0 +1,11 @@
+<%= form_for [test], url:quiz_single_path(test),remote:true do |f| %>
+
+  <% test.answers.each do |answer| %>
+  <input type="radio" id="<%=answer.id%>" name="answer" value="<%=answer.id%>" ><%=answer.answer%></input><br>
+
+<% end%>
+<div class="actions center">
+    <%= f.submit "Submit", :class => 'btn btn-primary' %>
+ </div>
+<br>
+<% end%>

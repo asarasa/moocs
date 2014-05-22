@@ -1,4 +1,3 @@
-
 function sendPOST(xmlhttp, url, params) {
   xmlhttp.open("POST",url);
 
@@ -13,7 +12,7 @@ function change_state(element, lesson_id, lecture_id, course_id) {
 	var xmlhttp = new XMLHttpRequest();
 	var url = "/en/courses/" + course_id + "/lectures/" + lecture_id + "/change_state";
 	var params = "id=" + lesson_id;
-
+  
 	sendPOST(xmlhttp, url, params);
 
   xmlhttp.onreadystatechange=function() {
@@ -35,7 +34,6 @@ function change_state(element, lesson_id, lecture_id, course_id) {
 
 $("span[data-lesson-id]").click (function( e ) {
   e.preventDefault();
-
 
   lesson_id = $(this).data("lesson-id");
   lecture_id = $(this).data("lecture-id");

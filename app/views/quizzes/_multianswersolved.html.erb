@@ -1,0 +1,27 @@
+<div class="card resource">
+	<h2 class="card-heading lg"><%= @quiz.name %></h2>
+
+	<div class="card-body">
+   <div class="question">
+    <%=raw @quiz.question %>
+     <br>  
+     <% @quiz.answers.each do |test| %>
+       <% if @answers.include?(test.id.to_s) %>
+         <input type="checkbox" id="<%=test.id%>"  disabled="true" checked="true"><%=test.answer%></input><br>      
+           <%if @correct.include?(test.id.to_s) %>
+             <span style='color : green' class='glyphicon glyphicon-ok'></span><br>
+           <% else%>
+             <span style='color : red' class='glyphicon glyphicon-remove'></span><br>
+           <% end%>
+      <% else%>
+         <input type="checkbox" id="<%=test.id%>"  disabled="true"><%=test.answer%></input><br>
+         <%if @correct.include?(test.id.to_s) %>
+           <span style='color : green'  class='glyphicon glyphicon-ok'></span><br>
+         <% else%>
+           <span style='color : red' class='glyphicon glyphicon-remove'></span><br>
+         <% end%>
+      <% end%>
+    <% end%>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+if (<%= @score.status=="close" %>) {
+   $("#lesson").html("<%= escape_javascript( render 'single_solved') %>");
+} else {
+   $("#lesson").html("<%= escape_javascript( render 'solve') %>");
+}
+              
+

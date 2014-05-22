@@ -37,7 +37,7 @@ class Course
   end
 
   def add_member(user, type)
-    member = Member.new({ user_id: user.id, course_id: self.id, type: type, date: DateTime.now})
+    member = Member.new({ user_id: user.id, course_id: self.id, type: type, grade: 0 , date: DateTime.now})
     member.save
   end
 
@@ -73,6 +73,18 @@ class Course
       false
     end
   end
+  
+    
+  def num_tests 
+    tests  = 0
+    self.lectures.each do |lecture|
+      logger.debug(lecture.testinlectures.count)   
+      tests  = tests  + lecture.testinlectures.count
+      logger.debug(tests)
+    end  
+    tests 
+  end
+
 
   def self.categories
     map = %Q{

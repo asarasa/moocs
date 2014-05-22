@@ -1,7 +1,7 @@
 <% if listlesson.active %>
-	<span data-lesson-id="<%= listlesson.id %>" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>" id="lesson_active" class="glyphicon glyphicon-eye-open"></span>
+	<span data-lesson-id="<%= listlesson.id %>" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>" id="lesson_active" style="cursor:pointer" class="glyphicon glyphicon-eye-open"></span>
 <% else %>
-	<span data-lesson-id="<%= listlesson.id %>" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>" id="lesson_inactive" class="glyphicon glyphicon-eye-close"></span>
+	<span data-lesson-id="<%= listlesson.id %>" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>" id="lesson_inactive" style="cursor:pointer" class="glyphicon glyphicon-eye-close"></span>
 <% end %>
 
 <span style="padding-left: 10px">

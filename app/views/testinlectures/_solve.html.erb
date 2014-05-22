@@ -1,0 +1,35 @@
+<div class="card resource">
+	<h2 class="card-heading lg"><%= @test.name %>	
+    <% if @course.is?(current_user, "teacher") %>
+			<small>     	
+        <%= link_to :delete,testinlecture_delete_path(@course,@lecture,@testinlecture) , :class => 'label label-danger right',:method=> :post ,data: { confirm: 'Are you sure?' } %>	
+      </small>
+		<% end %>
+	</h2>
+
+	<div class="card-body">
+   <%if !@scoresClose.empty?%>
+      <div class="right">
+        <label>Score: <label>
+          <br>
+       <h3 style="background-color:#619E83" class="img-thumbnail"><%=@scoresClose[0].score %></h3>
+     </div>
+    <%end%>
+    <%if !@scoresOpen.empty?%>
+      <div class="right">
+        <label>attempt: <label>
+          <br>
+          <h3 style="background-color:#D2DA8B" class="img-thumbnail"><%=@scoresOpen[0].attempt %></h3>
+     </div>
+     <%end%>
+   <div class="question">
+    <%=raw @test.question %>
+  </div>
+  <% if @test.multianswer == true %>
+    <%= render partial: 'quizzes/multisolve', locals: { test: @test } %> 
+   <%else%>    
+    <%= render partial: 'quizzes/singlesolve', locals: {test: @test} %> 
+  <%end%>
+
+  </div>
+</div>

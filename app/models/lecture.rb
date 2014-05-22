@@ -6,6 +6,7 @@ class Lecture
   field :end_date, type: DateTime
   
   has_many :lessons
+  has_many :testinlectures ,dependent: :destroy
   embedded_in :courses
 
   validates_presence_of :name, :description, :start_date, :end_date
@@ -17,6 +18,7 @@ class Lecture
   		self.start_date.strftime('%d/%m/%Y %H:%M')
   	end
   end
+  
 
   def end_date_formatted
   	if self.end_date.nil? 

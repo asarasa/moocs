@@ -1,0 +1,13 @@
+<div class="card resource">
+	<h2 class="card-heading lg"><%= test.name %></h2>
+	<div class="card-body">
+   <div class="question">
+    <%=raw test.question %>
+  </div>
+  <% if test.multianswer == true %>
+    <%= render partial: 'quizzes/multianswer', locals: { test: test  } %> 
+   <%else%>
+    <%= render partial: 'quizzes/singleanswer', locals: { test: test   } %> 
+  <%end%>
+  </div>
+</div>

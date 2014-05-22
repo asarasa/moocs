@@ -1,0 +1,22 @@
+<div class="card resource">
+	<h2 class="card-heading lg"><%= @questionnaire.name %></h2>
+
+	<div class="card-body">
+   <div class="question">
+      <%=raw @questionnaire.question %>
+    </div>
+    <div class="field">
+      <%= label "Answer","Answer" %><br>
+      <input type='text_area' disabled="true" value="<%=@answer%>"%>
+      <%if @answer.to_s==@correct.to_s%>
+          <span style='color : green' class='glyphicon glyphicon-ok'></span><br>
+       <% else %>
+          <span style='color : red' class='glyphicon glyphicon-remove'></span><br>
+       <% end %><br>
+      <input type='text_area' disabled="true" value="<%=@correct%>"%>    
+    </div>
+    <div class="card-footer">
+      <br>
+    </div>
+  </div>
+</div>

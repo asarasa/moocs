@@ -1,0 +1,46 @@
+<div class="form">
+
+<%= form_for [test], url:quiz_solve_path(test) do |f| %>
+
+  <div class="name">
+    <h3>name:</h3>
+    <%=test.name %>
+  </div>
+
+  <div class="question">
+    <h3>Question:</h3>
+    <%=raw test.question %>
+  </div>
+  
+  <div class="answers">
+    <h3>Answers:</h3>
+     <%   index=0 %>
+    <% test.answers.each do |answer| %>
+      <%= f.fields_for "answer", index:answer do |answers_form|%>
+        
+        <div class="checkbox">
+          <%= answers_form.label :answers , answer %>
+  
+          <% if test.multianswer == true %>
+            <%= answers_form.check_box :results %> <br>
+          <%else%>
+            <%= f.radio_button :results, index %> <br>
+          <%end%>
+        </div>
+      
+      <%end%>     
+     <%index = index + 1 %>
+    <% end %>
+  </div>
+ 
+ <div class="actions center">
+    <%= f.submit "Submit", :class => 'btn btn-lg btn-primary' %>
+    <% if @fail=='true'%>
+      <%= link_to 'See answers', quiz_see_answers_path(test), :class => 'btn btn-lg btn-warning' %>
+    <% end%>
+ </div>
+
+<% end %>
+</div>
+
+<%= link_to 'Back', user_tests_path, :class => 'btn btn-default' %>

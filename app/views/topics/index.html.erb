@@ -1,20 +1,26 @@
-<h1>Listing topics</h1>
 <% @topics.each do |topic| %>
 <%= link_to(course_topic_messages_path(@course,topic)) do %>
-  <div style="background:#E6E6E6">
-    <%= topic.title %>
-    <%= topic.state %>
-    <%= topic.creation_Date.strftime("%x") %>
-    <%= topic.createBy %>
+	<div class="card">
+    	<h1 class="card-heading lg">	<%= topic.createBy %>	 </h1>
+      <div class="card-body">
+        <span class="left"style='margin : 10px'><%= image_tag '1400189685_topic.png' %></span>      
+         <%=raw topic.title%>        
+         <% if can_edit_topic?(topic) %>
+          <%= link_to 'Edit', edit_course_topic_path(@course,topic), class: 'btn btn-warning btn-sm right' %>
+          <%= link_to 'Destroy', [@course,topic],class: 'btn btn-danger btn-sm right', method: :delete, data: { confirm: 'Are you sure?' } %>   
+         <% end %>  
+        <h6><%= topic.creation_Date.to_s(:db) %></h6>  
+       
+			</div>
+		</div>    
 <% end %>
-    <% if can_edit_topic?(topic) %>
-      <%= link_to 'Edit', edit_course_topic_path(@course,topic) %>
-      <%= link_to 'Destroy', [@course,topic], method: :delete, data: { confirm: 'Are you sure?' } %>  
-    <% end %>
-  </div>   
+   
+
+   
   <br>
 <% end %>  
 <br>
+<%= link_to 'Back', course_path(@course) ,:class => 'btn btn-default' %>
 <% if can_create_topic? %>
-  <%= link_to 'New Topic', new_course_topic_path(@course) ,:class => 'btn btn-primary' %>
+  <%= link_to 'New Topic', new_course_topic_path(@course) ,:class => 'btn btn-primary right' %>
 <% end %>  
