@@ -49,7 +49,6 @@ Moocs::Application.routes.draw do
         match "change_state", :to => "lessons#change_state", :as => "change_state", :via => [ :post]
       end
     end
-    get 'join_course/:id', to: 'courses#join_course', as:'join_course'
 
     resources :resources do
         resources :quizzes do
