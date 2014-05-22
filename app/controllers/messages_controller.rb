@@ -39,10 +39,11 @@ class MessagesController < ApplicationController
     message.from = current_user.name
     message.order = @topic.nextmessage
     @topic.messages.push(message)
-    @topic.nextmessage =  @topic.nextmessage+1
+    @topic.nextmessage =  @topic.nextmessage + 1
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to course_topic_messages_path(@course,@topic), notice: 'Message was successfully created.' }
+        format.html { redirect_to course_topic_messages_path(@course,@topic), 
+                                                        notice: 'Message was successfully created.' }
         format.json { render action: 'show', status: :created, location: @message }
       else
         format.html { render action: 'new' }
@@ -56,7 +57,8 @@ class MessagesController < ApplicationController
   def update
     respond_to do |format|
       if @message.update(message_params)
-        format.html { redirect_to course_topic_messages_path(@course,@topic), notice: 'Message was successfully updated.' }
+        format.html { redirect_to course_topic_messages_path(@course,@topic), 
+                                                          notice: 'Message was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -66,7 +66,6 @@ class LecturesController < ApplicationController
   def create
     @lecture = Lecture.new(lecture_params)
     @course.lectures.push(@lecture)
-
     respond_to do |format|
       if @course.save
         format.html { redirect_to course_lectures_path(@course), notice: 'Lecture was successfully created.' }

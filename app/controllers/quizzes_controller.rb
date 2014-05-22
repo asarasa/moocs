@@ -13,16 +13,6 @@ class QuizzesController < ApplicationController
   def show
   end
   
-  def add_answers
-    @quiz = Test.find(params[:quiz_id])
-  end
-
-  def see_answers    
-     @quiz = @resource.tests.find(params[:quiz_id])
-     @quiz.users.push(current_user.id)
-     @quiz.update()
-  end
-  
   def single
     if !params[:answer].nil?
       @correct= @quiz.answers.where(valid: true).to_a[0].id      
@@ -92,9 +82,7 @@ class QuizzesController < ApplicationController
   # PATCH/PUT /quizzes/1.json
   def update
     @quiz.answers.clear
-    params[:array].each do |answer|
-      logger.debug answer[1][:answer]
-      logger.debug answer[1][:valid]      
+    params[:array].each do |answer|     
        @quiz.answers << Answer.new(answer: answer[1][:answer],valid: answer[1][:valid])
     end
     respond_to do |format|

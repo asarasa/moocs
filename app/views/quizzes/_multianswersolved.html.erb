@@ -4,6 +4,7 @@
 	<div class="card-body">
    <div class="question">
     <%=raw @quiz.question %>
+     <br>  
      <% @quiz.answers.each do |test| %>
        <% if @answers.include?(test.id.to_s) %>
          <input type="checkbox" id="<%=test.id%>"  disabled="true" checked="true"><%=test.answer%></input><br>      
@@ -15,9 +16,9 @@
       <% else%>
          <input type="checkbox" id="<%=test.id%>"  disabled="true"><%=test.answer%></input><br>
          <%if @correct.include?(test.id.to_s) %>
-           <span style='color : red'  class='glyphicon glyphicon-remove'></span><br>
+           <span style='color : green'  class='glyphicon glyphicon-ok'></span><br>
          <% else%>
-           <span style='color : green' class='glyphicon glyphicon-ok'></span><br>
+           <span style='color : red' class='glyphicon glyphicon-remove'></span><br>
          <% end%>
       <% end%>
     <% end%>

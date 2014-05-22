@@ -17,7 +17,7 @@ class CoursesController < ApplicationController
   
 def tracking
     @course = Course.find(params[:course_id])
-    @lectures = @course.lectures   
+    @lectures = @course.lectures     
     @categories = Array.new
     @score = Array.new
     @average=Array.new
@@ -25,18 +25,22 @@ def tracking
     @min=Array.new
     cinco= (@course.num_tests * 5)
     ocho= (@course.num_tests * 8)
-    @lt5 = Member.where(:type => 'student',:grade.lt => cinco).count
-    @b58 = Member.where(:type => 'student',:grade.lt => ocho,:grade.gte => cinco).count
-    @gt8 = Member.where(:type => 'student',:grade.gte => ocho).count
+    @member = Member.where(user: current_user, course: @course).first
+    @lt5 = Member.where(:course => @course,:type => 'student',:grade.lt => cinco).count
+    @b58 = Member.where(:course => @course,:type => 'student',:grade.lt => ocho,                                                                          :grade.gte => cinco).count
+    @gt8 = Member.where(:course => @course,:type => 'student',:grade.gte => ocho).count
       @lectures.each do |lecture|
         lecture.testinlectures.each do |testinlecture|
+         score = Score.where(testinlecture: testinlecture , member: @member)
+           if !score.empty?
+             @score << score.first.score
+          end  
           @categories << Test.find(testinlecture.test).name
           @average << Score.where(testinlecture: testinlecture).avg(:score).round(2)
           @max << Score.where(testinlecture: testinlecture).max(:score).round(2)
           @min << Score.where(testinlecture: testinlecture).min(:score).round(2)     
         end  
-      end  
-
+      end
       if @course.is?(current_user,"teacher") 
         @chart = LazyHighCharts::HighChart.new('graph') do |f|
           f.title( :text=>"Course Statistics")
@@ -76,20 +80,11 @@ def tracking
 
         end
       else     
-         @member = Member.where(user: current_user, course: @course).first
-         @lectures.each do |lecture|
-          lecture.testinlectures.each do |testinlecture|
-            score = Score.where(testinlecture: testinlecture , member: @member)
-            if !score.empty?
-              @score << score.first.score
-            end  
-          end  
-        end  
          @chart = LazyHighCharts::HighChart.new('graph') do |f|
            f.title(:text => "Your course rating")
            f.options[:xAxis][:categories] = @categories
            f.options[:yAxis][:max] = 10
-           f.series(:type=> 'column',:data=> @score, :dataLabels => {
+           f.series(:type=> 'column',:name=> 'Your score',:data=> @score, :dataLabels => {
                      :enabled=> true,
                      color:'#FFFFFF',
                      align: 'center',

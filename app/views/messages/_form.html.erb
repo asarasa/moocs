@@ -23,8 +23,9 @@
         <%= f.cktext_area :text %>
       </div>
       <br>
-     <%= link_to 'Back', course_topic_messages_path(@course,@topic),class: 'btn btn-default ' %>
-     <%= f.submit "Create message" ,class: 'btn btn-primary right' %>
     </div>
+
   </div>  
+    <%= link_to 'Back', course_topic_messages_path(@course,@topic),class: 'btn btn-default ' %>
+    <%= f.submit "Create message" ,class: 'btn btn-primary right' %>
 <% end %>

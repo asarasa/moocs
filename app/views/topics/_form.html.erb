@@ -24,8 +24,9 @@
       <%= f.radio_button :state, "Closed" ,:checked => false ,:style => "margin-left: 60px" %> 
       <label  style="font-style:normal">Close</label>
   </div>
+
+ </div>
         <%= link_to 'Back', course_topics_path(@course),class: 'btn btn-default ' %>
         <%= f.submit "Create topic" ,class: 'btn btn-primary right' %>
- </div>
 </div>
 <% end %>

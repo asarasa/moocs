@@ -8,13 +8,27 @@
 	</h2>
 
 	<div class="card-body">
+   <%if !@scoresClose.empty?%>
+      <div class="right">
+        <label>Score: <label>
+          <br>
+       <h3 style="background-color:#619E83" class="img-thumbnail"><%=@scoresClose[0].score %></h3>
+     </div>
+    <%end%>
+    <%if !@scoresOpen.empty?%>
+      <div class="right">
+        <label>attempt: <label>
+          <br>
+          <h3 style="background-color:#D2DA8B" class="img-thumbnail"><%=@scoresOpen[0].attempt %></h3>
+     </div>
+     <%end%>
    <div class="question">
     <%=raw @test.question %>
   </div>
   <% if @test.multianswer == true %>
-    <%= render partial: 'quizzes/multisolve', locals: {course: @course, lecture:@lecture, test: @test, score: @scores } %> 
+    <%= render partial: 'quizzes/multisolve', locals: { test: @test } %> 
    <%else%>    
-    <%= render partial: 'quizzes/singlesolve', locals: {course: @course, lecture:@lecture ,test: @test, score: @scores } %> 
+    <%= render partial: 'quizzes/singlesolve', locals: {test: @test} %> 
   <%end%>
 
   </div>

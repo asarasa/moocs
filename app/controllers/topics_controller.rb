@@ -31,7 +31,6 @@ class TopicsController < ApplicationController
     @topic.creation_Date = DateTime.now
     @topic.createBy = current_user.name
     @topic.nextmessage = 1
-    @topic.messages = Array.new
     @course.topics << @topic
     respond_to do |format|
       if @topic.save

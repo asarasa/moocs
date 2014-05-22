@@ -61,8 +61,7 @@ Moocs::Application.routes.draw do
     
     match "courses/:course_id/lectures/:lecture_id/testinlectures/create", :to => "testinlectures#create", :as => "testinlecture_create", :via => [:get,:post]    
     get 'courses/:course_id/lectures/:lecture_id/testinlecture/:id/solve', :to => 'testinlectures#solve', :as => 'solve'
-    match "courses/:course_id/lectures/:lecture_id/testinlectures/:id/single_solved", :to => "testinlectures#single_solved", :as => "single_solved", :via => [:get, :post, :patch]
-    match "courses/:course_id/lectures/:lecture_id/testinlectures/:id/multi_solved", :to => "testinlectures#multi_solved", :as => "multi_solved", :via => [:get, :post, :patch]
+    match "courses/:course_id/lectures/:lecture_id/testinlectures/:id/solved", :to => "testinlectures#solved", :as => "solved", :via => [:get, :post, :patch]
     match "courses/:course_id/lectures/:lecture_id/testinlectures/:id/delete", :to => "testinlectures#delete", :as => "testinlecture_delete", :via => [:post]
       
     get 'courses/:course_id/lectures/:id/view_resource/:resource_id', to:'lectures#view_resource', as: 'view_resource'

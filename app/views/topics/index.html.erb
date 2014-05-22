@@ -3,8 +3,8 @@
 	<div class="card">
     	<h1 class="card-heading lg">	<%= topic.createBy %>	 </h1>
       <div class="card-body">
-        <span style='margin : 20px'><%= image_tag '1400189685_topic.png' %></span>      
-         <%=topic.title%>        
+        <span class="left"style='margin : 10px'><%= image_tag '1400189685_topic.png' %></span>      
+         <%=raw topic.title%>        
          <% if can_edit_topic?(topic) %>
           <%= link_to 'Edit', edit_course_topic_path(@course,topic), class: 'btn btn-warning btn-sm right' %>
           <%= link_to 'Destroy', [@course,topic],class: 'btn btn-danger btn-sm right', method: :delete, data: { confirm: 'Are you sure?' } %>   

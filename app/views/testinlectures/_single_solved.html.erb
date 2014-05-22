@@ -2,7 +2,20 @@
 	<h2 class="card-heading lg"><%= @test.name %></h2>
 
 	<div class="card-body">
-    <h3 >Your score is <%= @score.score  %></h3>
+     <%if !@score.nil?%>
+      <div class="right">
+        <label>Score: <label>
+          <br>
+       <h3 style="background-color:#619E83" class="img-thumbnail"><%=@score.score %></h3>
+     </div>
+    <%end%>
+    <%if !@scoresOpen.empty?%>
+      <div class="right">
+        <label>attempt: <label>
+          <br>
+          <h3 style="background-color:#D2DA8B" class="img-thumbnail"><%=@scoresOpen[0].attempt %></h3>
+     </div>
+     <%end%>
    <div class="question">
     <%=raw @test.question %><br>
      <% @test.answers.each do |test| %>
@@ -16,9 +29,9 @@
       <% else%>
          <input type="radio" id="<%=test.id%>" disabled="true" ><%=test.answer%></input><br>
          <%if @correct.to_s.eql?(test.id.to_s) %>
-           <span style='color : red'  class='glyphicon glyphicon-remove'></span><br>
+           <span style='color : green'  class='glyphicon glyphicon-ok'></span><br>
          <% else%>
-           <span style='color : green' class='glyphicon glyphicon-ok'></span><br>
+           <span style='color : red' class='glyphicon glyphicon-remove'></span><br>
          <% end%>
       <% end%>
     <% end%>
