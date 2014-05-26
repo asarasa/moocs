@@ -28,9 +28,10 @@ class Testinlecture
     logger.debug(member)
     logger.debug(answers)
    if !test.multianswer
-     logger.debug("es single")
-     if test.answers.to_a[0].id.to_s == answer.to_s
-       logger.debug("es correcta")
+      logger.debug("es singleeeeeeeeeeeeeeee")
+      correct=test.answers.to_a[0].id.to_s
+      if test.answers.to_a[0].id.to_s == answer.to_s
+        logger.debug("es correcta")
         if score.empty?      
           empty = true
           score = Score.new(:testinlecture => testinlecture ,:member => member,:attempt => 1,:score => 10,:status => "close")   
@@ -96,18 +97,18 @@ class Testinlecture
     score = Score.new(:testinlecture => testinlecture ,:member => member,:attempt => 1,:score => value,:status => "close") 
    end  
     logger.debug(score)
-     if empty
-         if score.save and member.update
-            {:score => score}
-         else
-            {:score => false}
-         end
-     else      
-         if  score.update and member.update
-           {:score => score,:correct =>correct}
-         else
-           {:score => false,:correct=>correct}
-        end
+    if empty
+      if score.save and member.update
+        {:score => score,:correct =>correct}
+      else
+        {:score => false,:correct =>correct}
       end
+    else 
+      if score.update and member.update
+        {:score => score,:correct =>correct}
+      else
+        {:score => false,:correct=>correct}
+      end
+    end
   end
 end

@@ -18,6 +18,7 @@ class Course
 
   has_mongoid_attached_file :banner
 
+  embeds_many :notices
   embeds_many :lectures
   has_many :members
   has_many :topics

@@ -1,5 +1,6 @@
-
-<span >
-	<%= listteststudent.test.name %>
-</span>
-<%= link_to "", solve_path(@course, @lecture, listteststudent), remote: true, :class => "glyphicon glyphicon-chevron-right right"%>
+<%= link_to solve_path(@course, @lecture, listteststudent), remote: true do %>
+  <div class="row">
+    <div class="col-md-10" style="color:#666666"><%= listteststudent.test.name %></div>
+    <div class="col-md-2"><span style="color:#18bc9c" class="glyphicon glyphicon-chevron-right right"></span></div>
+  </div>
+<% end %>

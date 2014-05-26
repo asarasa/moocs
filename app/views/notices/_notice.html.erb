@@ -1,0 +1,14 @@
+<div class="card">
+  <h1 class="card-heading lg">
+    <%= notice.title %>
+    <small>
+      <% if @course.is?(current_user, "teacher") %>
+        <%= link_to :delete, [@course,notice], method: :delete, data: { confirm: 'Are you sure?' }, :class => "label label-danger right" %>
+        <%= link_to :edit, edit_course_notice_path(@course, notice), :class => "label label-warning right" %>
+      <% end %>
+    </small>
+  </h1>
+  <div class="card-body">
+    <%=raw notice.content %>        
+  </div>
+</div>

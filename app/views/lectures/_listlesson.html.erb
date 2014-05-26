@@ -1,10 +1,13 @@
-<% if listlesson.active %>
-	<span data-lesson-id="<%= listlesson.id %>" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>" id="lesson_active" style="cursor:pointer" class="glyphicon glyphicon-eye-open"></span>
-<% else %>
-	<span data-lesson-id="<%= listlesson.id %>" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>" id="lesson_inactive" style="cursor:pointer" class="glyphicon glyphicon-eye-close"></span>
+<%= link_to course_lecture_lesson_select_lesson_path(@course, @lecture, listlesson), remote: true do %>
+  <div class="row">
+    <div class="col-md-1" style="color:#666666">
+      <% if listlesson.active %>
+      	<span data-lesson-id="<%= listlesson.id %>" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>" id="lesson_active" style="cursor:pointer" class="glyphicon glyphicon-eye-open"></span>
+      <% else %>
+      	<span data-lesson-id="<%= listlesson.id %>" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>" id="lesson_inactive" style="cursor:pointer" class="glyphicon glyphicon-eye-close"></span>
+      <% end %>
+    </div>
+    <div class="col-md-9" style="color:#666666"><%= listlesson.name %></div>
+    <div style="padding-right:10px"><span class="glyphicon glyphicon-chevron-right right"></span></div>
+  </div>
 <% end %>
-
-<span style="padding-left: 10px">
-	<%= listlesson.name %>
-</span>
-<%= link_to "", course_lecture_lesson_select_lesson_path(@course, @lecture, listlesson), remote: true, :class => "glyphicon glyphicon-chevron-right right"%>

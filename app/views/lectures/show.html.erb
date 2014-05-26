@@ -7,20 +7,21 @@
 
 <div class="row">
 	<div class="col-md-4">
-		<div class="bs-component">
-      <div id="lessons-student" class="list-group" >
-		    <% @lessons.each_with_index do |lesson, index| %>
-		    	<div id="<%= lesson.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
-						<%= render partial: 'listlessonstudent', object: lesson, lecture: @lecture, course: @course %>
-		      </div>
-		    <% end %>
-          <% @testinlectures.each do |testinlecture| %>
-		    	<div id="<%= testinlecture.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
-						<%= render partial: 'listteststudent', object: testinlecture, lecture: @lecture, course: @course %>
-		      </div>
-		    <% end %>
-			</div>
+    <div id="lessons-student" class="list-group">
+	    <% @lessons.each_with_index do |lesson, index| %>
+	    	<div id="<%= lesson.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
+					<%= render partial: 'listlessonstudent', object: lesson, lecture: @lecture, course: @course %>
+	      </div>
+	    <% end %>
 		</div>
+    <h4 style="padding-left:15px;">Tests</h4>
+		<div id="tests-student" class="list-group">
+      <% @testinlectures.each do |testinlecture| %>
+	    	<div id="<%= testinlecture.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
+					<%= render partial: 'listteststudent', object: testinlecture, lecture: @lecture, course: @course %>
+	      </div>
+	    <% end %>		
+		</div>		
 	</div>
 	<div id="lesson" class="col-md-8">
 		<% if !@lesson.nil? %>

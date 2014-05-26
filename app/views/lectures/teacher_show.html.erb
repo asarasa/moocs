@@ -4,6 +4,38 @@
     <p><%=raw @lecture.description %></p>
   </div>
 </div>
+  
+<div class="row">
+	<div class="col-md-4">
+    <div id="lessons" class="list-group">
+	    <% @lessons.each_with_index do |lesson, index| %>
+	    	<div id="<%= lesson.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
+					<%= render partial: 'listlesson', object: lesson, lecture: @lecture, course: @course %>
+	      </div>
+	    <% end %>
+		</div>
+    <h4 style="padding-left:15px;">Tests</h4>
+    <div id="tests" class="list-group">
+      <% @testinlectures.each do |testinlecture| %>
+        <div id="<%= testinlecture.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
+          <%= render partial: 'listtest', object: testinlecture, lecture: @lecture, course: @course %>
+        </div>
+      <% end %>
+    </div>
+	</div>
+	<div id="lesson" class="col-md-8">
+		<% if !@lesson.nil? %>
+			<%= render @lesson %>
+		<% else %>
+			<div class="card" style="margin-top:2px">
+				<h2 class="card-heading lg">Crear lecciones</h2>
+				<div class="card-body">
+					<p>Para crear lecciones haz click en "Nueva lección".</p>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
 
 <div class="modal fade select_tests" role="dialog" aria-labelledby="select_tests" aria-hidden="true">
  <div class="modal-dialog modal-lg">
@@ -27,37 +59,6 @@
      <% end %> 
      </div> 
    </div>              
-</div>
-  
-<div class="row">
-	<div class="col-md-4">
-		<div class="bs-component">
-      <div id="lessons" class="list-group" >
-		    <% @lessons.each_with_index do |lesson, index| %>
-		    	<div id="<%= lesson.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
-						<%= render partial: 'listlesson', object: lesson, lecture: @lecture, course: @course %>
-		      </div>
-		    <% end %>
-        <% @testinlectures.each do |testinlecture| %>
-		    	<div id="<%= testinlecture.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
-						<%= render partial: 'listtest', object: testinlecture, lecture: @lecture, course: @course %>
-		      </div>
-		    <% end %>
-			</div>
-		</div>
-	</div>
-	<div id="lesson" class="col-md-8">
-		<% if !@lesson.nil? %>
-			<%= render @lesson %>
-		<% else %>
-			<div class="card" style="margin-top:2px">
-				<h2 class="card-heading lg">Crear lecciones</h2>
-				<div class="card-body">
-					<p>Para crear lecciones haz click en "Nueva lección".</p>
-				</div>
-			</div>
-		<% end %>
-	</div>
 </div>
 
 

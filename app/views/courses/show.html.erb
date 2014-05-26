@@ -2,13 +2,24 @@
 
 	<!-- Content -->
 	<div class="col-xs-12 col-sm-9">
-		<div class="card">
-    	<h1 class="card-heading lg"><%= @course.name %></h1>
-      <div class="card-body">
- 				<p><%=raw @course.desc %></p>				 
-
-			</div>
-		</div>
+    <% if @course.is_member?(current_user) && @course.notices.count > 0 %>
+      <div class="card">
+        <h1 class="card-heading lg"><%= @course.name %></h1>
+        <div class="card-body">
+          <p><%= @course.abstract %></p>        
+        </div>        
+      </div>
+      <% @course.notices.each do |notice| %>
+        <%= render partial: notice %>
+      <% end %>
+    <% else %>
+  		<div class="card">
+      	<h1 class="card-heading lg"><%= @course.name %></h1>
+        <div class="card-body">
+   			  <p><%=raw @course.desc %></p>				 
+  			</div>
+  		</div>
+    <% end %>
 	  <div class="buttons">
 			<%= link_to 'Back', :back, :class => 'btn btn-default left' %>
 		</div>		
@@ -46,6 +57,17 @@
                   <% else %>
                     <%= link_to t(:inactive), course_change_state_path(@course.id) %>
                   <% end %>
+                </div>
+              </div>
+            </div>
+
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-md-2 main-color">            
+                  <span class="glyphicon glyphicon-comment"></span>
+                </div>
+                <div class="col-md-10">
+                  <%= link_to ' New Notice', new_course_notice_path(@course) %>
                 </div>
               </div>
             </div>

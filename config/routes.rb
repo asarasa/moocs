@@ -29,6 +29,7 @@ Moocs::Application.routes.draw do
     resources :courses do
       get 'tracking', to:'courses#tracking', as: 'tracking'  
       get 'change_state', to:'courses#change_state', as: 'change_state'
+      resources :notices
       resources :topics do
         resources :messages do
           get 'reply', to:'messages#reply', as: 'reply' 

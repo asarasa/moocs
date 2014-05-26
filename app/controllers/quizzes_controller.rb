@@ -14,15 +14,13 @@ class QuizzesController < ApplicationController
   end
   
   def single
-    if !params[:answer].nil?
-      @correct= @quiz.answers.where(valid: true).to_a[0].id      
-      @answer = params[:answer]
-      respond_to do |format|
-          format.js {}
-          format.json {}
-      end
-      end  
+    @correct= @quiz.answers.where(valid: true).to_a[0].id     
+    @answer = params[:answer]
+    respond_to do |format|
+        format.js {}
+        format.json {}
     end
+  end
   
   def multi
      if params[:answers].nil?
@@ -43,8 +41,8 @@ class QuizzesController < ApplicationController
   # GET /quizzes/new
   def new
     if !params[:course_id].nil?
-      @course=params[:course_id]
-      @lecture=params[:lecture_id]
+      @course=Course.find(params[:course_id])
+      @lecture=@course.lectures.find(params[:lecture_id])
     end
     @quiz = Quiz.new
   end
