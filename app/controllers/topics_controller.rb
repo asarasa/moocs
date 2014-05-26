@@ -5,7 +5,7 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = @course.topics
+    @topics = @course.topics.desc(:date)
   end
 
   # GET /topics/1
@@ -22,15 +22,11 @@ class TopicsController < ApplicationController
   def edit
   end
   
-
-
   # POST /topics
   # POST /topics.json
   def create
     @topic = Topic.new(topic_params)
-    @topic.creation_Date = DateTime.now
-    @topic.createBy = current_user.name
-    @topic.nextmessage = 1
+    @topic.user = current_user
     @course.topics << @topic
     respond_to do |format|
       if @topic.save
@@ -80,10 +76,8 @@ class TopicsController < ApplicationController
       @course = Course.find(params[:course_id])
     end
 
-   
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def topic_params
-      params.require(:topic).permit(:type, :title, :state)
+      params.require(:topic).permit(:title, :content, :state)
     end
 end

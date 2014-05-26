@@ -14,14 +14,16 @@
 	      </div>
 	    <% end %>
 		</div>
-    <h4 style="padding-left:15px;">Tests</h4>
-		<div id="tests-student" class="list-group">
-      <% @testinlectures.each do |testinlecture| %>
-	    	<div id="<%= testinlecture.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
-					<%= render partial: 'listteststudent', object: testinlecture, lecture: @lecture, course: @course %>
-	      </div>
-	    <% end %>		
-		</div>		
+    <% if @testinlectures.count > 0 %>
+      <h4 style="padding-left:15px;">Tests</h4>
+		  <div id="tests-student" class="list-group">
+        <% @testinlectures.each do |testinlecture| %>
+	    	  <div id="<%= testinlecture.id %>" class="list-group-item" data-lecture-id="<%= @lecture.id %>" data-course-id="<%= @course.id %>">
+					 <%= render partial: 'listteststudent', object: testinlecture, lecture: @lecture, course: @course %>
+	       </div>
+	     <% end %>		
+		  </div>		
+    <% end %>
 	</div>
 	<div id="lesson" class="col-md-8">
 		<% if !@lesson.nil? %>

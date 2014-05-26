@@ -73,22 +73,22 @@ private
   helper_method :have_forumpermission?	
   
    def can_create_topic?
-     @course.is?(current_user, 'teacher') or (is_member? and have_forumpermission?)
+     @course.is?(current_user, 'teacher') or (@course.is_member?(current_user) and have_forumpermission?)
     end	
     helper_method :can_create_topic?	
   
     def can_edit_topic?(topic)
-       @course.is?(current_user, 'teacher') or (is_member? and have_forumpermission? and topic.createBy == current_user.username)
+       @course.is?(current_user, 'teacher') or (@course.is_member?(current_user) and have_forumpermission? and topic.user == current_user)
     end	
     helper_method :can_edit_topic?	
   
     def can_create_message?
-       @course.is?(current_user, 'teacher') or topic.createBy == current_user.username or (is_member? and @topic == "Opened")
+       @course.is?(current_user, 'teacher') or @topic.user == current_user or (@course.is_member?(current_user) and @topic.state == "Opened")
     end	
     helper_method :can_create_message?	
   
   def can_edit_message?(message)
-     @course.is?(current_user, 'teacher') or  @topic.createBy == current_user.username or (is_member? and @topic == "Opened" and message.from == ucurrent)
+     @course.is?(current_user, 'teacher') or  @topic.user == current_user or (@course.is_member?(current_user) and @topic.state == "Opened" and message.user == current_user)
     end	
     helper_method :can_edit_message?	
 end

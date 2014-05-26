@@ -14,6 +14,7 @@ class User
   has_many :members
   has_many :resources
   has_many :tests
+  has_many :topics
   
   has_mongoid_attached_file :photo
   validates_attachment_content_type :photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
@@ -26,6 +27,10 @@ class User
     message: "This isn't a valid email"}
  
   has_secure_password
+
+  def full_name
+    self.name + " " + self.lastname
+  end
 
   def courses
     Course.in(id: members.map(&:course_id))

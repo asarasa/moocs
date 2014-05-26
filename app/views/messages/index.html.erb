@@ -1,26 +1,64 @@
+<div class="card">
+  <div class="card-heading image forum">
+    <%= avatar(@topic.user) %>
+    <div class="card-heading-header">
+      <h3><%= @topic.title %><small> <%=t :by %> <%= @topic.user.full_name %></small></h3>
+    </div>
+
+    <div class="card-dates">
+      <span class="label label-success"><%= @topic.date.to_formatted_s(:short) %></span>
+    </div>    
+  </div>
+
+  <div class="card-body">
+    <%=raw @topic.content %>
+  </div>
+
+  <% if current_user == @topic.user %>
+    <div class="card-options">
+      <div class="options-collapse-toggle">
+         <a data-toggle="collapse" data-target="#c<%= @topic.id %>-options" href="#c<%= @topic.id %>-options">Actions<i class="icon-angle-down"></i></a>
+      </div>    
+
+      <div id="c<%= @topic.id %>-options" class="options collapse">
+        <%= link_to :edit, edit_course_topic_path(@course,@topic), :class => 'btn btn-warning' %>
+        <%= link_to :destroy, [@course,@topic], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+      </div>
+    </div>
+  <% end %>        
+</div>
+
  <% @messages.each do |message| %>
-     <div class="card">
-      <h6 style="margin-right: 10px"class="right"><%= message.date.to_s(:db) %></h6>
-    	<h1 class="card-heading lg"><%= message.order%>.   <%= message.title %> </h1>
-        <div class="card-body">
-        <%= link_to 'Reply', course_topic_message_reply_path(@course,@topic,message),class: 'btn btn-success btn-sm right' %>
-        <% if can_edit_message?(message) %>
-          <%= link_to 'Edit', edit_course_topic_message_path(@course,@topic,message), class: 'btn btn-warning btn-sm right'  %>
-          <%= link_to 'Destroy', [@course,@topic,message], method: :delete,class: 'btn btn-danger btn-sm right', data: { confirm: 'Are you sure?' } %>
-        <%end%>
-        <div class="row">
-           <div align="center" class="col-md-2">
-             <%= image_tag 'buddyicon.jpg' ,height:"50%", width:"90%"%>    
-             <br>
-             <br>
-              <%= message.from %>          
-          </div>      
-          <div style="margin" class="col-md-10">
-            <%=raw message.text %>
-          </div>           
+  <div class="card">
+    <div class="card-heading image forum">
+      <%= avatar(message.user) %>
+      <div class="card-heading-header">
+        <h3><%= message.title %><small> <%=t :by %> <%= message.user.full_name %></small></h3>
+        
+      </div>
+
+      <div class="card-dates">
+        <span class="label label-success"><%= message.date.to_formatted_s(:short) %></span>
+      </div>    
+    </div>
+
+    <div class="card-body">
+      <%=raw message.content %>
+    </div>
+
+    <% if current_user == message.user %>
+      <div class="card-options">
+        <div class="options-collapse-toggle">
+           <a data-toggle="collapse" data-target="#c<%= message.id %>-options" href="#c<%= message.id %>-options">Actions<i class="icon-angle-down"></i></a>
+        </div>    
+
+        <div id="c<%= message.id %>-options" class="options collapse">
+          <%= link_to :edit, edit_course_topic_message_path(@course,@topic, message), :class => 'btn btn-warning' %>
+          <%= link_to :destroy, [@course,@topic, message], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
         </div>
-       </div>
-</div>   
+      </div>
+    <% end %>        
+  </div>
 <% end %> 
 <% if can_create_message? %>
     <%= link_to 'Back', course_topics_path(@course),class: 'btn btn-default ' %>

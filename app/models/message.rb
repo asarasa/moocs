@@ -1,13 +1,15 @@
 class Message
   include Mongoid::Document
-  field :date, type: DateTime
-  field :order, type: Integer
   field :title, type: String
-  field :text, type: String
-  field :from, type: String
+  field :content, type: String
+  field :date, type: DateTime, default: DateTime.now
+  field :user_id, type: String
 
   embedded_in :topics
-  
-  
-  validates_presence_of :from, :date, :title, :text
+   
+  validates_presence_of :title, :content, :date
+
+  def user
+    User.find(self.user_id)
+  end
 end
