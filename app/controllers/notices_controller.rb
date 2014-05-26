@@ -3,7 +3,6 @@ class NoticesController < ApplicationController
   before_action :set_notice, only: [:edit, :update, :destroy]
   before_action :authorize, only: [:edit, :new, :create, :update, :destroy]
   before_action :authorize_teacher, only: [:edit, :update, :destroy]
-  before_action :authorize_admin, only: [:edit, :update, :destroy]
 
   # GET /notices/new
   def new

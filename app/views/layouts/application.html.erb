@@ -42,6 +42,7 @@
             <li class="dropdown">
               <a id="dropdown-resources" class="dropdown-toggle" data-toggle="dropdown"><%=t :resources %> <b class="caret"></b></a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-resources">
+                  <li><%= link_to t(:create_course), new_course_path %></li>
                   <li><%= link_to t(:my_resources), resources_path %></li>
                   <li><%= link_to t(:my_tests), tests_path %></li>
                 </ul>
