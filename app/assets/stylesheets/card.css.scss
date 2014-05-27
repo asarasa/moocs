@@ -87,6 +87,12 @@
           border-radius: 50%;
 }
 
+.card .card-heading.image.md img {
+  width: 100px;
+  height: 100px;
+  padding:0;
+}
+
 .card .card-heading.image .card-heading-header {
   display: inline-block;
   vertical-align: top;

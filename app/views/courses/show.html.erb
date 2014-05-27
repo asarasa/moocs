@@ -131,17 +131,20 @@
 				<p><%=raw @course.prerequisites %></p>
 			</div>
   	</div>
-  	<div class="card" style="margin-top:50px">
-	 	  <h3 class="card-heading md">Teacher/s</h3>
-			<div class="card-body">
-				<% @course.members_by("teacher").each do |teacher| %>	
-		    		<h4>Name</h4>
-					<p><%= teacher.name %></p>
+    <% @course.members_by("teacher").each do |teacher| %> 
+  	  <div class="card" style="margin-top:50px">
+        <div class="card-heading image md center">
+          <%= avatar(teacher) %>
+        </div>
+			  <div class="card-body">
+		    	<h4>Teacher</h4>
+					<p><%= teacher.full_name %></p>
 					<h4>e-mail</h4>
 					<p><%= teacher.email %></p>
-				<% end %>	
-			</div>
-  	</div>    	
+			  </div>
+  	  </div>
+    <% end %> 
+    	
   </div>
   <!-- End Sidebar -->
 </div>

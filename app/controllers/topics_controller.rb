@@ -5,7 +5,7 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = @course.topics.desc(:date)
+    @topics = @course.topics.asc(:date)
   end
 
   # GET /topics/1
